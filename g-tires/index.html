@@ -1,0 +1,792 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>G-Tires service — шиномонтаж у Києві</title>
+    <meta name="description" content="G-Tires service на вул. Чорновола, 41. Шиномонтаж, бортировка, ремонт шин. Щодня 8:00–20:00. Телефон 093 384 1914.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=Outfit:wght@700;800;900&display=swap" rel="stylesheet">
+    <style>
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+        :root {
+            --bg: #f7f5f0;
+            --surface: #ffffff;
+            --ink: #141414;
+            --muted: #5c5c5c;
+            --accent: #e85d04;
+            --accent-soft: #fff0e6;
+            --dark: #1a1a1a;
+            --radius: 20px;
+            --radius-sm: 12px;
+            --shadow: 0 4px 24px rgba(20, 20, 20, 0.06);
+            --shadow-lg: 0 20px 50px rgba(20, 20, 20, 0.1);
+        }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: 'DM Sans', system-ui, sans-serif;
+            background: var(--bg);
+            color: var(--ink);
+            line-height: 1.65;
+            font-size: 1.05rem;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            inset: 0;
+            background-image: repeating-linear-gradient(
+                -12deg,
+                transparent,
+                transparent 40px,
+                rgba(232, 93, 4, 0.03) 40px,
+                rgba(232, 93, 4, 0.03) 41px
+            );
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        h1, h2, h3, .logo-text {
+            font-family: 'Outfit', sans-serif;
+            font-weight: 800;
+            letter-spacing: -0.03em;
+            line-height: 1.1;
+        }
+
+        a { color: inherit; text-decoration: none; }
+        img { max-width: 100%; display: block; }
+
+        .wrap { max-width: 1140px; margin: 0 auto; padding: 0 1.25rem; }
+
+        /* —— Header —— */
+        .topbar {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background: rgba(247, 245, 240, 0.85);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(20, 20, 20, 0.06);
+        }
+
+        .topbar-inner {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 4.5rem;
+            gap: 1rem;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+        }
+
+        .logo-mark {
+            width: 42px;
+            height: 42px;
+            background: var(--dark);
+            border-radius: 50%;
+            display: grid;
+            place-items: center;
+            color: var(--accent);
+            font-size: 1.25rem;
+        }
+
+        .logo-text { font-size: 1.35rem; }
+        .logo-text span { color: var(--accent); }
+
+        .nav-desktop {
+            display: none;
+            gap: 2rem;
+            font-size: 0.95rem;
+            font-weight: 500;
+        }
+
+        .nav-desktop a:hover { color: var(--accent); }
+
+        .btn-call {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: var(--dark);
+            color: #fff;
+            padding: 0.65rem 1.25rem;
+            border-radius: 999px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: transform 0.2s, background 0.2s;
+            white-space: nowrap;
+        }
+
+        .btn-call:hover {
+            background: var(--accent);
+            transform: translateY(-1px);
+        }
+
+        .menu-toggle {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 4px;
+        }
+
+        .menu-toggle span {
+            width: 24px;
+            height: 2px;
+            background: var(--ink);
+            border-radius: 2px;
+            transition: 0.25s;
+        }
+
+        .nav-mobile {
+            display: none;
+            flex-direction: column;
+            padding: 1rem 0 1.5rem;
+            gap: 0.75rem;
+            border-top: 1px solid rgba(20,20,20,0.08);
+        }
+
+        .nav-mobile.open { display: flex; }
+        .nav-mobile a { font-weight: 600; padding: 0.5rem 0; }
+
+        @media (min-width: 768px) {
+            .nav-desktop { display: flex; }
+            .menu-toggle { display: none; }
+        }
+
+        /* —— Hero —— */
+        .hero {
+            padding: 3rem 0 4rem;
+        }
+
+        .hero-grid {
+            display: grid;
+            gap: 2.5rem;
+            align-items: center;
+        }
+
+        @media (min-width: 900px) {
+            .hero-grid {
+                grid-template-columns: 1.1fr 0.9fr;
+                gap: 3rem;
+            }
+        }
+
+        .badge {
+            display: inline-block;
+            background: var(--accent-soft);
+            color: var(--accent);
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.12em;
+            padding: 0.4rem 0.9rem;
+            border-radius: 999px;
+            margin-bottom: 1.25rem;
+        }
+
+        .hero h1 {
+            font-size: clamp(2.5rem, 6vw, 3.75rem);
+            margin-bottom: 1.25rem;
+        }
+
+        .hero h1 em {
+            font-style: normal;
+            color: var(--accent);
+        }
+
+        .hero-lead {
+            font-size: 1.15rem;
+            color: var(--muted);
+            max-width: 32rem;
+            margin-bottom: 2rem;
+        }
+
+        .hero-actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .btn-primary {
+            background: var(--accent);
+            color: #fff;
+            padding: 1rem 1.75rem;
+            border-radius: var(--radius-sm);
+            font-weight: 700;
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: filter 0.2s, transform 0.2s;
+        }
+
+        .btn-primary:hover { filter: brightness(1.08); transform: translateY(-2px); }
+
+        .btn-outline {
+            border: 2px solid var(--ink);
+            padding: 0.95rem 1.5rem;
+            border-radius: var(--radius-sm);
+            font-weight: 600;
+            transition: background 0.2s, color 0.2s;
+        }
+
+        .btn-outline:hover {
+            background: var(--ink);
+            color: #fff;
+        }
+
+        .hero-visual {
+            position: relative;
+        }
+
+        .hero-card {
+            background: var(--surface);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow-lg);
+            overflow: hidden;
+            aspect-ratio: 4/3;
+        }
+
+        .hero-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .hero-float {
+            position: absolute;
+            bottom: -1rem;
+            left: -1rem;
+            background: var(--dark);
+            color: #fff;
+            padding: 1.25rem 1.5rem;
+            border-radius: var(--radius-sm);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .hero-float strong {
+            display: block;
+            font-family: 'Outfit', sans-serif;
+            font-size: 2rem;
+            color: #ffc971;
+            line-height: 1;
+        }
+
+        .hero-float span { font-size: 0.85rem; opacity: 0.85; }
+
+        /* —— Stats —— */
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1rem;
+            margin-bottom: 4rem;
+        }
+
+        .stat {
+            background: var(--surface);
+            padding: 1.5rem 1rem;
+            border-radius: var(--radius-sm);
+            text-align: center;
+            box-shadow: var(--shadow);
+        }
+
+        .stat b {
+            display: block;
+            font-family: 'Outfit', sans-serif;
+            font-size: 1.75rem;
+            color: var(--accent);
+        }
+
+        .stat small {
+            font-size: 0.8rem;
+            color: var(--muted);
+            font-weight: 500;
+        }
+
+        /* —— Sections —— */
+        section { margin-bottom: 4.5rem; }
+
+        .section-head {
+            margin-bottom: 2rem;
+        }
+
+        .section-head h2 {
+            font-size: clamp(1.75rem, 4vw, 2.5rem);
+            margin-bottom: 0.5rem;
+        }
+
+        .section-head p { color: var(--muted); max-width: 36rem; }
+
+        /* —— Services bento —— */
+        .bento {
+            display: grid;
+            gap: 1rem;
+        }
+
+        @media (min-width: 640px) {
+            .bento {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            .bento .wide { grid-column: span 2; }
+        }
+
+        .bento-item {
+            background: var(--surface);
+            border-radius: var(--radius);
+            padding: 1.75rem;
+            box-shadow: var(--shadow);
+            border: 1px solid rgba(20,20,20,0.04);
+            transition: transform 0.25s;
+        }
+
+        .bento-item:hover { transform: translateY(-4px); }
+
+        .bento-icon {
+            width: 48px;
+            height: 48px;
+            background: var(--accent-soft);
+            border-radius: 14px;
+            display: grid;
+            place-items: center;
+            font-size: 1.4rem;
+            margin-bottom: 1rem;
+        }
+
+        .bento-item h3 {
+            font-size: 1.2rem;
+            margin-bottom: 0.4rem;
+        }
+
+        .bento-item p {
+            font-size: 0.95rem;
+            color: var(--muted);
+        }
+
+        .bento-item.wide {
+            background: linear-gradient(135deg, var(--dark) 0%, #2d2d2d 100%);
+            color: #fff;
+        }
+
+        .bento-item.wide p { color: rgba(255,255,255,0.75); }
+        .bento-item.wide .bento-icon { background: rgba(255,255,255,0.12); }
+
+        /* —— Reviews —— */
+        .reviews-strip {
+            display: grid;
+            gap: 1.25rem;
+        }
+
+        @media (min-width: 768px) {
+            .reviews-strip { grid-template-columns: repeat(3, 1fr); }
+        }
+
+        .review {
+            background: var(--surface);
+            padding: 1.5rem;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            border-left: 4px solid var(--accent);
+        }
+
+        .stars { color: #f59e0b; letter-spacing: 2px; font-size: 0.9rem; margin-bottom: 0.75rem; }
+
+        .review q {
+            display: block;
+            font-style: italic;
+            color: var(--muted);
+            font-size: 0.95rem;
+            margin-bottom: 1rem;
+        }
+
+        .review cite {
+            font-style: normal;
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: var(--ink);
+        }
+
+        /* —— Hours + contact —— */
+        .contact-grid {
+            display: grid;
+            gap: 2rem;
+        }
+
+        @media (min-width: 900px) {
+            .contact-grid { grid-template-columns: 1fr 1.2fr; }
+        }
+
+        .contact-card {
+            background: var(--surface);
+            border-radius: var(--radius);
+            padding: 2rem;
+            box-shadow: var(--shadow);
+        }
+
+        .contact-list { list-style: none; margin: 1.5rem 0; }
+
+        .contact-list li {
+            display: flex;
+            gap: 1rem;
+            padding: 1rem 0;
+            border-bottom: 1px solid var(--bg);
+        }
+
+        .contact-list li:last-child { border: none; }
+
+        .contact-list .ico {
+            width: 44px;
+            height: 44px;
+            background: var(--accent-soft);
+            border-radius: 12px;
+            display: grid;
+            place-items: center;
+            flex-shrink: 0;
+        }
+
+        .contact-list strong { display: block; font-size: 0.8rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.05em; }
+        .contact-list a.phone { font-size: 1.35rem; font-weight: 700; color: var(--accent); }
+
+        .map-wrap {
+            border-radius: var(--radius);
+            overflow: hidden;
+            box-shadow: var(--shadow-lg);
+            min-height: 320px;
+            border: 4px solid var(--surface);
+        }
+
+        .map-wrap iframe {
+            width: 100%;
+            height: 100%;
+            min-height: 320px;
+            border: 0;
+        }
+
+        /* —— Form —— */
+        .form-box {
+            background: var(--dark);
+            color: #fff;
+            border-radius: var(--radius);
+            padding: 2rem;
+            margin-top: 2rem;
+        }
+
+        .form-box h3 { margin-bottom: 1rem; font-size: 1.35rem; }
+
+        .form-row { margin-bottom: 1rem; }
+
+        .form-row label {
+            display: block;
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin-bottom: 0.35rem;
+            opacity: 0.8;
+        }
+
+        .form-row input {
+            width: 100%;
+            padding: 0.85rem 1rem;
+            border: none;
+            border-radius: 10px;
+            font: inherit;
+            background: rgba(255,255,255,0.1);
+            color: #fff;
+        }
+
+        .form-row input::placeholder { color: rgba(255,255,255,0.4); }
+        .form-row input:focus { outline: 2px solid var(--accent); background: rgba(255,255,255,0.15); }
+
+        .form-box .btn-primary { width: 100%; margin-top: 0.5rem; }
+
+        /* —— FAQ —— */
+        details {
+            background: var(--surface);
+            border-radius: var(--radius-sm);
+            margin-bottom: 0.75rem;
+            box-shadow: var(--shadow);
+            overflow: hidden;
+        }
+
+        summary {
+            padding: 1.15rem 1.25rem;
+            font-weight: 700;
+            cursor: pointer;
+            list-style: none;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        summary::-webkit-details-marker { display: none; }
+        summary::after { content: '+'; font-size: 1.25rem; color: var(--accent); }
+        details[open] summary::after { content: '−'; }
+
+        details p {
+            padding: 0 1.25rem 1.25rem;
+            color: var(--muted);
+            font-size: 0.95rem;
+        }
+
+        /* —— Footer —— */
+        footer {
+            background: var(--dark);
+            color: rgba(255,255,255,0.7);
+            padding: 2.5rem 0;
+            text-align: center;
+            font-size: 0.9rem;
+        }
+
+        footer strong { color: #fff; display: block; margin-bottom: 0.35rem; font-family: 'Outfit', sans-serif; font-size: 1.1rem; }
+
+        /* —— Mobile bar —— */
+        .mobile-bar {
+            display: flex;
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            z-index: 99;
+            background: var(--surface);
+            border-top: 1px solid rgba(20,20,20,0.08);
+            padding: 0.75rem 1rem;
+            gap: 0.75rem;
+            box-shadow: 0 -8px 30px rgba(0,0,0,0.08);
+        }
+
+        .mobile-bar a {
+            flex: 1;
+            text-align: center;
+            padding: 0.85rem;
+            border-radius: var(--radius-sm);
+            font-weight: 700;
+            font-size: 0.9rem;
+        }
+
+        .mobile-bar .call { background: var(--accent); color: #fff; }
+        .mobile-bar .book { background: var(--bg); color: var(--ink); border: 2px solid var(--ink); }
+
+        @media (min-width: 768px) {
+            .mobile-bar { display: none; }
+            body { padding-bottom: 0; }
+        }
+
+        @media (max-width: 767px) {
+            body { padding-bottom: 5rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <header class="topbar">
+        <div class="wrap topbar-inner">
+            <a href="#" class="logo">
+                <div class="logo-mark" aria-hidden="true">⬤</div>
+                <div class="logo-text">G-<span>Tires</span></div>
+            </a>
+            <nav class="nav-desktop">
+                <a href="#services">Послуги</a>
+                <a href="#reviews">Відгуки</a>
+                <a href="#contact">Контакти</a>
+            </nav>
+            <a href="tel:0933841914" class="btn-call">☎ 093 384 1914</a>
+            <button class="menu-toggle" type="button" aria-label="Меню" id="menuBtn">
+                <span></span><span></span><span></span>
+            </button>
+        </div>
+        <nav class="nav-mobile wrap" id="mobileNav">
+            <a href="#services">Послуги</a>
+            <a href="#reviews">Відгуки</a>
+            <a href="#contact">Контакти</a>
+            <a href="tel:0933841914">Зателефонувати</a>
+        </nav>
+    </header>
+
+    <main>
+        <section class="hero wrap">
+            <div class="hero-grid">
+                <div>
+                    <span class="badge">Шиномонтаж · Київ</span>
+                    <h1>Колеса під контролем <em>G-Tires</em></h1>
+                    <p class="hero-lead">
+                        Акуратний шиномонтаж на вул. Чорновола: бортировка, сезонна заміна, ремонт проколів. Працюємо щодня з 8:00 до 20:00.
+                    </p>
+                    <div class="hero-actions">
+                        <a href="tel:0933841914" class="btn-primary">Зателефонувати</a>
+                        <a href="#contact" class="btn-outline">Як нас знайти</a>
+                    </div>
+                </div>
+                <div class="hero-visual">
+                    <div class="hero-card">
+                        <img src="https://images.unsplash.com/photo-1601362840469-51e4d5d22969?auto=format&fit=crop&q=80&w=900" alt="Шини та колеса в сервісі">
+                    </div>
+                    <div class="hero-float">
+                        <strong>3.8★</strong>
+                        <span>59 відгуків на Google</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <div class="wrap stats">
+            <div class="stat"><b>8–20</b><small>щодня без вихідних</small></div>
+            <div class="stat"><b>59+</b><small>відгуків клієнтів</small></div>
+            <div class="stat"><b>∞</b><small>діаметрів коліс</small></div>
+        </div>
+
+        <section id="services" class="wrap">
+            <div class="section-head">
+                <h2>Що робимо</h2>
+                <p>Повний цикл робіт з шинами та дисками — від проколу до сезонної переобувки.</p>
+            </div>
+            <div class="bento">
+                <article class="bento-item wide">
+                    <div class="bento-icon">🔧</div>
+                    <h3>Шиномонтаж і балансування</h3>
+                    <p>Зняття, установка, бортировка удареного колеса — клієнти відзначають адекватні ціни та відсутність черг у зручний час.</p>
+                </article>
+                <article class="bento-item">
+                    <div class="bento-icon">🛞</div>
+                    <h3>Сезонна заміна</h3>
+                    <p>Літня / зимня гума, зберігання не входить — уточнюйте на місці.</p>
+                </article>
+                <article class="bento-item">
+                    <div class="bento-icon">✨</div>
+                    <h3>Дбайливо з дисками</h3>
+                    <p>Обережна робота — без подряпин, навіть зі світлими та полірованими дисками.</p>
+                </article>
+                <article class="bento-item">
+                    <div class="bento-icon">🩹</div>
+                    <h3>Ремонт проколів</h3>
+                    <p>Швидке відновлення шини, щоб ви знову були в дорозі.</p>
+                </article>
+                <article class="bento-item">
+                    <div class="bento-icon">💨</div>
+                    <h3>Підкачка та огляд</h3>
+                    <p>Тиск, стан протектора — базова перевірка перед поїздкою.</p>
+                </article>
+            </div>
+        </section>
+
+        <section id="reviews" class="wrap">
+            <div class="section-head">
+                <h2>Відгуки з Google Maps</h2>
+                <p>Реальні враження клієнтів G-Tires service.</p>
+            </div>
+            <div class="reviews-strip">
+                <blockquote class="review">
+                    <div class="stars">★★★★★</div>
+                    <q>Обережно поводяться з дисками — при заміні без подряпин. Для білого диска це найголовніше.</q>
+                    <cite>— Клієнт G-Tires</cite>
+                </blockquote>
+                <blockquote class="review">
+                    <div class="stars">★★★★☆</div>
+                    <q>Гарний шиномонтаж, черг не було. Адекватна ціна за бортировку удареного колеса на сталевому диску.</q>
+                    <cite>— Відгук Google</cite>
+                </blockquote>
+                <blockquote class="review">
+                    <div class="stars">★★★★★</div>
+                    <q>Чудовий сервіс — рекомендую всім, хто цінує акуратність і швидкість.</q>
+                    <cite>— Постійний клієнт</cite>
+                </blockquote>
+            </div>
+        </section>
+
+        <section class="wrap">
+            <div class="section-head">
+                <h2>Питання</h2>
+            </div>
+            <details>
+                <summary>Чи працюєте в неділю?</summary>
+                <p>Так. G-Tires service відкритий щодня з 8:00 до 20:00, включно з вихідними.</p>
+            </details>
+            <details>
+                <summary>Як записатися?</summary>
+                <p>Зателефонуйте <a href="tel:0933841914" style="color:var(--accent);font-weight:700">093 384 1914</a> або приїжджайте на вул. Чорновола, 41 — черга зазвичай рухається швидко.</p>
+            </details>
+            <details>
+                <summary>Чи можна привезти одне колесо?</summary>
+                <p>Так, багато клієнтів приходять з одним колесом на ремонт або бортировку — уточніть деталі по телефону.</p>
+            </details>
+        </section>
+
+        <section id="contact" class="wrap contact-grid">
+            <div>
+                <div class="section-head">
+                    <h2>Контакти</h2>
+                    <p>G-Tires service — вул. В'ячеслава Чорновола, 41, Київ.</p>
+                </div>
+                <div class="contact-card">
+                    <ul class="contact-list">
+                        <li>
+                            <span class="ico">📍</span>
+                            <div>
+                                <strong>Адреса</strong>
+                                вул. В'ячеслава Чорновола, 41, Київ, 02000
+                            </div>
+                        </li>
+                        <li>
+                            <span class="ico">📞</span>
+                            <div>
+                                <strong>Телефон</strong>
+                                <a href="tel:0933841914" class="phone">093 384 1914</a>
+                            </div>
+                        </li>
+                        <li>
+                            <span class="ico">🕐</span>
+                            <div>
+                                <strong>Графік</strong>
+                                Понеділок – неділя: 08:00 – 20:00
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                <div class="form-box">
+                    <h3>Залишити заявку</h3>
+                    <form>
+                        <div class="form-row">
+                            <label for="name">Ім'я</label>
+                            <input type="text" id="name" placeholder="Ваше ім'я" required>
+                        </div>
+                        <div class="form-row">
+                            <label for="tel">Телефон</label>
+                            <input type="tel" id="tel" placeholder="093 384 1914" required>
+                        </div>
+                        <button type="submit" class="btn-primary">Надіслати</button>
+                    </form>
+                </div>
+            </div>
+            <div class="map-wrap">
+                <iframe
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2540.4!2d30.4838246!3d50.4495178!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x40d4ce891eccffab%3A0xd300627b04106f38!2sG-Tires%20service!5e0!3m2!1suk!2sua!4v1710000000003!5m2!1suk!2sua"
+                    loading="lazy"
+                    title="G-Tires на карті"></iframe>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="wrap">
+            <strong>G-Tires service</strong>
+            Шиномонтаж · вул. Чорновола, 41, Київ
+        </div>
+    </footer>
+
+    <div class="mobile-bar">
+        <a href="tel:0933841914" class="call">Подзвонити</a>
+        <a href="#contact" class="book">Контакти</a>
+    </div>
+
+    <script>
+        document.getElementById('menuBtn').addEventListener('click', function () {
+            document.getElementById('mobileNav').classList.toggle('open');
+        });
+    </script>
+</body>
+</html>
