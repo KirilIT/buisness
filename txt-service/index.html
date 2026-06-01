@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TXT Service | Автосервіс Винники · Škoda & Volkswagen</title>
+    <meta name="description" content="TXT Service — автосервіс у Винниках, вул. Проста, 1. Рейтинг 4.9. Škoda, Volkswagen. 097 296 4515.">
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@500;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+        :root{--bg:#111318;--card:#1a1d26;--line:#2a2f3d;--cyan:#22d3ee;--cyan-dim:#0891b2;--text:#e8eaef;--muted:#8b919e}
+        body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--bg);color:var(--text);line-height:1.65}
+        .mono{font-family:'JetBrains Mono',monospace}
+        a{text-decoration:none;color:inherit}
+        .wrap{max-width:1080px;margin:0 auto;padding:0 1.25rem}
+
+        header{padding:1.25rem 0;border-bottom:1px solid var(--line);position:sticky;top:0;background:rgba(17,19,24,.92);backdrop-filter:blur(10px);z-index:50}
+        .header-row{display:flex;align-items:center;justify-content:space-between;gap:1rem}
+        .brand{display:flex;align-items:center;gap:.6rem}
+        .brand-icon{background:var(--cyan);color:#111;font-weight:800;font-size:.75rem;padding:.35rem .5rem;border-radius:4px;font-family:'JetBrains Mono',monospace}
+        .brand-name{font-weight:800;font-size:1.15rem;letter-spacing:-.02em}
+        .brand-name span{color:var(--cyan)}
+        .header-phone{font-weight:700;font-size:.9rem;color:var(--cyan);white-space:nowrap}
+
+        .hero{padding:4rem 0 3rem;border-bottom:1px solid var(--line)}
+        .hero-badge{display:inline-block;background:rgba(34,211,238,.1);border:1px solid rgba(34,211,238,.25);color:var(--cyan);font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;padding:.35rem .75rem;border-radius:4px;margin-bottom:1.25rem;font-family:'JetBrains Mono',monospace}
+        .hero h1{font-size:clamp(2rem,5vw,3.2rem);font-weight:800;letter-spacing:-.03em;line-height:1.15;margin-bottom:1rem}
+        .hero h1 span{color:var(--cyan)}
+        .hero p{color:var(--muted);max-width:32rem;margin-bottom:2rem;font-size:1.05rem}
+        .hero-meta{display:flex;flex-wrap:wrap;gap:1.5rem}
+        .meta-item{background:var(--card);border:1px solid var(--line);padding:1rem 1.25rem;border-radius:8px;min-width:120px}
+        .meta-item b{display:block;font-size:1.5rem;font-weight:800;color:var(--cyan);font-family:'JetBrains Mono',monospace}
+        .meta-item small{font-size:.75rem;color:var(--muted)}
+
+        section{padding:3.5rem 0}
+        .sec-title{font-size:1.5rem;font-weight:800;margin-bottom:.5rem;letter-spacing:-.02em}
+        .sec-sub{color:var(--muted);margin-bottom:2rem;font-size:.95rem}
+
+        .tags{display:flex;flex-wrap:wrap;gap:.5rem;margin-bottom:2rem}
+        .tag{background:var(--card);border:1px solid var(--line);padding:.5rem 1rem;border-radius:6px;font-size:.85rem;font-weight:600}
+        .tag strong{color:var(--cyan);font-family:'JetBrains Mono',monospace;margin-right:.35rem}
+
+        .grid-2{display:grid;gap:1rem}
+        @media(min-width:640px){.grid-2{grid-template-columns:1fr 1fr}}
+        .card{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:1.5rem;transition:border-color .2s}
+        .card:hover{border-color:var(--cyan-dim)}
+        .card h3{font-size:1rem;font-weight:700;margin-bottom:.4rem;display:flex;align-items:center;gap:.5rem}
+        .card h3::before{content:'';width:8px;height:8px;background:var(--cyan);border-radius:2px;flex-shrink:0}
+        .card p{font-size:.88rem;color:var(--muted)}
+
+        .reviews{display:grid;gap:1rem}
+        @media(min-width:768px){.reviews{grid-template-columns:repeat(3,1fr)}}
+        .review{background:var(--card);border-left:3px solid var(--cyan);padding:1.25rem;border-radius:0 8px 8px 0}
+        .review p{font-size:.88rem;color:var(--muted);font-style:italic}
+        .review cite{display:block;margin-top:.75rem;font-size:.72rem;font-weight:700;color:var(--cyan);font-style:normal;font-family:'JetBrains Mono',monospace}
+
+        .contact-box{background:linear-gradient(135deg,#1a1d26,#151820);border:1px solid var(--line);border-radius:12px;padding:2rem;display:grid;gap:2rem}
+        @media(min-width:768px){.contact-box{grid-template-columns:1fr 1.2fr}}
+        .info-row{margin-bottom:1.25rem}
+        .info-row label{display:block;font-size:.65rem;font-weight:700;text-transform:uppercase;letter-spacing:.12em;color:var(--cyan);font-family:'JetBrains Mono',monospace;margin-bottom:.25rem}
+        .info-row p,.info-row a{color:var(--text);font-size:.95rem}
+        .info-row a.phone{font-size:1.4rem;font-weight:800;color:var(--cyan)}
+        .map{border-radius:8px;overflow:hidden;min-height:260px;border:1px solid var(--line)}
+        .map iframe{width:100%;height:100%;min-height:260px;border:0}
+
+        footer{padding:2rem 0;text-align:center;color:var(--muted);font-size:.8rem;border-top:1px solid var(--line)}
+        .cta-bar{position:fixed;bottom:0;left:0;right:0;display:flex;z-index:40;background:var(--card);border-top:1px solid var(--line)}
+        .cta-bar a{flex:1;text-align:center;padding:1rem;font-weight:700;font-size:.85rem}
+        .cta-bar .primary{background:var(--cyan);color:#111}
+        @media(min-width:768px){.cta-bar{display:none}body{padding-bottom:0}}
+        @media(max-width:767px){body{padding-bottom:3.5rem}}
+    </style>
+</head>
+<body>
+
+<header>
+    <div class="wrap header-row">
+        <div class="brand">
+            <span class="brand-icon">TXT</span>
+            <span class="brand-name">TXT <span>Service</span></span>
+        </div>
+        <a href="tel:0972964515" class="header-phone">097 296 4515</a>
+    </div>
+</header>
+
+<section class="hero wrap">
+    <span class="hero-badge">Vynnyky · Lviv Oblast</span>
+    <h1>Автосервіс для <span>Škoda</span> та Volkswagen</h1>
+    <p>TXT Service у Винниках — діагностика, ТО, кондиціонування та регламентні роботи. 414+ відгуків і рейтинг 4.9 на Google.</p>
+    <div class="hero-meta">
+        <div class="meta-item"><b>4.9</b><small>Google rating</small></div>
+        <div class="meta-item"><b>414+</b><small>відгуків</small></div>
+        <div class="meta-item"><b>10–20</b><small>Пн–Пт</small></div>
+    </div>
+</section>
+
+<section class="wrap">
+    <h2 class="sec-title">Спеціалізація</h2>
+    <p class="sec-sub">Сервіс, де є все необхідне для ремонту та обслуговування вашого авто.</p>
+    <div class="tags">
+        <span class="tag"><strong>01</strong> Škoda</span>
+        <span class="tag"><strong>02</strong> Volkswagen</span>
+        <span class="tag"><strong>03</strong> Діагностика</span>
+        <span class="tag"><strong>04</strong> Кондиціонер</span>
+        <span class="tag"><strong>05</strong> Заміна масла</span>
+    </div>
+    <div class="grid-2">
+        <div class="card"><h3>ТО і регламент</h3><p>Заміна оливи, фільтрів, перевірка вузлів за регламентом виробника.</p></div>
+        <div class="card"><h3>Клімат-система</h3><p>Діагностика та усунення несправностей кондиціонування.</p></div>
+        <div class="card"><h3>Комп'ютерна діагностика</h3><p>Зчитування помилок, пошук причини до початку ремонту.</p></div>
+        <div class="card"><h3>Ремонт і сервіс</h3><p>Повний цикл — від огляду до усунення поломки.</p></div>
+    </div>
+</section>
+
+<section class="wrap">
+    <h2 class="sec-title">Відгуки</h2>
+    <p class="sec-sub">Рекомендації клієнтів з Google Maps.</p>
+    <div class="reviews">
+        <blockquote class="review">
+            <p>«Приїхав з поломкою по кондиціонуванню — продіагностували та усунули. Сервіс сподобався.»</p>
+            <cite>— клієнт TXT</cite>
+        </blockquote>
+        <blockquote class="review">
+            <p>«Суперовий сервіс по Škoda і Volkswagen — є все для ремонту та регламентних робіт.»</p>
+            <cite>— Google Maps</cite>
+        </blockquote>
+        <blockquote class="review">
+            <p>«Перший візит за рекомендацією — задоволений на 100%. Міняв оливу, фільтри, діагностика.»</p>
+            <cite>— постійний клієнт</cite>
+        </blockquote>
+    </div>
+</section>
+
+<section class="wrap" id="contact">
+    <h2 class="sec-title">Контакти</h2>
+    <div class="contact-box">
+        <div>
+            <div class="info-row">
+                <label>location</label>
+                <p>вул. Проста, 1<br>Винники, Львівська область, 79496</p>
+            </div>
+            <div class="info-row">
+                <label>phone</label>
+                <a href="tel:0972964515" class="phone">097 296 4515</a>
+            </div>
+            <div class="info-row">
+                <label>hours</label>
+                <p>Понеділок – п'ятниця: 10:00 – 20:00<br>Субота, неділя: вихідний</p>
+            </div>
+        </div>
+        <div class="map">
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2660!2d24.1540156!3d49.8260755!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x473ac31490cfeb4b%3A0x77923a5c78b44111!2sTXT%20Service!5e0!3m2!1suk!2sua!4v1710000000200!5m2!1suk!2sua" loading="lazy" title="TXT Service"></iframe>
+        </div>
+    </div>
+</section>
+
+<footer class="wrap">
+    <p class="mono">TXT Service · Винники · Škoda / VW</p>
+</footer>
+
+<div class="cta-bar">
+    <a href="tel:0972964515" class="primary">Подзвонити</a>
+    <a href="#contact">Контакти</a>
+</div>
+</body>
+</html>

@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>СТО Royal Servis | Автосервіс преміум-класу, Київ</title>
+    <meta name="description" content="СТО Royal Servis на вул. Радищева, 7, Київ. Ремонт, ходова, розвал-сходження. Попередній запис. 067 236 1452.">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,600;0,700;1,500&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+        :root{
+            --gold:#c9a84c;--gold-light:#e8d5a3;--gold-dim:#8a7340;
+            --bg:#0a0a0c;--surface:#12121a;--surface2:#1a1a24;
+            --text:#f5f3ee;--muted:#9a968a;--border:rgba(201,168,76,.15);
+        }
+        html{scroll-behavior:smooth}
+        body{font-family:'Manrope',sans-serif;background:var(--bg);color:var(--text);line-height:1.7}
+        h1,h2,h3,.logo{font-family:'Cormorant Garamond',serif;font-weight:700}
+        a{color:inherit;text-decoration:none}
+        .wrap{max-width:1180px;margin:0 auto;padding:0 1.5rem}
+
+        /* grain overlay */
+        body::after{content:'';position:fixed;inset:0;background:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");pointer-events:none;z-index:9999;opacity:.4}
+
+        header{position:fixed;inset:0 0 auto;z-index:100;background:rgba(10,10,12,.88);backdrop-filter:blur(16px);border-bottom:1px solid var(--border)}
+        .header-inner{display:flex;align-items:center;justify-content:space-between;height:5rem}
+        .logo{display:flex;align-items:center;gap:.75rem;font-size:1.5rem;letter-spacing:.02em}
+        .logo-crown{color:var(--gold);font-size:1.75rem;line-height:1}
+        .logo em{font-style:normal;color:var(--gold)}
+        nav{display:none;gap:2.5rem;font-size:.85rem;font-weight:600;text-transform:uppercase;letter-spacing:.12em}
+        nav a{color:var(--muted);transition:color .2s}
+        nav a:hover{color:var(--gold)}
+        .btn-gold{display:inline-flex;align-items:center;gap:.5rem;background:linear-gradient(135deg,var(--gold),var(--gold-dim));color:#0a0a0c;padding:.75rem 1.5rem;font-weight:800;font-size:.8rem;text-transform:uppercase;letter-spacing:.08em;border:none;cursor:pointer;transition:transform .2s,box-shadow .2s}
+        .btn-gold:hover{transform:translateY(-2px);box-shadow:0 8px 30px rgba(201,168,76,.35)}
+        .btn-ghost{border:1px solid var(--border);color:var(--gold-light);padding:.75rem 1.5rem;font-weight:600;font-size:.85rem;transition:background .2s,border-color .2s}
+        .btn-ghost:hover{background:rgba(201,168,76,.08);border-color:var(--gold)}
+
+        @media(min-width:900px){nav{display:flex}}
+
+        .hero{min-height:100vh;display:flex;align-items:center;padding:6rem 0 4rem;position:relative;overflow:hidden}
+        .hero-bg{position:absolute;inset:0;background:radial-gradient(ellipse 80% 60% at 70% 40%,rgba(201,168,76,.12),transparent 60%),radial-gradient(ellipse at 20% 80%,rgba(40,40,60,.8),transparent 50%)}
+        .hero-grid{display:grid;gap:3rem;align-items:center;position:relative;z-index:1}
+        @media(min-width:900px){.hero-grid{grid-template-columns:1.15fr .85fr}}
+        .hero-tag{display:inline-flex;align-items:center;gap:.5rem;border:1px solid var(--border);padding:.4rem 1rem;font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:.15em;color:var(--gold);margin-bottom:1.5rem}
+        .hero-tag::before{content:'◆';font-size:.5rem}
+        .hero h1{font-size:clamp(2.8rem,6vw,4.5rem);line-height:1.05;margin-bottom:1.25rem}
+        .hero h1 span{display:block;font-style:italic;color:var(--gold-light);font-weight:600;font-size:.65em;margin-top:.25rem}
+        .hero-lead{color:var(--muted);font-size:1.1rem;max-width:32rem;margin-bottom:2rem}
+        .hero-actions{display:flex;flex-wrap:wrap;gap:1rem;margin-bottom:3rem}
+        .hero-stats{display:flex;gap:2.5rem;flex-wrap:wrap;padding-top:2rem;border-top:1px solid var(--border)}
+        .hero-stats div b{display:block;font-family:'Cormorant Garamond',serif;font-size:2.25rem;color:var(--gold);line-height:1}
+        .hero-stats div small{font-size:.75rem;color:var(--muted);text-transform:uppercase;letter-spacing:.08em}
+
+        .hero-panel{background:var(--surface);border:1px solid var(--border);padding:2rem;position:relative}
+        .hero-panel::before{content:'';position:absolute;top:-1px;left:2rem;right:2rem;height:2px;background:linear-gradient(90deg,transparent,var(--gold),transparent)}
+        .hero-panel h3{font-size:1.5rem;margin-bottom:.5rem;color:var(--gold-light)}
+        .hero-panel p{color:var(--muted);font-size:.9rem;margin-bottom:1.5rem}
+        .hero-panel ul{list-style:none}
+        .hero-panel li{display:flex;gap:.75rem;padding:.65rem 0;border-bottom:1px solid rgba(255,255,255,.04);font-size:.9rem}
+        .hero-panel li::before{content:'✓';color:var(--gold);font-weight:700}
+
+        section{padding:5rem 0}
+        .section-label{font-size:.7rem;font-weight:800;text-transform:uppercase;letter-spacing:.2em;color:var(--gold);margin-bottom:.75rem}
+        .section-title{font-size:clamp(2rem,4vw,2.75rem);margin-bottom:1rem}
+        .section-desc{color:var(--muted);max-width:36rem;margin-bottom:3rem}
+
+        .services{display:grid;gap:1px;background:var(--border)}
+        @media(min-width:640px){.services{grid-template-columns:repeat(2,1fr)}}
+        @media(min-width:900px){.services{grid-template-columns:repeat(3,1fr)}}
+        .svc{background:var(--surface);padding:2rem 1.75rem;transition:background .3s}
+        .svc:hover{background:var(--surface2)}
+        .svc-num{font-family:'Cormorant Garamond',serif;font-size:2.5rem;color:var(--gold-dim);line-height:1;margin-bottom:1rem}
+        .svc h3{font-size:1.25rem;margin-bottom:.5rem;color:var(--gold-light)}
+        .svc p{font-size:.88rem;color:var(--muted)}
+
+        .reviews{background:var(--surface);border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
+        .review-grid{display:grid;gap:1.5rem}
+        @media(min-width:768px){.review-grid{grid-template-columns:repeat(3,1fr)}}
+        .review{background:var(--bg);border:1px solid var(--border);padding:2rem;position:relative}
+        .review::before{content:'"';font-family:'Cormorant Garamond',serif;font-size:4rem;color:var(--gold-dim);position:absolute;top:.5rem;left:1rem;line-height:1;opacity:.5}
+        .review-stars{color:var(--gold);font-size:.85rem;margin-bottom:1rem;letter-spacing:2px}
+        .review p{font-size:.92rem;color:var(--muted);font-style:italic;padding-top:1.5rem}
+        .review cite{display:block;margin-top:1.25rem;font-style:normal;font-size:.75rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--gold-dim)}
+
+        .cta-band{background:linear-gradient(135deg,var(--surface2),var(--surface));border:1px solid var(--border);padding:3rem 2rem;text-align:center;margin:0 1.5rem;max-width:1180px;margin-left:auto;margin-right:auto}
+        .cta-band h2{font-size:2rem;margin-bottom:.75rem}
+        .cta-band p{color:var(--muted);margin-bottom:2rem;max-width:28rem;margin-left:auto;margin-right:auto}
+
+        .contact-grid{display:grid;gap:2rem}
+        @media(min-width:900px){.contact-grid{grid-template-columns:1fr 1.3fr}}
+        .contact-info{background:var(--surface);border:1px solid var(--border);padding:2.5rem}
+        .contact-row{padding:1.25rem 0;border-bottom:1px solid rgba(255,255,255,.05)}
+        .contact-row:last-child{border:none}
+        .contact-row label{display:block;font-size:.65rem;font-weight:800;text-transform:uppercase;letter-spacing:.15em;color:var(--gold);margin-bottom:.35rem}
+        .contact-row a.phone{font-size:1.5rem;font-weight:800;color:var(--gold-light)}
+        .contact-row p{color:var(--muted);font-size:.95rem}
+        .hours-grid{display:grid;grid-template-columns:1fr 1fr;gap:.35rem .5rem;font-size:.88rem;margin-top:.5rem}
+        .hours-grid span:last-child{text-align:right;color:var(--text)}
+        .hours-grid .today{color:var(--gold);font-weight:700}
+        .map-frame{border:1px solid var(--border);min-height:380px;overflow:hidden}
+        .map-frame iframe{width:100%;height:100%;min-height:380px;border:0;filter:grayscale(30%) contrast(1.1)}
+
+        footer{padding:2.5rem 0;text-align:center;border-top:1px solid var(--border)}
+        footer .logo{justify-content:center;margin-bottom:.5rem}
+        footer p{font-size:.8rem;color:var(--muted)}
+
+        .float-call{position:fixed;bottom:1.5rem;right:1.5rem;z-index:90;width:3.5rem;height:3.5rem;background:linear-gradient(135deg,var(--gold),var(--gold-dim));border-radius:50%;display:grid;place-items:center;font-size:1.25rem;box-shadow:0 8px 30px rgba(201,168,76,.4);transition:transform .2s}
+        .float-call:hover{transform:scale(1.08)}
+    </style>
+</head>
+<body>
+
+<header>
+    <div class="wrap header-inner">
+        <a href="#" class="logo"><span class="logo-crown">♛</span> Royal <em>Servis</em></a>
+        <nav>
+            <a href="#services">Послуги</a>
+            <a href="#reviews">Відгуки</a>
+            <a href="#contact">Контакти</a>
+        </nav>
+        <a href="tel:0672361452" class="btn-gold">☎ Записатися</a>
+    </div>
+</header>
+
+<section class="hero">
+    <div class="hero-bg"></div>
+    <div class="wrap hero-grid">
+        <div>
+            <div class="hero-tag">СТО · Київ · з 336+ відгуками</div>
+            <h1>Royal Servis<span>автосервіс, якому довіряють</span></h1>
+            <p class="hero-lead">Професійний ремонт, ходова, розвал-сходження та регулювання фар. Телефонуйте перед візитом — працюємо за попереднім записом.</p>
+            <div class="hero-actions">
+                <a href="tel:0672361452" class="btn-gold">067 236 1452</a>
+                <a href="#contact" class="btn-ghost">Графік і адреса</a>
+            </div>
+            <div class="hero-stats">
+                <div><b>3.9</b><small>рейтинг Google</small></div>
+                <div><b>336+</b><small>відгуків</small></div>
+                <div><b>7/7</b><small>днів на тиждень</small></div>
+            </div>
+        </div>
+        <div class="hero-panel">
+            <h3>Чому Royal Servis</h3>
+            <p>Комплексний сервіс для вашого автомобіля — від діагностики до складного ремонту підвіски.</p>
+            <ul>
+                <li>Розвал-сходження та регулювання фар</li>
+                <li>Ремонт ходової частини</li>
+                <li>Заміна ремня генератора та агрегатів</li>
+                <li>Досвід з преміум-авто (Porsche Cayenne та ін.)</li>
+                <li>Попередній запис — без зайвого очікування</li>
+            </ul>
+        </div>
+    </div>
+</section>
+
+<section id="services">
+    <div class="wrap">
+        <p class="section-label">Послуги</p>
+        <h2 class="section-title">Повний спектр робіт</h2>
+        <p class="section-desc">Від планового ТО до складного ремонту задньої підвіски — майстри Royal Servis працюють акуратно та за домовленістю.</p>
+        <div class="services">
+            <article class="svc"><div class="svc-num">01</div><h3>Ходова частина</h3><p>Заміна сайлентблоків, балки, амортизаторів, важелів. Діагностика перед ремонтом.</p></article>
+            <article class="svc"><div class="svc-num">02</div><h3>Розвал-сходження</h3><p>Точне налаштування кутів установки коліс. Клієнти повертаються неодноразово.</p></article>
+            <article class="svc"><div class="svc-num">03</div><h3>Регулювання фар</h3><p>Комплексно з розвалом — безпека на дорозі вночі та в дощ.</p></article>
+            <article class="svc"><div class="svc-num">04</div><h3>Двигун і навісне</h3><p>Ремінь генератора, ролики, базове обслуговування.</p></article>
+            <article class="svc"><div class="svc-num">05</div><h3>Діагностика</h3><p>Комп'ютерна та механічна перевірка перед ремонтом.</p></article>
+            <article class="svc"><div class="svc-num">06</div><h3>ТО і сервіс</h3><p>Планове обслуговування за регламентом виробника.</p></article>
+        </div>
+    </div>
+</section>
+
+<section id="reviews" class="reviews">
+    <div class="wrap">
+        <p class="section-label">Відгуки</p>
+        <h2 class="section-title">Що кажуть клієнти</h2>
+        <div class="review-grid" style="margin-top:2.5rem">
+            <blockquote class="review">
+                <div class="review-stars">★★★★★</div>
+                <p>Як завжди на висоті, за адекватні гроші. Робив розвал-сходження неодноразово, в останній раз ще відрегулювали фари. Cayenne Turbo S.</p>
+                <cite>— Власник Porsche</cite>
+            </blockquote>
+            <blockquote class="review">
+                <div class="review-stars">★★★★★</div>
+                <p>Не могла завести машину — виявилось, порвався ремінь генератора. Швидко замінили, поки я працювала поруч у бізнес-центрі.</p>
+                <cite>— Клієнтка Royal Servis</cite>
+            </blockquote>
+            <blockquote class="review">
+                <div class="review-stars">★★★★★</div>
+                <p>Звернувся після заносу в бордюр узимку — якісно відновили, пояснили всі роботи. Повернусь знову.</p>
+                <cite>— Постійний клієнт</cite>
+            </blockquote>
+        </div>
+    </div>
+</section>
+
+<div class="cta-band">
+    <h2>Запишіться заздалегідь</h2>
+    <p>Телефонуйте перед візитом — так ми зможемо прийняти вас у зручний час без черги.</p>
+    <a href="tel:0672361452" class="btn-gold">067 236 1452 — зателефонувати</a>
+</div>
+
+<section id="contact">
+    <div class="wrap contact-grid">
+        <div class="contact-info">
+            <p class="section-label">Контакти</p>
+            <h2 class="section-title" style="font-size:2rem;margin-bottom:1.5rem">Як нас знайти</h2>
+            <div class="contact-row">
+                <label>Адреса</label>
+                <p>м. Київ, вул. Радищева, 7</p>
+            </div>
+            <div class="contact-row">
+                <label>Телефон</label>
+                <a href="tel:0672361452" class="phone">067 236 1452</a>
+            </div>
+            <div class="contact-row">
+                <label>Графік роботи</label>
+                <div class="hours-grid">
+                    <span>Пн – Сб</span><span>08:00 – 18:00</span>
+                    <span>Неділя</span><span>09:00 – 17:00</span>
+                </div>
+            </div>
+            <div class="contact-row">
+                <label>Запис</label>
+                <p style="color:var(--gold-light);font-weight:600">☎ Телефонуйте перед візитом. Є попередній запис.</p>
+            </div>
+        </div>
+        <div class="map-frame">
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2540.7!2d30.4107369!3d50.4473432!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x40d4cc6b99c17037%3A0x9beb8e0533c4dd2!2sSto%20%22Royal%20Servis%22!5e0!3m2!1suk!2sua!4v1710000000100!5m2!1suk!2sua" loading="lazy" title="Royal Servis"></iframe>
+        </div>
+    </div>
+</section>
+
+<footer>
+    <div class="wrap">
+        <div class="logo"><span class="logo-crown">♛</span> Royal <em>Servis</em></div>
+        <p>вул. Радищева, 7, Київ · СТО преміум-класу</p>
+    </div>
+</footer>
+
+<a href="tel:0672361452" class="float-call" aria-label="Зателефонувати">☎</a>
+</body>
+</html>
