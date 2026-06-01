@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="uk" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>СТО Сигнал | Автосервіс на лівому березі, Київ</title>
+    <meta name="description" content="СТО Сигнал — ремонт і техобслуговування авто на вул. Гната Хоткевича, 22. Рейтинг 5.0 на Google. Телефон: 067 220 8383.">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: { sans: ['Inter', 'sans-serif'] },
+                    colors: {
+                        brand: {
+                            accent: '#22c55e',
+                            darkBg: '#0a0f0c',
+                            cardBg: '#121a15'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body { background: #0a0f0c; color: #f3f4f6; }
+        .accent-glow:hover { box-shadow: 0 0 18px rgba(34, 197, 94, 0.35); }
+    </style>
+</head>
+<body x-data="{ modalOpen: false, modalService: '' }">
+
+    <header class="sticky top-0 z-50 bg-brand-darkBg/95 backdrop-blur border-b border-gray-800" x-data="{ mobileMenu: false }">
+        <div class="max-w-7xl mx-auto px-4 h-20 flex items-center justify-between">
+            <a href="#" class="flex items-center gap-2 font-extrabold text-white tracking-wide">
+                <i class="fa-solid fa-traffic-light text-brand-accent"></i>
+                СТО <span class="text-brand-accent">Сигнал</span>
+            </a>
+            <nav class="hidden md:flex gap-7 text-sm text-gray-300">
+                <a href="#about" class="hover:text-brand-accent">Про нас</a>
+                <a href="#services" class="hover:text-brand-accent">Послуги</a>
+                <a href="#reviews" class="hover:text-brand-accent">Відгуки</a>
+                <a href="#contacts" class="hover:text-brand-accent">Контакти</a>
+            </nav>
+            <div class="hidden lg:flex items-center gap-5">
+                <a href="tel:0672208383" class="font-semibold hover:text-brand-accent"><i class="fa-solid fa-phone text-brand-accent mr-2"></i>067 220 8383</a>
+                <button @click="modalOpen=true;modalService='Запис'" class="bg-brand-accent hover:bg-green-600 text-black px-5 py-2.5 rounded font-semibold text-sm accent-glow">Записатися</button>
+            </div>
+            <button @click="mobileMenu=!mobileMenu" class="md:hidden text-white"><i class="fa-solid" :class="mobileMenu?'fa-xmark':'fa-bars'"></i></button>
+        </div>
+        <div x-show="mobileMenu" class="md:hidden bg-brand-cardBg border-b border-gray-800 p-4 text-center space-y-2" style="display:none">
+            <a href="#about" @click="mobileMenu=false" class="block py-2 text-gray-300">Про нас</a>
+            <a href="#services" @click="mobileMenu=false" class="block py-2 text-gray-300">Послуги</a>
+            <a href="#contacts" @click="mobileMenu=false" class="block py-2 text-gray-300">Контакти</a>
+            <a href="tel:0672208383" class="block font-bold text-white py-2">067 220 8383</a>
+        </div>
+    </header>
+
+    <section class="relative py-16 lg:py-24 border-b border-gray-900 overflow-hidden">
+        <div class="absolute inset-0 opacity-20 bg-[url('https://images.unsplash.com/photo-1486262715619-67b85e0b08d3?auto=format&fit=crop&q=80&w=1920')] bg-cover bg-center"></div>
+        <div class="absolute inset-0 bg-gradient-to-r from-brand-darkBg via-brand-darkBg/95 to-transparent"></div>
+        <div class="max-w-7xl mx-auto px-4 relative grid lg:grid-cols-12 gap-12 items-center">
+            <div class="lg:col-span-7 space-y-6">
+                <p class="text-brand-accent text-xs font-bold uppercase tracking-[0.2em]">Лівий берег · Київ</p>
+                <h1 class="text-4xl sm:text-5xl font-black text-white uppercase leading-tight">
+                    <span class="text-brand-accent">СТО Сигнал</span> — ремонт і ТО
+                </h1>
+                <p class="text-lg text-gray-400 font-light max-w-2xl">
+                    Ремонт автомобілів, техобслуговування та ходова. Чесна діагностика, помірні ціни та майстри, яким довіряють клієнти з Google Maps.
+                </p>
+                <div class="flex flex-col sm:flex-row gap-4">
+                    <button @click="modalOpen=true;modalService='Головна'" class="bg-brand-accent hover:bg-green-600 text-black px-8 py-4 rounded font-bold accent-glow uppercase">Записатися</button>
+                    <a href="tel:0672208383" class="border border-gray-700 hover:border-brand-accent px-8 py-4 rounded font-bold text-center flex items-center justify-center gap-3">
+                        <i class="fa-solid fa-phone text-brand-accent"></i> Зателефонувати
+                    </a>
+                </div>
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-4 pt-8 border-t border-gray-800/60 text-sm text-gray-300">
+                    <span class="flex items-center gap-2"><i class="fa-solid fa-star text-yellow-400"></i> 5.0 рейтинг</span>
+                    <span class="flex items-center gap-2"><i class="fa-solid fa-comments text-brand-accent"></i> 37 відгуків</span>
+                    <span class="flex items-center gap-2"><i class="fa-solid fa-clock text-brand-accent"></i> Щодня 9–20</span>
+                    <span class="flex items-center gap-2"><i class="fa-solid fa-screwdriver-wrench text-brand-accent"></i> ТО і ходова</span>
+                </div>
+            </div>
+            <div class="lg:col-span-5 bg-brand-cardBg/90 border border-gray-800 p-8 rounded">
+                <h3 class="text-lg font-bold text-white uppercase mb-4">Запис на сервіс</h3>
+                <form class="space-y-4">
+                    <input type="text" placeholder="Ім'я" required class="w-full bg-brand-darkBg border border-gray-700 rounded px-4 py-3 text-sm text-white focus:border-brand-accent focus:outline-none">
+                    <input type="tel" placeholder="067 220 8383" required class="w-full bg-brand-darkBg border border-gray-700 rounded px-4 py-3 text-sm text-white focus:border-brand-accent focus:outline-none">
+                    <button type="submit" class="w-full bg-brand-accent hover:bg-green-600 text-black font-bold py-3 rounded uppercase text-sm">Надіслати</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <section id="about" class="py-16">
+        <div class="max-w-3xl mx-auto px-4 text-center space-y-5">
+            <span class="text-brand-accent text-xs font-bold uppercase tracking-widest">Про СТО</span>
+            <h2 class="text-3xl font-black text-white uppercase">СТО Сигнал на Хоткевича</h2>
+            <p class="text-gray-300 leading-relaxed">
+                СТО Сигнал на лівому березі Києва виконує ремонт, планове техобслуговування та роботи по ходовій частині. Майстри ретельно діагностують несправність — клієнти відзначають швидкість, якість і людяний підхід.
+            </p>
+        </div>
+    </section>
+
+    <section id="services" class="py-16 bg-brand-cardBg/30 border-y border-gray-900">
+        <div class="max-w-4xl mx-auto px-4">
+            <h2 class="text-2xl font-extrabold text-white uppercase text-center mb-10">Послуги</h2>
+            <div class="grid sm:grid-cols-2 gap-4">
+                <div class="bg-brand-cardBg border border-gray-800 p-5 rounded flex gap-4">
+                    <i class="fa-solid fa-gears text-brand-accent text-xl"></i>
+                    <div><h3 class="font-bold text-white">Техобслуговування</h3><p class="text-gray-400 text-xs mt-1">Планове ТО, заміна фільтрів і рідин</p></div>
+                </div>
+                <div class="bg-brand-cardBg border border-gray-800 p-5 rounded flex gap-4">
+                    <i class="fa-solid fa-car-side text-brand-accent text-xl"></i>
+                    <div><h3 class="font-bold text-white">Ходова частина</h3><p class="text-gray-400 text-xs mt-1">Ремонт підвіски, рульового, гальм</p></div>
+                </div>
+                <div class="bg-brand-cardBg border border-gray-800 p-5 rounded flex gap-4">
+                    <i class="fa-solid fa-laptop-medical text-brand-accent text-xl"></i>
+                    <div><h3 class="font-bold text-white">Діагностика</h3><p class="text-gray-400 text-xs mt-1">Точний пошук причини, без зайвих робіт</p></div>
+                </div>
+                <div class="bg-brand-cardBg border border-gray-800 p-5 rounded flex gap-4">
+                    <i class="fa-solid fa-engine text-brand-accent text-xl"></i>
+                    <div><h3 class="font-bold text-white">Двигун і АКПП</h3><p class="text-gray-400 text-xs mt-1">Складні вузли, підушки, коробка</p></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="reviews" class="py-16">
+        <div class="max-w-7xl mx-auto px-4">
+            <div class="flex flex-col md:flex-row justify-between items-center mb-10 gap-4">
+                <h2 class="text-2xl font-extrabold text-white uppercase">Відгуки Google</h2>
+                <div class="flex items-center bg-brand-cardBg border border-gray-800 px-4 py-2 rounded text-sm">
+                    <i class="fa-solid fa-star text-yellow-400 mr-2"></i>
+                    <span class="font-bold">5.0</span>
+                    <span class="text-gray-500 mx-2">|</span>
+                    <span class="text-gray-400">37 оцінок</span>
+                </div>
+            </div>
+            <div class="grid md:grid-cols-3 gap-6">
+                <div class="bg-brand-cardBg p-6 rounded border border-gray-800">
+                    <div class="text-yellow-400 text-xs mb-2">★★★★★</div>
+                    <p class="text-gray-300 text-sm italic">«Думав, зламалась АКПП на Camry — швидко знайшли причину: підушка двигуна. Замінили, усе працює. Рекомендую.»</p>
+                </div>
+                <div class="bg-brand-cardBg p-6 rounded border border-gray-800">
+                    <div class="text-yellow-400 text-xs mb-2">★★★★★</div>
+                    <p class="text-gray-300 text-sm italic">«Планове ТО по ходовій на Audi — майстер Євген якісно й вчасно. Помірні ціни, рідкість у наш час.»</p>
+                </div>
+                <div class="bg-brand-cardBg p-6 rounded border border-gray-800">
+                    <div class="text-yellow-400 text-xs mb-2">★★★★★</div>
+                    <p class="text-gray-300 text-sm italic">«Jeep Compass, ходова — все на високому рівні, швидко й по-людськи. Тепер усі питання з авто вирішую тут.»</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contacts" class="py-16 bg-brand-cardBg/20 border-t border-gray-900">
+        <div class="max-w-7xl mx-auto px-4 grid lg:grid-cols-12 gap-12">
+            <div class="lg:col-span-5 space-y-5">
+                <h2 class="text-2xl font-extrabold text-white uppercase">Контакти</h2>
+                <p class="text-gray-400 text-sm flex gap-3"><i class="fa-solid fa-location-dot text-brand-accent"></i> вул. Гната Хоткевича, 22, Київ, 02094</p>
+                <p class="text-sm flex gap-3"><i class="fa-solid fa-phone text-brand-accent"></i><a href="tel:0672208383" class="text-brand-accent font-bold text-lg">067 220 8383</a></p>
+                <p class="text-gray-400 text-sm flex gap-3"><i class="fa-solid fa-clock text-brand-accent"></i> Щодня: 09:00 – 20:00</p>
+            </div>
+            <div class="lg:col-span-7 min-h-[350px] rounded border border-gray-800 overflow-hidden relative">
+                <iframe
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2540.5!2d30.635743!3d50.450886!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x40d4c593301f2879%3A0x2ddfa55534fc38da!2z0KLQotCQINCh0LjRgtC10LvRjA!5e0!3m2!1suk!2sua!4v1710000000002!5m2!1suk!2sua"
+                    class="absolute inset-0 w-full h-full border-0 filter invert-[88%] hue-rotate-[80deg] contrast-[95%]"
+                    loading="lazy"
+                    title="СТО Сигнал на карті"></iframe>
+            </div>
+        </div>
+    </section>
+
+    <footer class="py-8 text-center text-xs text-gray-600 border-t border-gray-900">
+        <p class="text-white font-bold">СТО Сигнал</p>
+        <p>вул. Гната Хоткевича, 22, Київ · Лівий берег</p>
+    </footer>
+
+    <a href="tel:0672208383" class="fixed bottom-6 right-6 w-14 h-14 bg-brand-accent text-black rounded-full flex items-center justify-center shadow-2xl z-40 hover:scale-110 transition-transform">
+        <i class="fa-solid fa-phone text-xl"></i>
+    </a>
+
+    <div x-show="modalOpen" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80" style="display:none">
+        <div @click.away="modalOpen=false" class="bg-brand-cardBg border border-gray-800 max-w-md w-full rounded p-6 relative">
+            <button @click="modalOpen=false" class="absolute top-4 right-4 text-gray-400"><i class="fa-solid fa-xmark"></i></button>
+            <h3 class="text-lg font-bold text-white uppercase">Запис</h3>
+            <p class="text-brand-accent text-xs mt-1 mb-4" x-text="modalService"></p>
+            <form class="space-y-3">
+                <input type="text" placeholder="Ім'я" required class="w-full bg-brand-darkBg border border-gray-700 rounded px-4 py-2 text-white text-sm focus:border-brand-accent focus:outline-none">
+                <input type="tel" placeholder="067 220 8383" required class="w-full bg-brand-darkBg border border-gray-700 rounded px-4 py-2 text-white text-sm focus:border-brand-accent focus:outline-none">
+                <button type="submit" class="w-full bg-brand-accent text-black font-bold py-3 rounded text-sm uppercase">Підтвердити</button>
+            </form>
+        </div>
+    </div>
+</body>
+</html>
