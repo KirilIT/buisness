@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html lang="uk" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>4Wheels | Автосервіс у Києві — кузовний ремонт і фарбування</title>
+    <meta name="description" content="4Wheels — автосервіс на вул. Стеценка у Києві. Кузовний ремонт, фарбування, ходова, діагностика. Рейтинг 4.5 на Google. Телефон: 063 844 4333.">
+    <meta name="keywords" content="4Wheels, СТО Київ, автосервіс Поділ, кузовний ремонт, фарбування авто, ремонт ходової">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: { sans: ['Inter', 'sans-serif'] },
+                    colors: {
+                        brand: {
+                            accent: '#f59e0b',
+                            darkBg: '#0c0e12',
+                            cardBg: '#141820',
+                            grayMuted: '#9fa6b2'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body { background-color: #0c0e12; color: #f3f4f6; }
+        .accent-glow:hover { box-shadow: 0 0 18px rgba(245, 158, 11, 0.35); }
+    </style>
+</head>
+<body x-data="{ modalOpen: false, modalService: '' }">
+
+    <header class="sticky top-0 z-50 bg-brand-darkBg/95 backdrop-blur-md border-b border-gray-800" x-data="{ mobileMenu: false }">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+            <a href="#" class="flex items-center space-x-2">
+                <i class="fa-solid fa-circle-notch text-brand-accent text-xl"></i>
+                <span class="text-lg font-extrabold tracking-wider text-white">4<span class="text-brand-accent">Wheels</span></span>
+            </a>
+
+            <nav class="hidden md:flex space-x-8 text-sm font-medium">
+                <a href="#about" class="text-gray-300 hover:text-brand-accent transition-colors">Про нас</a>
+                <a href="#why-us" class="text-gray-300 hover:text-brand-accent transition-colors">Переваги</a>
+                <a href="#prices" class="text-gray-300 hover:text-brand-accent transition-colors">Послуги</a>
+                <a href="#workshop" class="text-gray-300 hover:text-brand-accent transition-colors">Майстерня</a>
+                <a href="#reviews" class="text-gray-300 hover:text-brand-accent transition-colors">Відгуки</a>
+                <a href="#faq" class="text-gray-300 hover:text-brand-accent transition-colors">FAQ</a>
+                <a href="#contacts" class="text-gray-300 hover:text-brand-accent transition-colors">Контакти</a>
+            </nav>
+
+            <div class="hidden lg:flex items-center space-x-6">
+                <a href="tel:0638444333" class="text-gray-200 hover:text-brand-accent font-semibold transition-colors flex items-center">
+                    <i class="fa-solid fa-phone text-brand-accent mr-2"></i> 063 844 4333
+                </a>
+                <button @click="modalOpen = true; modalService = 'Загальний запис'" class="bg-brand-accent hover:bg-amber-600 text-black px-5 py-2.5 rounded font-semibold text-sm transition-all accent-glow">
+                    Записатися
+                </button>
+            </div>
+
+            <button @click="mobileMenu = !mobileMenu" class="md:hidden text-white hover:text-brand-accent focus:outline-none">
+                <i class="fa-solid" :class="mobileMenu ? 'fa-xmark text-xl' : 'fa-bars text-xl'"></i>
+            </button>
+        </div>
+
+        <div x-show="mobileMenu" x-transition class="md:hidden bg-brand-cardBg border-b border-gray-800" style="display: none;">
+            <div class="px-4 pt-2 pb-6 space-y-3 text-center">
+                <a href="#about" @click="mobileMenu = false" class="block text-gray-300 hover:text-brand-accent py-2">Про нас</a>
+                <a href="#why-us" @click="mobileMenu = false" class="block text-gray-300 hover:text-brand-accent py-2">Переваги</a>
+                <a href="#prices" @click="mobileMenu = false" class="block text-gray-300 hover:text-brand-accent py-2">Послуги</a>
+                <a href="#workshop" @click="mobileMenu = false" class="block text-gray-300 hover:text-brand-accent py-2">Майстерня</a>
+                <a href="#reviews" @click="mobileMenu = false" class="block text-gray-300 hover:text-brand-accent py-2">Відгуки</a>
+                <a href="#faq" @click="mobileMenu = false" class="block text-gray-300 hover:text-brand-accent py-2">FAQ</a>
+                <a href="#contacts" @click="mobileMenu = false" class="block text-gray-300 hover:text-brand-accent py-2">Контакти</a>
+                <hr class="border-gray-700">
+                <a href="tel:0638444333" class="block text-white font-bold py-2"><i class="fa-solid fa-phone text-brand-accent mr-2"></i>063 844 4333</a>
+                <button @click="modalOpen = true; modalService = 'Мобільне меню'; mobileMenu = false" class="w-full bg-brand-accent text-black py-2.5 rounded font-bold">
+                    Записатися на ремонт
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <section class="relative bg-black py-16 lg:py-24 overflow-hidden border-b border-gray-900">
+        <div class="absolute inset-0 z-0 opacity-25 bg-[url('https://images.unsplash.com/photo-1619642751034-765dfdf7c58e?auto=format&fit=crop&q=80&w=1920')] bg-cover bg-center mix-blend-luminosity"></div>
+        <div class="absolute inset-0 bg-gradient-to-r from-brand-darkBg via-brand-darkBg/92 to-transparent z-10"></div>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-20 grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+            <div class="lg:col-span-7 space-y-6">
+                <p class="text-brand-accent text-xs font-bold uppercase tracking-[0.2em]">Автотранспортні послуги · Подільський район</p>
+                <h1 class="text-4xl sm:text-5xl lg:text-6xl font-black text-white uppercase tracking-tight">
+                    Автосервіс <span class="text-brand-accent">4Wheels</span> у Києві
+                </h1>
+                <p class="text-lg sm:text-xl text-gray-400 max-w-2xl font-light">
+                    Кузовний ремонт, якісне фарбування та обслуговування автомобілів. Працюємо акуратно, з дотриманням заводських зазорів і кольору.
+                </p>
+
+                <div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-4 pt-4">
+                    <button @click="modalOpen = true; modalService = 'Головний екран'" class="bg-brand-accent hover:bg-amber-600 text-black px-8 py-4 rounded font-bold text-lg transition-all text-center accent-glow uppercase tracking-wider">
+                        Записатися
+                    </button>
+                    <a href="tel:0638444333" class="border border-gray-700 hover:border-brand-accent bg-white/5 hover:bg-amber-500/10 text-white px-8 py-4 rounded font-bold text-lg transition-all text-center flex items-center justify-center space-x-3 uppercase tracking-wider">
+                        <i class="fa-solid fa-phone text-brand-accent text-xl"></i>
+                        <span>Зателефонувати</span>
+                    </a>
+                </div>
+
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-4 pt-8 border-t border-gray-800/60 text-sm">
+                    <div class="flex items-center space-x-2 text-gray-300">
+                        <i class="fa-solid fa-star text-yellow-500"></i>
+                        <span>Рейтинг 4.5</span>
+                    </div>
+                    <div class="flex items-center space-x-2 text-gray-300">
+                        <i class="fa-solid fa-comments text-brand-accent"></i>
+                        <span>23+ відгуків</span>
+                    </div>
+                    <div class="flex items-center space-x-2 text-gray-300">
+                        <i class="fa-solid fa-spray-can-sparkles text-brand-accent"></i>
+                        <span>Фарбування без шагрені</span>
+                    </div>
+                    <div class="flex items-center space-x-2 text-gray-300">
+                        <i class="fa-solid fa-car-burst text-brand-accent"></i>
+                        <span>Після ДТП</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="lg:col-span-5 bg-brand-cardBg/90 border border-gray-800 p-6 sm:p-8 rounded shadow-2xl backdrop-blur-sm">
+                <h3 class="text-xl font-bold text-white mb-2 uppercase tracking-wide">Швидкий запис</h3>
+                <p class="text-gray-400 text-xs mb-6">Залиште контакти — передзвонимо та узгодимо зручний час візиту.</p>
+                <form class="space-y-4">
+                    <div>
+                        <label class="block text-xs font-semibold uppercase text-gray-400 mb-1 tracking-wider">Ваше ім'я</label>
+                        <input type="text" placeholder="Введіть ім'я" required class="w-full bg-brand-darkBg border border-gray-700 rounded px-4 py-3 text-white text-sm focus:outline-none focus:border-brand-accent transition-colors">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-semibold uppercase text-gray-400 mb-1 tracking-wider">Номер телефону *</label>
+                        <input type="tel" placeholder="063 844 4333" required class="w-full bg-brand-darkBg border border-gray-700 rounded px-4 py-3 text-white text-sm focus:outline-none focus:border-brand-accent transition-colors">
+                    </div>
+                    <button type="submit" class="w-full bg-brand-accent hover:bg-amber-600 text-black font-bold py-3.5 rounded transition-colors uppercase tracking-wider text-sm shadow-md">
+                        Надіслати заявку
+                    </button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <section id="about" class="py-16 bg-brand-darkBg">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center space-y-6">
+            <span class="text-brand-accent text-xs font-bold uppercase tracking-widest block">Про компанію</span>
+            <h2 class="text-3xl font-black uppercase text-white tracking-tight">4Wheels — автосервіс на Стеценка</h2>
+            <p class="text-gray-300 text-base sm:text-lg leading-relaxed font-light">
+                4Wheels надає автотранспортні послуги у Києві (Подільський район). Спеціалізуємося на кузовному ремонті після ДТП, малярних роботах, відновленні деталей та комплексному обслуговуванні авто — від діагностики до ремонту ходової частини.
+            </p>
+            <div class="w-16 h-1 bg-brand-accent mx-auto mt-4"></div>
+        </div>
+    </section>
+
+    <section id="why-us" class="py-16 bg-brand-cardBg/40 border-t border-b border-gray-900">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12">
+                <span class="text-brand-accent text-xs font-bold uppercase tracking-widest block mb-1">Чому обирають нас</span>
+                <h2 class="text-2xl sm:text-3xl font-extrabold text-white uppercase tracking-wide">Наші переваги</h2>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <div class="bg-brand-cardBg border border-gray-800 p-6 rounded hover:border-gray-700 transition-all">
+                    <div class="w-10 h-10 bg-amber-500/10 border border-amber-500/30 rounded flex items-center justify-center text-brand-accent text-lg mb-4">
+                        <i class="fa-solid fa-palette"></i>
+                    </div>
+                    <h3 class="text-lg font-bold text-white mb-2">Якісне фарбування</h3>
+                    <p class="text-gray-400 text-xs leading-relaxed">Підбір кольору та лак без помітної шагрені — відтінок максимально близький до заводського.</p>
+                </div>
+                <div class="bg-brand-cardBg border border-gray-800 p-6 rounded hover:border-gray-700 transition-all">
+                    <div class="w-10 h-10 bg-amber-500/10 border border-amber-500/30 rounded flex items-center justify-center text-brand-accent text-lg mb-4">
+                        <i class="fa-solid fa-car-side"></i>
+                    </div>
+                    <h3 class="text-lg font-bold text-white mb-2">Кузовні роботи</h3>
+                    <p class="text-gray-400 text-xs leading-relaxed">Відновлення після ДТП: заміна елементів, рихтування, збірка з штатними зазорами преміум-брендів.</p>
+                </div>
+                <div class="bg-brand-cardBg border border-gray-800 p-6 rounded hover:border-gray-700 transition-all">
+                    <div class="w-10 h-10 bg-amber-500/10 border border-amber-500/30 rounded flex items-center justify-center text-brand-accent text-lg mb-4">
+                        <i class="fa-solid fa-gauge-high"></i>
+                    </div>
+                    <h3 class="text-lg font-bold text-white mb-2">Швидко й по справі</h3>
+                    <p class="text-gray-400 text-xs leading-relaxed">Клієнти відзначають оперативність, зрозумілі ціни та майстрів, які знають свою справу.</p>
+                </div>
+                <div class="bg-brand-cardBg border border-gray-800 p-6 rounded hover:border-gray-700 transition-all">
+                    <div class="w-10 h-10 bg-amber-500/10 border border-amber-500/30 rounded flex items-center justify-center text-brand-accent text-lg mb-4">
+                        <i class="fa-solid fa-location-dot"></i>
+                    </div>
+                    <h3 class="text-lg font-bold text-white mb-2">Зручне розташування</h3>
+                    <p class="text-gray-400 text-xs leading-relaxed">вул. Стеценка, 12/157 — зручний під'їзд у Києві, поруч із промисловою зоною Подолу.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="prices" class="py-16 bg-brand-darkBg border-b border-gray-900">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12">
+                <span class="text-brand-accent text-xs font-bold uppercase tracking-widest block mb-1">Напрямки робіт</span>
+                <h2 class="text-2xl sm:text-3xl font-extrabold text-white uppercase tracking-wide">Основні послуги</h2>
+                <p class="text-gray-400 text-xs mt-2 font-light">Точну вартість уточнюйте за телефоном після огляду автомобіля</p>
+            </div>
+
+            <div class="bg-brand-cardBg border border-gray-800 rounded-lg overflow-hidden shadow-xl">
+                <div class="flex items-center justify-between p-5 border-b border-gray-800/80 hover:bg-white/5 transition-colors">
+                    <div class="flex items-center space-x-4">
+                        <div class="text-brand-accent text-base w-6 text-center"><i class="fa-solid fa-hammer"></i></div>
+                        <span class="text-sm sm:text-base font-semibold text-white">Кузовний ремонт після ДТП</span>
+                    </div>
+                    <button @click="modalOpen = true; modalService = 'Кузовний ремонт'" class="hidden sm:block border border-gray-700 hover:border-brand-accent px-3 py-1.5 text-xs rounded uppercase tracking-wide transition-colors text-gray-300 hover:text-white">Записатись</button>
+                </div>
+                <div class="flex items-center justify-between p-5 border-b border-gray-800/80 hover:bg-white/5 transition-colors">
+                    <div class="flex items-center space-x-4">
+                        <div class="text-brand-accent text-base w-6 text-center"><i class="fa-solid fa-spray-can"></i></div>
+                        <span class="text-sm sm:text-base font-semibold text-white">Малярні роботи та фарбування</span>
+                    </div>
+                    <button @click="modalOpen = true; modalService = 'Фарбування'" class="hidden sm:block border border-gray-700 hover:border-brand-accent px-3 py-1.5 text-xs rounded uppercase tracking-wide transition-colors text-gray-300 hover:text-white">Записатись</button>
+                </div>
+                <div class="flex items-center justify-between p-5 border-b border-gray-800/80 hover:bg-white/5 transition-colors">
+                    <div class="flex items-center space-x-4">
+                        <div class="text-brand-accent text-base w-6 text-center"><i class="fa-solid fa-screwdriver-wrench"></i></div>
+                        <span class="text-sm sm:text-base font-semibold text-white">Ремонт ходової частини</span>
+                    </div>
+                    <button @click="modalOpen = true; modalService = 'Ходова'" class="hidden sm:block border border-gray-700 hover:border-brand-accent px-3 py-1.5 text-xs rounded uppercase tracking-wide transition-colors text-gray-300 hover:text-white">Записатись</button>
+                </div>
+                <div class="flex items-center justify-between p-5 hover:bg-white/5 transition-colors">
+                    <div class="flex items-center space-x-4">
+                        <div class="text-brand-accent text-base w-6 text-center"><i class="fa-solid fa-laptop-medical"></i></div>
+                        <span class="text-sm sm:text-base font-semibold text-white">Діагностика та ТО</span>
+                    </div>
+                    <button @click="modalOpen = true; modalService = 'Діагностика'" class="hidden sm:block border border-gray-700 hover:border-brand-accent px-3 py-1.5 text-xs rounded uppercase tracking-wide transition-colors text-gray-300 hover:text-white">Записатись</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="workshop" class="py-16 bg-brand-darkBg">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+                <div class="lg:col-span-5 space-y-6">
+                    <span class="text-brand-accent text-xs font-bold uppercase tracking-widest block">Майстерня</span>
+                    <h2 class="text-2xl sm:text-3xl font-extrabold text-white uppercase tracking-tight">Професійний автосервіс</h2>
+                    <p class="text-gray-400 text-sm leading-relaxed font-light">
+                        У 4Wheels виконують складні кузовні проєкти: від заміни бамперів і крил до повного фарбування з ідеальним підбором відтінку. Клієнти згадують якісну збірку та увагу до деталей преміум-автомобілів.
+                    </p>
+                    <ul class="space-y-3 text-sm text-gray-300">
+                        <li class="flex items-center space-x-3"><i class="fa-solid fa-check text-brand-accent"></i><span>Рихтування та фарбування без зайвого демонтажу, де це можливо</span></li>
+                        <li class="flex items-center space-x-3"><i class="fa-solid fa-check text-brand-accent"></i><span>Заміна пошкоджених деталей оригіналом або якісним аналогом</span></li>
+                        <li class="flex items-center space-x-3"><i class="fa-solid fa-check text-brand-accent"></i><span>Комплексний підхід: кузов, ходова, дрібний ремонт</span></li>
+                    </ul>
+                </div>
+                <div class="lg:col-span-7 grid grid-cols-12 gap-4">
+                    <div class="col-span-8">
+                        <img src="https://images.unsplash.com/photo-1625044849028-8b839e0b0e4e?auto=format&fit=crop&q=80&w=800" alt="Кузовний ремонт автомобіля" class="rounded border border-gray-800 shadow-xl w-full h-64 object-cover">
+                    </div>
+                    <div class="col-span-4">
+                        <img src="https://images.unsplash.com/photo-1619642751034-765dfdf7c58e?auto=format&fit=crop&q=80&w=400" alt="Фарбування в автосервісі" class="rounded border border-gray-800 shadow-xl w-full h-64 object-cover">
+                    </div>
+                    <div class="col-span-4">
+                        <img src="https://images.unsplash.com/photo-1486262715619-67b85e0b08d3?auto=format&fit=crop&q=80&w=400" alt="Діагностика автомобіля" class="rounded border border-gray-800 shadow-xl w-full h-48 object-cover">
+                    </div>
+                    <div class="col-span-8">
+                        <img src="https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?auto=format&fit=crop&q=80&w=800" alt="Автомобіль у сервісі" class="rounded border border-gray-800 shadow-xl w-full h-48 object-cover">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="reviews" class="py-16 bg-brand-cardBg/40 border-t border-b border-gray-900">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row items-center justify-between mb-12">
+                <div>
+                    <span class="text-brand-accent text-xs font-bold uppercase tracking-widest block mb-1">Відгуки клієнтів</span>
+                    <h2 class="text-2xl sm:text-3xl font-extrabold text-white uppercase tracking-wide">Google Maps</h2>
+                </div>
+                <div class="mt-4 md:mt-0 flex items-center bg-brand-cardBg border border-gray-800 px-4 py-2 rounded">
+                    <span class="text-yellow-500 mr-2 text-lg"><i class="fa-solid fa-star"></i></span>
+                    <span class="text-white font-bold text-sm">4.5 / 5</span>
+                    <span class="text-gray-500 mx-2">|</span>
+                    <span class="text-xs text-gray-400">23 оцінки</span>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div class="bg-brand-cardBg p-6 rounded border border-gray-800 flex flex-col justify-between">
+                    <div class="space-y-3">
+                        <div class="flex text-yellow-500 text-xs">
+                            <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                        </div>
+                        <p class="text-gray-300 text-sm italic">
+                            «Покрашено без шагрені, колір один в один. Усе зібрано з ідеальними штатними зазорами. Рекомендую це СТО.»
+                        </p>
+                    </div>
+                    <div class="pt-4 border-t border-gray-800/60 mt-4 text-xs text-gray-400 font-medium">— Власник BMW</div>
+                </div>
+                <div class="bg-brand-cardBg p-6 rounded border border-gray-800 flex flex-col justify-between">
+                    <div class="space-y-3">
+                        <div class="flex text-yellow-500 text-xs">
+                            <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                        </div>
+                        <p class="text-gray-300 text-sm italic">
+                            «Чудовий сервіс. Зробили як треба і недорого. Майстри знають свою справу!»
+                        </p>
+                    </div>
+                    <div class="pt-4 border-t border-gray-800/60 mt-4 text-xs text-gray-400 font-medium">— Клієнт 4Wheels</div>
+                </div>
+                <div class="bg-brand-cardBg p-6 rounded border border-gray-800 flex flex-col justify-between">
+                    <div class="space-y-3">
+                        <div class="flex text-yellow-500 text-xs">
+                            <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                        </div>
+                        <p class="text-gray-300 text-sm italic">
+                            «Швидко, якісно і ціна нормальна. Дуже задоволений роботою.»
+                        </p>
+                    </div>
+                    <div class="pt-4 border-t border-gray-800/60 mt-4 text-xs text-gray-400 font-medium">— Постійний клієнт</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="faq" class="py-16 bg-brand-darkBg" x-data="{ activeFaq: null }">
+        <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-10">
+                <span class="text-brand-accent text-xs font-bold uppercase tracking-widest block mb-1">FAQ</span>
+                <h2 class="text-2xl sm:text-3xl font-extrabold text-white uppercase tracking-wide">Часті питання</h2>
+            </div>
+            <div class="space-y-4">
+                <div class="bg-brand-cardBg border border-gray-800 rounded">
+                    <button @click="activeFaq = (activeFaq === 1 ? null : 1)" class="w-full px-5 py-4 text-left font-bold text-sm sm:text-base text-white flex justify-between items-center focus:outline-none">
+                        <span>Як записатися на ремонт?</span>
+                        <i class="fa-solid text-brand-accent transition-transform duration-200" :class="activeFaq === 1 ? 'fa-minus rotate-180' : 'fa-plus'"></i>
+                    </button>
+                    <div x-show="activeFaq === 1" x-transition class="px-5 pb-4 text-gray-400 text-xs sm:text-sm border-t border-gray-800/50 pt-2">
+                        Зателефонуйте за номером <a href="tel:0638444333" class="text-brand-accent hover:underline">063 844 4333</a> або заповніть форму на сайті — ми узгодимо зручний час візиту.
+                    </div>
+                </div>
+                <div class="bg-brand-cardBg border border-gray-800 rounded">
+                    <button @click="activeFaq = (activeFaq === 2 ? null : 2)" class="w-full px-5 py-4 text-left font-bold text-sm sm:text-base text-white flex justify-between items-center focus:outline-none">
+                        <span>Чи робите кузовний ремонт після ДТП?</span>
+                        <i class="fa-solid text-brand-accent transition-transform duration-200" :class="activeFaq === 2 ? 'fa-minus rotate-180' : 'fa-plus'"></i>
+                    </button>
+                    <div x-show="activeFaq === 2" x-transition class="px-5 pb-4 text-gray-400 text-xs sm:text-sm border-t border-gray-800/50 pt-2">
+                        Так. Відновлюємо кузов, замінюємо пошкоджені елементи, рихтуємо та фарбуємо з підбором кольору під ваш автомобіль.
+                    </div>
+                </div>
+                <div class="bg-brand-cardBg border border-gray-800 rounded">
+                    <button @click="activeFaq = (activeFaq === 3 ? null : 3)" class="w-full px-5 py-4 text-left font-bold text-sm sm:text-base text-white flex justify-between items-center focus:outline-none">
+                        <span>Який графік роботи?</span>
+                        <i class="fa-solid text-brand-accent transition-transform duration-200" :class="activeFaq === 3 ? 'fa-minus rotate-180' : 'fa-plus'"></i>
+                    </button>
+                    <div x-show="activeFaq === 3" x-transition class="px-5 pb-4 text-gray-400 text-xs sm:text-sm border-t border-gray-800/50 pt-2">
+                        Понеділок – п'ятниця: 09:00 – 19:00. Субота: 10:00 – 17:00. Неділя: 10:00 – 15:30.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contacts" class="py-16 bg-brand-cardBg/30 border-t border-gray-900">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12">
+                <div class="lg:col-span-5 space-y-6">
+                    <span class="text-brand-accent text-xs font-bold uppercase tracking-widest block">Контакти</span>
+                    <h2 class="text-2xl sm:text-3xl font-extrabold text-white uppercase tracking-tight">4Wheels — як нас знайти</h2>
+                    <div class="space-y-4 text-sm">
+                        <div class="flex items-start space-x-3">
+                            <i class="fa-solid fa-location-dot text-brand-accent mt-1"></i>
+                            <div>
+                                <h4 class="font-bold text-white">Адреса</h4>
+                                <p class="text-gray-400">вул. Стеценка, 12/157, Київ, 04128<br><span class="text-gray-500 text-xs">Подільський район</span></p>
+                            </div>
+                        </div>
+                        <div class="flex items-start space-x-3">
+                            <i class="fa-solid fa-phone text-brand-accent mt-1"></i>
+                            <div>
+                                <h4 class="font-bold text-white">Телефон</h4>
+                                <a href="tel:0638444333" class="text-brand-accent font-bold text-base hover:underline block">063 844 4333</a>
+                            </div>
+                        </div>
+                        <div class="flex items-start space-x-3">
+                            <i class="fa-solid fa-clock text-brand-accent mt-1"></i>
+                            <div>
+                                <h4 class="font-bold text-white">Графік</h4>
+                                <p class="text-gray-400">Пн – Пт: 09:00 – 19:00</p>
+                                <p class="text-gray-400">Сб: 10:00 – 17:00</p>
+                                <p class="text-gray-400">Нд: 10:00 – 15:30</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="lg:col-span-7 h-80 lg:h-auto min-h-[350px] rounded border border-gray-800 overflow-hidden relative shadow-2xl">
+                    <iframe
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2540.8!2d30.4033729!3d50.4828734!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x40d4cd719c1ebfe3%3A0xe80cb4ce1a8721a6!2s4Wheels!5e0!3m2!1suk!2sua!4v1710000000000!5m2!1suk!2sua"
+                        class="w-full h-full absolute inset-0 border-0 filter invert-[90%] sepia-[8%] hue-rotate-[15deg] contrast-[95%]"
+                        allowfullscreen=""
+                        loading="lazy"
+                        referrerpolicy="no-referrer-when-downgrade"
+                        title="4Wheels на карті Google"></iframe>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="bg-black border-t border-gray-900 text-gray-500 text-xs py-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-4">
+            <div>
+                <span class="text-white font-bold uppercase tracking-wider text-sm block mb-1">4Wheels</span>
+                <p class="text-[11px] text-gray-600">вул. Стеценка, 12/157, Київ. Всі права захищені.</p>
+            </div>
+            <div class="flex space-x-6 text-gray-400">
+                <a href="#about" class="hover:text-brand-accent transition-colors">Про нас</a>
+                <a href="#prices" class="hover:text-brand-accent transition-colors">Послуги</a>
+                <a href="#contacts" class="hover:text-brand-accent transition-colors">Контакти</a>
+            </div>
+        </div>
+    </footer>
+
+    <div class="fixed bottom-6 right-6 z-40">
+        <a href="tel:0638444333" class="w-14 h-14 bg-brand-accent text-black rounded-full flex items-center justify-center shadow-2xl hover:scale-110 transition-transform active:scale-95" title="Зателефонувати">
+            <i class="fa-solid fa-phone text-xl"></i>
+        </a>
+    </div>
+
+    <div x-show="modalOpen" class="fixed inset-0 z-50 overflow-y-auto flex items-center justify-center p-4 bg-black/80 backdrop-blur-xs" style="display: none;">
+        <div @click.away="modalOpen = false" class="bg-brand-cardBg border border-gray-800 w-full max-w-md rounded p-6 relative shadow-2xl">
+            <button @click="modalOpen = false" class="absolute top-4 right-4 text-gray-400 hover:text-white">
+                <i class="fa-solid fa-xmark text-lg"></i>
+            </button>
+            <h3 class="text-lg font-bold text-white uppercase tracking-wider mb-1">Запис на ремонт</h3>
+            <p class="text-brand-accent text-xs font-semibold uppercase mb-3 tracking-wide" x-text="modalService"></p>
+            <p class="text-gray-400 text-xs mb-4">Залиште контакти — передзвонимо найближчим часом.</p>
+            <form class="space-y-4">
+                <div>
+                    <label class="block text-xs font-semibold text-gray-400 mb-1">Ваше ім'я</label>
+                    <input type="text" placeholder="Ім'я" required class="w-full bg-brand-darkBg border border-gray-700 rounded px-4 py-2.5 text-white text-sm focus:outline-none focus:border-brand-accent">
+                </div>
+                <div>
+                    <label class="block text-xs font-semibold text-gray-400 mb-1">Номер телефону *</label>
+                    <input type="tel" placeholder="063 844 4333" required class="w-full bg-brand-darkBg border border-gray-700 rounded px-4 py-2.5 text-white text-sm focus:outline-none focus:border-brand-accent">
+                </div>
+                <button type="submit" class="w-full bg-brand-accent hover:bg-amber-600 text-black font-bold py-3 rounded text-xs uppercase tracking-wider transition-colors shadow-md">
+                    Підтвердити запис
+                </button>
+            </form>
+        </div>
+    </div>
+
+</body>
+</html>

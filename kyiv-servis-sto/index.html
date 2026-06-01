@@ -1,0 +1,533 @@
+<!DOCTYPE html>
+<html lang="uk" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <title>KYIV SERVIS СТО | Автосервіс у Києві</title>
+    <meta name="description" content="Автомобільний сервіс у Києві. Професійний ремонт та обслуговування автомобілів. Телефон: 093 604 6642.">
+    <meta name="keywords" content="KYIV SERVIS СТО, СТО Київ, автосервіс Київ, ремонт авто, діагностика автомобіля, ціни сто">
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                    colors: {
+                        brand: {
+                            red: '#d90429', // Акцентний червоний, натхненний витягами LAUNCH
+                            darkBg: '#0f1115', // Темна індустріальна база
+                            cardBg: '#161920', // Контрастні блоки
+                            grayMuted: '#9fa6b2'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <style>
+        body {
+            background-color: #0f1115;
+            color: #f3f4f6;
+        }
+        .red-glow:hover {
+            box-shadow: 0 0 15px rgba(217, 4, 41, 0.4);
+        }
+    </style>
+</head>
+<body x-data="{ modalOpen: false, modalService: '' }">
+
+    <header class="sticky top-0 z-50 bg-brand-darkBg/95 backdrop-blur-md border-b border-gray-800" x-data="{ mobileMenu: false }">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+            <a href="#" class="flex items-center space-x-2">
+                <i class="fa-solid fa-wrench text-brand-red text-xl"></i>
+                <span class="text-lg font-extrabold tracking-wider uppercase text-white">KYIV <span class="text-brand-red">SERVIS</span> СТО</span>
+            </a>
+
+            <nav class="hidden md:flex space-x-8 text-sm font-medium">
+                <a href="#about" class="text-gray-300 hover:text-brand-red transition-colors">Про нас</a>
+                <a href="#why-us" class="text-gray-300 hover:text-brand-red transition-colors">Переваги</a>
+                <a href="#prices" class="text-gray-300 hover:text-brand-red transition-colors">Ціни</a>
+                <a href="#workshop" class="text-gray-300 hover:text-brand-red transition-colors">Майстерня</a>
+                <a href="#reviews" class="text-gray-300 hover:text-brand-red transition-colors">Відгуки</a>
+                <a href="#faq" class="text-gray-300 hover:text-brand-red transition-colors">FAQ</a>
+                <a href="#contacts" class="text-gray-300 hover:text-brand-red transition-colors">Контакти</a>
+            </nav>
+
+            <div class="hidden lg:flex items-center space-x-6">
+                <a href="tel:0936046642" class="text-gray-200 hover:text-brand-red font-semibold transition-colors flex items-center">
+                    <i class="fa-solid fa-phone text-brand-red mr-2"></i> 093 604 6642
+                </a>
+                <button @click="modalOpen = true; modalService = 'Загальний запис з шапки'" class="bg-brand-red hover:bg-red-700 text-white px-5 py-2.5 rounded font-semibold text-sm transition-all red-glow">
+                    Записатися
+                </button>
+            </div>
+
+            <button @click="mobileMenu = !mobileMenu" class="md:hidden text-white hover:text-brand-red focus:outline-none">
+                <i class="fa-solid" :class="mobileMenu ? 'fa-xmark text-xl' : 'fa-bars text-xl'"></i>
+            </button>
+        </div>
+
+        <div x-show="mobileMenu" x-transition class="md:hidden bg-brand-cardBg border-b border-gray-800" style="display: none;">
+            <div class="px-4 pt-2 pb-6 space-y-3 text-center">
+                <a href="#about" @click="mobileMenu = false" class="block text-gray-300 hover:text-brand-red py-2">Про нас</a>
+                <a href="#why-us" @click="mobileMenu = false" class="block text-gray-300 hover:text-brand-red py-2">Переваги</a>
+                <a href="#prices" @click="mobileMenu = false" class="block text-gray-300 hover:text-brand-red py-2">Ціни</a>
+                <a href="#workshop" @click="mobileMenu = false" class="block text-gray-300 hover:text-brand-red py-2">Майстерня</a>
+                <a href="#reviews" @click="mobileMenu = false" class="block text-gray-300 hover:text-brand-red py-2">Відгуки</a>
+                <a href="#faq" @click="mobileMenu = false" class="block text-gray-300 hover:text-brand-red py-2">FAQ</a>
+                <a href="#contacts" @click="mobileMenu = false" class="block text-gray-300 hover:text-brand-red py-2">Контакти</a>
+                <hr class="border-gray-700">
+                <a href="tel:0936046642" class="block text-white font-bold py-2"><i class="fa-solid fa-phone text-brand-red mr-2"></i>093 604 6642</a>
+                <button @click="modalOpen = true; modalService = 'Мобільне меню'; mobileMenu = false" class="w-full bg-brand-red text-white py-2.5 rounded font-bold">
+                    Записатися на ремонт
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <section class="relative bg-black py-16 lg:py-24 overflow-hidden border-b border-gray-900">
+        <div class="absolute inset-0 z-0 opacity-20 bg-[url('https://images.unsplash.com/photo-1486006920555-c77dce18193b?auto=format&fit=crop&q=80&w=1920')] bg-cover bg-center mix-blend-luminosity"></div>
+        <div class="absolute inset-0 bg-gradient-to-r from-brand-darkBg via-brand-darkBg/90 to-transparent z-10"></div>
+        
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-20 grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+            <div class="lg:col-span-7 space-y-6">
+                <h1 class="text-4xl sm:text-5xl lg:text-6xl font-black text-white uppercase tracking-tight">
+                    Професійне <span class="text-brand-red">СТО у Києві</span>
+                </h1>
+                <p class="text-lg sm:text-xl text-gray-400 max-w-2xl font-light">
+                    Якісне обслуговування та ремонт автомобілів у професійній майстерні з сучасним обладнанням.
+                </p>
+
+                <div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-4 pt-4">
+                    <button @click="modalOpen = true; modalService = 'Головний екран (Записатися)'" class="bg-brand-red hover:bg-red-700 text-white px-8 py-4 rounded font-bold text-lg transition-all text-center red-glow uppercase tracking-wider">
+                        Записатися
+                    </button>
+                    <a href="tel:0936046642" class="border border-gray-700 hover:border-brand-red bg-white/5 hover:bg-brand-red/10 text-white px-8 py-4 rounded font-bold text-lg transition-all text-center flex items-center justify-center space-x-3 uppercase tracking-wider">
+                        <i class="fa-solid fa-phone text-brand-red text-xl"></i>
+                        <span>Зателефонувати</span>
+                    </a>
+                </div>
+
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-4 pt-8 border-t border-gray-800/60 text-sm">
+                    <div class="flex items-center space-x-2 text-gray-300">
+                        <i class="fa-solid fa-star text-yellow-500"></i>
+                        <span>Рейтинг 4.3</span>
+                    </div>
+                    <div class="flex items-center space-x-2 text-gray-300">
+                        <i class="fa-solid fa-comments text-brand-red"></i>
+                        <span>91+ відгуків</span>
+                    </div>
+                    <div class="flex items-center space-x-2 text-gray-300">
+                        <i class="fa-solid fa-arrow-up-from-ground-water text-brand-red"></i>
+                        <span>Підйомники LAUNCH</span>
+                    </div>
+                    <div class="flex items-center space-x-2 text-gray-300">
+                        <i class="fa-solid fa-warehouse text-brand-red"></i>
+                        <span>Простора зона</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="lg:col-span-5 bg-brand-cardBg/90 border border-gray-800 p-6 sm:p-8 rounded shadow-2xl backdrop-blur-sm">
+                <h3 class="text-xl font-bold text-white mb-2 uppercase tracking-wide">Швидкий запис на діагностику</h3>
+                <p class="text-gray-400 text-xs mb-6">Залиште ваші дані, і наш майстер зв'яжеться з вами для уточнення деталей.</p>
+                <form class="space-y-4">
+                    <div>
+                        <label class="block text-xs font-semibold uppercase text-gray-400 mb-1 tracking-wider">Ваше ім'я</label>
+                        <input type="text" placeholder="Введіть ім'я" required class="w-full bg-brand-darkBg border border-gray-700 rounded px-4 py-3 text-white text-sm focus:outline-none focus:border-brand-red transition-colors">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-semibold uppercase text-gray-400 mb-1 tracking-wider">Номер телефону *</label>
+                        <input type="tel" placeholder="093 604 6642" required class="w-full bg-brand-darkBg border border-gray-700 rounded px-4 py-3 text-white text-sm focus:outline-none focus:border-brand-red transition-colors">
+                    </div>
+                    <button type="submit" class="w-full bg-brand-red hover:bg-red-700 text-white font-bold py-3.5 rounded transition-colors uppercase tracking-wider text-sm shadow-md">
+                        Надіслати заявку
+                    </button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <section id="about" class="py-16 bg-brand-darkBg">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center space-y-6">
+            <span class="text-brand-red text-xs font-bold uppercase tracking-widest block">Про компанію</span>
+            <h2 class="text-3xl font-black uppercase text-white tracking-tight">KYIV SERVIS СТО</h2>
+            <p class="text-gray-300 text-base sm:text-lg leading-relaxed font-light">
+                KYIV SERVIS СТО — це автомобільний сервіс у Києві з просторою ремонтною зоною, професійними підйомниками та командою майстрів, які виконують діагностику й ремонт автомобілів.
+            </p>
+            <div class="w-16 h-1 bg-brand-red mx-auto mt-4"></div>
+        </div>
+    </section>
+
+    <section id="why-us" class="py-16 bg-brand-cardBg/40 border-t border-b border-gray-900">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12">
+                <span class="text-brand-red text-xs font-bold uppercase tracking-widest block mb-1">Наші орієнтири</span>
+                <h2 class="text-2xl sm:text-3xl font-extrabold text-white uppercase tracking-wide">Чому клієнти обирають нас</h2>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <div class="bg-brand-cardBg border border-gray-800 p-6 rounded hover:border-gray-700 transition-all">
+                    <div class="w-10 h-10 bg-brand-red/10 border border-brand-red/30 rounded flex items-center justify-center text-brand-red text-lg mb-4">
+                        <i class="fa-solid fa-screwdriver-wrench"></i>
+                    </div>
+                    <h3 class="text-lg font-bold text-white mb-2">Сучасне обладнання</h3>
+                    <p class="text-gray-400 text-xs leading-relaxed">Використовуємо надійні підйомники та діагностичні системи для точного виявлення неполадок.</p>
+                </div>
+                <div class="bg-brand-cardBg border border-gray-800 p-6 rounded hover:border-gray-700 transition-all">
+                    <div class="w-10 h-10 bg-brand-red/10 border border-brand-red/30 rounded flex items-center justify-center text-brand-red text-lg mb-4">
+                        <i class="fa-solid fa-user-gear"></i>
+                    </div>
+                    <h3 class="text-lg font-bold text-white mb-2">Професійний підхід</h3>
+                    <p class="text-gray-400 text-xs leading-relaxed">Кожен автомобіль обслуговується досвідченими майстрами з урахуванням його технічних особливостей.</p>
+                </div>
+                <div class="bg-brand-cardBg border border-gray-800 p-6 rounded hover:border-gray-700 transition-all">
+                    <div class="w-10 h-10 bg-brand-red/10 border border-brand-red/30 rounded flex items-center justify-center text-brand-red text-lg mb-4">
+                        <i class="fa-solid fa-comments"></i>
+                    </div>
+                    <h3 class="text-lg font-bold text-white mb-2">Чесна комунікація</h3>
+                    <p class="text-gray-400 text-xs leading-relaxed">Попередньо узгоджуємо обсяг робіт і вартість. Ніяких прихованих платежів чи вигаданих проблем.</p>
+                </div>
+                <div class="bg-brand-cardBg border border-gray-800 p-6 rounded hover:border-gray-700 transition-all">
+                    <div class="w-10 h-10 bg-brand-red/10 border border-brand-red/30 rounded flex items-center justify-center text-brand-red text-lg mb-4">
+                        <i class="fa-solid fa-square-check"></i>
+                    </div>
+                    <h3 class="text-lg font-bold text-white mb-2">Якісний ремонт</h3>
+                    <p class="text-gray-400 text-xs leading-relaxed">Орієнтуємося на надійний результат, забезпечуючи стабільну експлуатацію вашого авто.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="prices" class="py-16 bg-brand-darkBg border-b border-gray-900">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12">
+                <span class="text-brand-red text-xs font-bold uppercase tracking-widest block mb-1">Прайс-лист</span>
+                <h2 class="text-2xl sm:text-3xl font-extrabold text-white uppercase tracking-wide">Вартість основних послуг</h2>
+                <p class="text-gray-400 text-xs mt-2 font-light">Прозоре та чесне ціноутворення без прихованих переплат</p>
+            </div>
+
+            <div class="bg-brand-cardBg border border-gray-800 rounded-lg overflow-hidden shadow-xl">
+                <div class="flex items-center justify-between p-5 border-b border-gray-800/80 hover:bg-white/5 transition-colors">
+                    <div class="flex items-center space-x-4">
+                        <div class="text-brand-red text-base w-6 text-center"><i class="fa-solid fa-laptop-diagnostic"></i></div>
+                        <span class="text-sm sm:text-base font-semibold text-white">Комп'ютерна діагностика</span>
+                    </div>
+                    <div class="flex items-center space-x-4">
+                        <span class="text-brand-red font-bold text-sm sm:text-base whitespace-nowrap">від 400 грн</span>
+                        <button @click="modalOpen = true; modalService = 'Компʼютерна діагностика (від 400 грн)'" class="hidden sm:block border border-gray-700 hover:border-brand-red px-3 py-1.5 text-xs rounded uppercase tracking-wide transition-colors text-gray-300 hover:text-white">Записатись</button>
+                    </div>
+                </div>
+
+                <div class="flex items-center justify-between p-5 border-b border-gray-800/80 hover:bg-white/5 transition-colors">
+                    <div class="flex items-center space-x-4">
+                        <div class="text-brand-red text-base w-6 text-center"><i class="fa-solid fa-oil-can"></i></div>
+                        <span class="text-sm sm:text-base font-semibold text-white">Заміна масла</span>
+                    </div>
+                    <div class="flex items-center space-x-4">
+                        <span class="text-brand-red font-bold text-sm sm:text-base whitespace-nowrap">від 600 грн</span>
+                        <button @click="modalOpen = true; modalService = 'Заміна масла (від 600 грн)'" class="hidden sm:block border border-gray-700 hover:border-brand-red px-3 py-1.5 text-xs rounded uppercase tracking-wide transition-colors text-gray-300 hover:text-white">Записатись</button>
+                    </div>
+                </div>
+
+                <div class="flex items-center justify-between p-5 hover:bg-white/5 transition-colors">
+                    <div class="flex items-center space-x-4">
+                        <div class="text-brand-red text-base w-6 text-center"><i class="fa-solid fa-car-tunnel"></i></div>
+                        <span class="text-sm sm:text-base font-semibold text-white">Ремонт ходової</span>
+                    </div>
+                    <div class="flex items-center space-x-4">
+                        <span class="text-brand-red font-bold text-sm sm:text-base whitespace-nowrap">від 1000 грн</span>
+                        <button @click="modalOpen = true; modalService = 'Ремонт ходової (від 1000 грн)'" class="hidden sm:block border border-gray-700 hover:border-brand-red px-3 py-1.5 text-xs rounded uppercase tracking-wide transition-colors text-gray-300 hover:text-white">Записатись</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="text-center mt-6 sm:hidden">
+                <button @click="modalOpen = true; modalService = 'Запис з прайс-листа'" class="w-full bg-white/5 border border-gray-800 text-gray-300 text-xs font-bold uppercase tracking-wider py-3 rounded">
+                    Записатися на іншу послугу
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <section id="workshop" class="py-16 bg-brand-darkBg">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+                <div class="lg:col-span-5 space-y-6">
+                    <span class="text-brand-red text-xs font-bold uppercase tracking-widest block">Наше робоче середовище</span>
+                    <h2 class="text-2xl sm:text-3xl font-extrabold text-white uppercase tracking-tight">Реальна робоча майстерня</h2>
+                    <p class="text-gray-400 text-sm leading-relaxed font-light">
+                        Наш автосервіс розташований у великій індустріальній будівлі з високими стелями та яскравим робочим освітленням. Це повноцінний діючий сервісний центр, спроектований для одночасного обслуговування кількох автомобілів.
+                    </p>
+                    
+                    <ul class="space-y-3 text-sm text-gray-300">
+                        <li class="flex items-center space-x-3">
+                            <i class="fa-solid fa-check text-brand-red"></i>
+                            <span>Простора ремонтна зона (понад 4 робочих пости)</span>
+                        </li>
+                        <li class="flex items-center space-x-3">
+                            <i class="fa-solid fa-check text-brand-red"></i>
+                            <span>Професійні підйомники фірми LAUNCH (домінуючий червоний колір у цеху)</span>
+                        </li>
+                        <li class="flex items-center space-x-3">
+                            <i class="fa-solid fa-check text-brand-red"></i>
+                            <span>Промислова бетонна підлога, біло-сині капітальні стіни</span>
+                        </li>
+                        <li class="flex items-center space-x-3">
+                            <i class="fa-solid fa-check text-brand-red"></i>
+                            <span>Спеціалізація на пасажирських європейських авто, зокрема бренду Volkswagen</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="lg:col-span-7 grid grid-cols-12 gap-4">
+                    <div class="col-span-8">
+                        <img src="https://images.unsplash.com/photo-1616788494707-ec28f08d05a1?auto=format&fit=crop&q=80&w=800" alt="Простора ремонтна зона з високою стелею та промисловою підлогою" class="rounded border border-gray-800 shadow-xl w-full h-64 object-cover">
+                    </div>
+                    <div class="col-span-4">
+                        <img src="https://images.unsplash.com/photo-1517524206127-48bbd363f3d7?auto=format&fit=crop&q=80&w=400" alt="Професійне діагностичне обладнання в цеху" class="rounded border border-gray-800 shadow-xl w-full h-64 object-cover">
+                    </div>
+                    <div class="col-span-4">
+                        <img src="https://images.unsplash.com/photo-1619642751034-765dfdf7c58e?auto=format&fit=crop&q=80&w=400" alt="Обслуговування автомобіля в сервісному центрі" class="rounded border border-gray-800 shadow-xl w-full h-48 object-cover">
+                    </div>
+                    <div class="col-span-8">
+                        <img src="https://images.unsplash.com/photo-1568605117036-5fe5e7bab0b7?auto=format&fit=crop&q=80&w=800" alt="Автомобіль Volkswagen на червоному витязі LAUNCH" class="rounded border border-gray-800 shadow-xl w-full h-48 object-cover">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="reviews" class="py-16 bg-brand-cardBg/40 border-t border-b border-gray-900">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row items-center justify-between mb-12">
+                <div>
+                    <span class="text-brand-red text-xs font-bold uppercase tracking-widest block mb-1">Що говорять клієнти</span>
+                    <h2 class="text-2xl sm:text-3xl font-extrabold text-white uppercase tracking-wide">Відгуки на основі Google Maps</h2>
+                </div>
+                <div class="mt-4 md:mt-0 flex items-center bg-brand-cardBg border border-gray-800 px-4 py-2 rounded">
+                    <span class="text-yellow-500 mr-2 text-lg"><i class="fa-solid fa-star"></i></span>
+                    <span class="text-white font-bold text-sm">4.3 / 5</span>
+                    <span class="text-gray-500 mx-2">|</span>
+                    <span class="text-xs text-gray-400">91+ оцінок</span>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div class="bg-brand-cardBg p-6 rounded border border-gray-800 flex flex-col justify-between">
+                    <div class="space-y-3">
+                        <div class="flex text-yellow-500 text-xs">
+                            <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                        </div>
+                        <p class="text-gray-300 text-sm italic">
+                            "Швидкий ремонт і дуже грамотна діагностика. Майстри знайшли причину несправності відразу. Сподобався індивідуальний підхід до проблеми."
+                        </p>
+                    </div>
+                    <div class="pt-4 border-t border-gray-800/60 mt-4 text-xs text-gray-400 font-medium">
+                        — Власник Volkswagen
+                    </div>
+                </div>
+                <div class="bg-brand-cardBg p-6 rounded border border-gray-800 flex flex-col justify-between">
+                    <div class="space-y-3">
+                        <div class="flex text-yellow-500 text-xs">
+                            <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star-half-stroke"></i>
+                        </div>
+                        <p class="text-gray-300 text-sm italic">
+                            "Привітний і приємний персонал. Працюють компетентні спеціалісти, які знають свою справу. Ремонт виконали якісно, без затримок."
+                        </p>
+                    </div>
+                    <div class="pt-4 border-t border-gray-800/60 mt-4 text-xs text-gray-400 font-medium">
+                        — Клієнт автосервісу
+                    </div>
+                </div>
+                <div class="bg-brand-cardBg p-6 rounded border border-gray-800 flex flex-col justify-between">
+                    <div class="space-y-3">
+                        <div class="flex text-yellow-500 text-xs">
+                            <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                        </div>
+                        <p class="text-gray-300 text-sm italic">
+                            "Чесний сервіс без зайвих накруток. Чітко пояснили, що треба міняти терміново, а що ще походить. Роботою задоволений."
+                        </p>
+                    </div>
+                    <div class="pt-4 border-t border-gray-800/60 mt-4 text-xs text-gray-400 font-medium">
+                        — Постійний клієнт
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="faq" class="py-16 bg-brand-darkBg" x-data="{ activeFaq: null }">
+        <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-10">
+                <span class="text-brand-red text-xs font-bold uppercase tracking-widest block mb-1">Інформація для водіїв</span>
+                <h2 class="text-2xl sm:text-3xl font-extrabold text-white uppercase tracking-wide">Часті питання</h2>
+            </div>
+
+            <div class="space-y-4">
+                <div class="bg-brand-cardBg border border-gray-800 rounded">
+                    <button @click="activeFaq = (activeFaq === 1 ? null : 1)" class="w-full px-5 py-4 text-left font-bold text-sm sm:text-base text-white flex justify-between items-center focus:outline-none">
+                        <span>Як записатися на ремонт?</span>
+                        <i class="fa-solid text-brand-red transition-transform duration-200" :class="activeFaq === 1 ? 'fa-minus rotate-180' : 'fa-plus'"></i>
+                    </button>
+                    <div x-show="activeFaq === 1" x-transition class="px-5 pb-4 text-gray-400 text-xs sm:text-sm border-t border-gray-800/50 pt-2">
+                        Ви можете заповнити форму зворотного зв'язку на нашому сайті або безпосередньо зателефонувати за номером телефону <a href="tel:0936046642" class="text-brand-red hover:underline">093 604 6642</a>, щоб узгодити зручний час візиту.
+                    </div>
+                </div>
+
+                <div class="bg-brand-cardBg border border-gray-800 rounded">
+                    <button @click="activeFaq = (activeFaq === 2 ? null : 2)" class="w-full px-5 py-4 text-left font-bold text-sm sm:text-base text-white flex justify-between items-center focus:outline-none">
+                        <span>Скільки часу займає діагностика?</span>
+                        <i class="fa-solid text-brand-red transition-transform duration-200" :class="activeFaq === 2 ? 'fa-minus rotate-180' : 'fa-plus'"></i>
+                    </button>
+                    <div x-show="activeFaq === 2" x-transition class="px-5 pb-4 text-gray-400 text-xs sm:text-sm border-t border-gray-800/50 pt-2">
+                        Час проведення професійної діагностики залежить від типу виявленої проблеми, але зазвичай базовий огляд та комп'ютерне зчитування займають від 30 до 60 хвилин.
+                    </div>
+                </div>
+
+                <div class="bg-brand-cardBg border border-gray-800 rounded">
+                    <button @click="activeFaq = (activeFaq === 3 ? null : 3)" class="w-full px-5 py-4 text-left font-bold text-sm sm:text-base text-white flex justify-between items-center focus:outline-none">
+                        <span>Чи потрібно попередньо телефонувати?</span>
+                        <i class="fa-solid text-brand-red transition-transform duration-200" :class="activeFaq === 3 ? 'fa-minus rotate-180' : 'fa-plus'"></i>
+                    </button>
+                    <div x-show="activeFaq === 3" x-transition class="px-5 pb-4 text-gray-400 text-xs sm:text-sm border-t border-gray-800/50 pt-2">
+                        Попередній дзвінок рекомендований для того, щоб ми могли зарезервувати за вами вільний пост з підйомником і уникнути очікування в черзі.
+                    </div>
+                </div>
+
+                <div class="bg-brand-cardBg border border-gray-800 rounded">
+                    <button @click="activeFaq = (activeFaq === 4 ? null : 4)" class="w-full px-5 py-4 text-left font-bold text-sm sm:text-base text-white flex justify-between items-center focus:outline-none">
+                        <span>Які години роботи СТО?</span>
+                        <i class="fa-solid text-brand-red transition-transform duration-200" :class="activeFaq === 4 ? 'fa-minus rotate-180' : 'fa-plus'"></i>
+                    </button>
+                    <div x-show="activeFaq === 4" x-transition class="px-5 pb-4 text-gray-400 text-xs sm:text-sm border-t border-gray-800/50 pt-2">
+                        Ми працюємо з понеділка по п'ятницю з 09:00 до 19:00. У суботу сервіс відкритий з 09:00 до 16:00. Неділя — вихідний день.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contacts" class="py-16 bg-brand-cardBg/30 border-t border-gray-900">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12">
+                <div class="lg:col-span-5 space-y-6">
+                    <span class="text-brand-red text-xs font-bold uppercase tracking-widest block">Навігація та зв'язок</span>
+                    <h2 class="text-2xl sm:text-3xl font-extrabold text-white uppercase tracking-tight">Контакти автосервісу</h2>
+                    
+                    <div class="space-y-4 text-sm">
+                        <div class="flex items-start space-x-3">
+                            <i class="fa-solid fa-location-dot text-brand-red mt-1 text-base"></i>
+                            <div>
+                                <h4 class="font-bold text-white">Адреса:</h4>
+                                <p class="text-gray-400">вул. Пантелеймона Куліша, 1а, Київ, Україна</p>
+                            </div>
+                        </div>
+
+                        <div class="flex items-start space-x-3">
+                            <i class="fa-solid fa-phone text-brand-red mt-1 text-base"></i>
+                            <div>
+                                <h4 class="font-bold text-white">Телефон для зв'язку:</h4>
+                                <a href="tel:0936046642" class="text-brand-red font-bold text-base hover:underline block">093 604 6642</a>
+                            </div>
+                        </div>
+
+                        <div class="flex items-start space-x-3">
+                            <i class="fa-solid fa-clock text-brand-red mt-1 text-base"></i>
+                            <div>
+                                <h4 class="font-bold text-white">Графік прийому:</h4>
+                                <p class="text-gray-400">Понеділок – П'ятниця: 09:00 – 19:00</p>
+                                <p class="text-gray-400">Субота: 09:00 – 16:00</p>
+                                <p class="text-brand-red font-medium mt-0.5">Неділя: Вихідний</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="pt-4 border-t border-gray-800/60">
+                        <h4 class="text-sm font-bold text-white uppercase mb-3 tracking-wider">Надіслати повідомлення</h4>
+                        <form class="space-y-3">
+                            <input type="text" placeholder="Ім'я" required class="w-full bg-brand-darkBg border border-gray-700 rounded px-3 py-2 text-white text-xs focus:outline-none focus:border-brand-red">
+                            <input type="tel" placeholder="Номер телефону" required class="w-full bg-brand-darkBg border border-gray-700 rounded px-3 py-2 text-white text-xs focus:outline-none focus:border-brand-red">
+                            <textarea placeholder="Опишіть проблему з автомобілем" rows="2" class="w-full bg-brand-darkBg border border-gray-700 rounded px-3 py-2 text-white text-xs focus:outline-none focus:border-brand-red"></textarea>
+                            <button type="submit" class="bg-brand-red hover:bg-red-700 text-white px-4 py-2 rounded font-bold text-xs uppercase tracking-wide transition-colors">
+                                Надіслати запит
+                            </button>
+                        </form>
+                    </div>
+                </div>
+
+                <div class="lg:col-span-7 h-80 lg:h-auto min-h-[350px] rounded border border-gray-800 overflow-hidden relative shadow-2xl">
+                    <iframe 
+                        src="https://www.google.com/maps/embed?pb=!11m1!1s0x40d4d1aa4723bd31%3A0x6b876fc1fcbf33cb!2z0LLRg9C70LjRhtGPINCf0LDQvdGC0LXQu9C10LnQvNC-0L3QsCDQmtGD0LvRltGI0LAsIDHQwSwg0JrQuNGX0LIsIDAyMDAw!5m2!1suk!2sua" 
+                        class="w-full h-full absolute inset-0 border-0 filter invert-[90%] sepia-[5%] hue-rotate-[170deg] contrast-[95%]" 
+                        allowfullscreen="" 
+                        loading="lazy" 
+                        referrerpolicy="no-referrer-when-downgrade">
+                    </iframe>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="bg-black border-t border-gray-900 text-gray-500 text-xs py-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-4">
+            <div>
+                <span class="text-white font-bold uppercase tracking-wider text-sm block mb-1">KYIV SERVIS СТО</span>
+                <p class="text-[11px] text-gray-600">Вулиця Пантелеймона Куліша, 1а, Київ. Всі права захищені.</p>
+            </div>
+            <div class="flex space-x-6 text-gray-400">
+                <a href="#about" class="hover:text-brand-red transition-colors">Про нас</a>
+                <a href="#prices" class="hover:text-brand-red transition-colors">Ціни</a>
+                <a href="#why-us" class="hover:text-brand-red transition-colors">Переваги</a>
+                <a href="#contacts" class="hover:text-brand-red transition-colors">Контакти</a>
+            </div>
+        </div>
+    </footer>
+
+    <div class="fixed bottom-6 right-6 z-40">
+        <a href="tel:0936046642" class="w-14 h-14 bg-brand-red text-white rounded-full flex items-center justify-center shadow-2xl hover:scale-110 transition-transform active:scale-95" title="Зателефонувати на СТО">
+            <i class="fa-solid fa-phone text-xl animate-pulse"></i>
+        </a>
+    </div>
+
+    <div x-show="modalOpen" class="fixed inset-0 z-50 overflow-y-auto flex items-center justify-center p-4 bg-black/80 backdrop-blur-xs" style="display: none;">
+        <div @click.away="modalOpen = false" class="bg-brand-cardBg border border-gray-800 w-full max-w-md rounded p-6 relative shadow-2xl">
+            <button @click="modalOpen = false" class="absolute top-4 right-4 text-gray-400 hover:text-white">
+                <i class="fa-solid fa-xmark text-lg"></i>
+            </button>
+            
+            <h3 class="text-lg font-bold text-white uppercase tracking-wider mb-1">Запис на ремонт</h3>
+            <p class="text-brand-red text-xs font-semibold uppercase mb-3 tracking-wide" x-text="modalService"></p>
+            <p class="text-gray-400 text-xs mb-4">Вкажіть ваші дані. Наш майстер зв'яжеться з вами найближчим часом.</p>
+            
+            <form class="space-y-4">
+                <div>
+                    <label class="block text-xs font-semibold text-gray-400 mb-1">Ваше ім'я</label>
+                    <input type="text" placeholder="Ім'я" required class="w-full bg-brand-darkBg border border-gray-700 rounded px-4 py-2.5 text-white text-sm focus:outline-none focus:border-brand-red">
+                </div>
+                <div>
+                    <label class="block text-xs font-semibold text-gray-400 mb-1">Номер телефону *</label>
+                    <input type="tel" placeholder="093 604 6642" required class="w-full bg-brand-darkBg border border-gray-700 rounded px-4 py-2.5 text-white text-sm focus:outline-none focus:border-brand-red">
+                </div>
+                <button type="submit" class="w-full bg-brand-red hover:bg-red-700 text-white font-bold py-3 rounded text-xs uppercase tracking-wider transition-colors shadow-md">
+                    Підтвердити запис
+                </button>
+            </form>
+        </div>
+    </div>
+
+</body>
+</html>
