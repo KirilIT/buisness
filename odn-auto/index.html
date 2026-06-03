@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ODN AUTO — автосервіс і магазин СТО в Києві</title>
+  <meta name="description" content="ODN AUTO — автосервіс на вул. Оноре де Бальзака, 21. Діагностика, ходова, ТО, підбір запчастин. Рейтинг 4.8, 106 відгуків.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bg: #f3f5f8;
+      --card: #ffffff;
+      --line: #dde3ea;
+      --text: #1f2937;
+      --muted: #6b7280;
+      --brand: #f97316;
+      --brand-dark: #ea580c;
+      --ok: #10b981;
+      --soft: #eff6ff;
+    }
+    body {
+      font-family: "Inter", sans-serif;
+      background: linear-gradient(180deg, #f8fafc 0%, #eff3f8 100%);
+      color: var(--text);
+      line-height: 1.55;
+    }
+    a { color: inherit; text-decoration: none; }
+    .wrap { max-width: 1180px; margin: 0 auto; padding: 0 20px; }
+
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--line);
+    }
+    .head {
+      min-height: 70px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+    }
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 800;
+      font-size: 20px;
+      color: #0f172a;
+      letter-spacing: -0.02em;
+      white-space: nowrap;
+    }
+    .brand-badge {
+      width: 32px;
+      height: 32px;
+      border-radius: 8px;
+      display: grid;
+      place-items: center;
+      background: var(--brand);
+      color: #fff;
+      font-weight: 800;
+      font-size: 13px;
+    }
+    .brand em {
+      font-style: normal;
+      color: var(--brand-dark);
+    }
+    .head-nav {
+      display: flex;
+      gap: 22px;
+      align-items: center;
+      font-size: 14px;
+      font-weight: 600;
+      color: #334155;
+    }
+    .head-nav a:hover { color: var(--brand-dark); }
+    .head-call {
+      background: #111827;
+      color: #fff;
+      border-radius: 10px;
+      padding: 9px 14px;
+      font-size: 13px;
+      font-weight: 700;
+      white-space: nowrap;
+    }
+    .head-call:hover { background: #1f2937; }
+
+    .hero { padding: 28px 0 18px; }
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.4fr .9fr;
+      gap: 22px;
+      align-items: stretch;
+    }
+    .gallery {
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      overflow: hidden;
+      min-height: 355px;
+      position: relative;
+      box-shadow: 0 10px 28px rgba(15, 23, 42, .06);
+    }
+    .gallery img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      filter: saturate(1.03);
+    }
+    .overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, rgba(15, 23, 42, .18), rgba(15, 23, 42, .28));
+    }
+    .title-chip {
+      position: absolute;
+      left: 18px;
+      bottom: 18px;
+      background: rgba(255,255,255,.95);
+      border-radius: 10px;
+      padding: 12px 14px;
+      max-width: 86%;
+    }
+    .title-chip h1 {
+      font-size: 26px;
+      font-weight: 800;
+      line-height: 1.15;
+      color: #111827;
+    }
+    .title-chip p {
+      margin-top: 6px;
+      color: #4b5563;
+      font-size: 13px;
+    }
+
+    .booking {
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      padding: 20px;
+      box-shadow: 0 10px 28px rgba(15, 23, 42, .06);
+    }
+    .booking h2 {
+      font-size: 28px;
+      line-height: 1;
+      margin-bottom: 10px;
+      font-weight: 800;
+      letter-spacing: -.02em;
+    }
+    .status {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 13px;
+      font-weight: 700;
+      color: #065f46;
+      background: #ecfdf5;
+      border: 1px solid #a7f3d0;
+      border-radius: 999px;
+      padding: 6px 10px;
+      margin-bottom: 14px;
+    }
+    .dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--ok);
+    }
+    .hours {
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      overflow: hidden;
+      margin-bottom: 16px;
+    }
+    .hr {
+      display: flex;
+      justify-content: space-between;
+      padding: 10px 12px;
+      font-size: 14px;
+      border-bottom: 1px solid #edf1f5;
+    }
+    .hr:last-child { border-bottom: none; }
+    .hr b { color: #111827; }
+    .hr span { color: #4b5563; font-weight: 600; }
+    .cta {
+      display: block;
+      width: 100%;
+      text-align: center;
+      background: var(--brand);
+      color: #fff;
+      font-weight: 800;
+      letter-spacing: .01em;
+      border-radius: 10px;
+      padding: 13px 12px;
+      margin-bottom: 16px;
+      transition: background .2s;
+    }
+    .cta:hover { background: var(--brand-dark); }
+    .contact-item {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+      font-size: 14px;
+      color: #374151;
+      margin-bottom: 8px;
+    }
+    .contact-item .icon {
+      width: 28px; height: 28px;
+      border-radius: 8px;
+      display: grid; place-items: center;
+      background: #f3f4f6;
+      font-size: 13px;
+    }
+
+    section { margin-top: 26px; }
+    .block {
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      padding: 24px;
+      box-shadow: 0 8px 22px rgba(15, 23, 42, .04);
+    }
+    .block h3 {
+      font-size: 34px;
+      letter-spacing: -.02em;
+      line-height: 1;
+      margin-bottom: 10px;
+    }
+    .subtitle { color: var(--muted); margin-bottom: 18px; }
+
+    .services {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 10px;
+      margin-top: 14px;
+    }
+    .service {
+      border: 1px solid #e5e7eb;
+      border-radius: 10px;
+      padding: 14px;
+      background: #fcfcfd;
+    }
+    .service h4 {
+      font-size: 16px;
+      margin-bottom: 5px;
+      display: flex; align-items: center; gap: 8px;
+    }
+    .service p { font-size: 13px; color: #6b7280; }
+
+    .pricing {
+      margin-top: 20px;
+      border-top: 1px solid #e5e7eb;
+    }
+    .pr-row {
+      display: grid;
+      grid-template-columns: 1fr auto auto;
+      align-items: center;
+      gap: 14px;
+      padding: 15px 0;
+      border-bottom: 1px solid #eef2f7;
+    }
+    .pr-row p { color: #374151; font-size: 15px; }
+    .price { font-weight: 800; font-size: 24px; white-space: nowrap; }
+    .order {
+      border: 1px solid var(--brand);
+      color: var(--brand-dark);
+      border-radius: 8px;
+      padding: 10px 18px;
+      font-weight: 700;
+      background: #fff;
+      white-space: nowrap;
+    }
+
+    .reviews {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 12px;
+      margin-top: 8px;
+    }
+    .review {
+      background: var(--soft);
+      border: 1px solid #dbeafe;
+      border-radius: 10px;
+      padding: 12px;
+    }
+    .stars { color: #f59e0b; margin-bottom: 6px; font-size: 13px; }
+    .review p { font-size: 13px; color: #374151; }
+
+    .map {
+      margin-top: 16px;
+      border-radius: 12px;
+      overflow: hidden;
+      border: 1px solid var(--line);
+      min-height: 280px;
+    }
+    .map iframe { width: 100%; min-height: 280px; border: 0; }
+
+    footer {
+      margin-top: 24px;
+      padding: 18px 0 30px;
+      color: #6b7280;
+      text-align: center;
+      font-size: 13px;
+    }
+
+    @media (max-width: 980px) {
+      .hero-grid { grid-template-columns: 1fr; }
+      .reviews { grid-template-columns: 1fr; }
+      .services { grid-template-columns: 1fr; }
+      .pr-row { grid-template-columns: 1fr; }
+      .order { width: max-content; }
+      .head-nav { display: none; }
+      .head-call { display: none; }
+      .head { min-height: 62px; }
+    }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <div class="wrap head">
+      <a href="#" class="brand">
+        <span class="brand-badge">ODN</span>
+        AUTO <em>service</em>
+      </a>
+      <nav class="head-nav">
+        <a href="#about">Про майстерню</a>
+        <a href="#services">Послуги</a>
+        <a href="#prices">Прайс</a>
+        <a href="#contact">Контакти</a>
+      </nav>
+      <a class="head-call" href="tel:0733030383">📞 073 303 0383</a>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <section class="hero" id="about">
+      <div class="hero-grid">
+        <div class="gallery">
+          <img src="https://images.unsplash.com/photo-1551830820-330a71b99659?auto=format&fit=crop&q=80&w=1400" alt="ODN AUTO автосервіс">
+          <div class="overlay"></div>
+          <div class="title-chip">
+            <h1>ODN AUTO Autservice</h1>
+            <p>Надійний автосервіс і магазин запчастин у Києві</p>
+          </div>
+        </div>
+
+        <aside class="booking">
+          <h2>Забронювати візит</h2>
+          <div class="status"><span class="dot"></span> Зараз відчинено</div>
+          <div class="hours">
+            <div class="hr"><b>Пн – Сб</b><span>09:00 – 18:00</span></div>
+            <div class="hr"><b>Неділя</b><span>09:00 – 17:00</span></div>
+          </div>
+          <a class="cta" href="tel:0733030383">ЗАБРОНЮВАТИ ВІЗИТ</a>
+          <div class="contact-item"><span class="icon">📞</span> +380 73 303 0383</div>
+          <div class="contact-item"><span class="icon">📍</span> вул. Оноре де Бальзака, 21, Київ</div>
+        </aside>
+      </div>
+    </section>
+
+    <section class="block" id="services">
+      <h3>Про автомайстерню</h3>
+      <p class="subtitle">ODN AUTO — надійний автосервіс у Києві: ремонт та обслуговування автомобілів будь-якої складності.</p>
+      <div class="services">
+        <article class="service">
+          <h4>🛠️ Механічний ремонт</h4>
+          <p>Ходова частина, підвіска, гальмівна система, планові та складні роботи.</p>
+        </article>
+        <article class="service">
+          <h4>🧰 Діагностика</h4>
+          <p>Чітке визначення причин несправності перед початком ремонту.</p>
+        </article>
+        <article class="service">
+          <h4>🛢️ Оливи та фільтри</h4>
+          <p>Заміна моторної оливи та основних витратників за регламентом.</p>
+        </article>
+        <article class="service">
+          <h4>🏪 Магазин СТО</h4>
+          <p>Підбір запчастин і супутніх матеріалів прямо на місці.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="block" id="prices">
+      <h3>Прайс-лист</h3>
+      <p class="subtitle">Найпопулярніші роботи. Точну вартість підтверджуємо після огляду авто.</p>
+      <div class="pricing">
+        <div class="pr-row">
+          <p>Заміна моторної оливи та масляного фільтра</p>
+          <div class="price">від 1450 UAH</div>
+          <a href="tel:0733030383" class="order">ЗАМОВИТИ</a>
+        </div>
+        <div class="pr-row">
+          <p>Діагностика ходової частини</p>
+          <div class="price">від 450 UAH</div>
+          <a href="tel:0733030383" class="order">ЗАМОВИТИ</a>
+        </div>
+        <div class="pr-row">
+          <p>Комплексне ТО (фільтри + олива + перевірка)</p>
+          <div class="price">від 2200 UAH</div>
+          <a href="tel:0733030383" class="order">ЗАМОВИТИ</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="block" id="contact">
+      <h3>Відгуки клієнтів</h3>
+      <p class="subtitle">Рейтинг 4.8 на Google (106 відгуків)</p>
+      <div class="reviews">
+        <article class="review">
+          <div class="stars">★★★★★</div>
+          <p>Майстри виконують роботу швидко та якісно, головне — у строки. Залишилися лише хороші враження.</p>
+        </article>
+        <article class="review">
+          <div class="stars">★★★★★</div>
+          <p>Чітко поставили «діагноз», все пояснили та показали. Після ремонту ходової авто їде набагато плавніше.</p>
+        </article>
+        <article class="review">
+          <div class="stars">★★★★★</div>
+          <p>При будь-якій проблемі їду сюди: адекватні ціни, сильна команда і нормальна комунікація.</p>
+        </article>
+      </div>
+      <div class="map">
+        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2538.6!2d30.5924208!3d50.5112588!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x40d4d1376f6fde91%3A0x9e304184a346929f!2zT0ROIEFVVE8g0LDQstGC0L7RgdC10YDQstGW0YEg0LzQsNCz0LDQt9C40L0g0KHQotCe!5e0!3m2!1suk!2sua!4v1717398600000!5m2!1suk!2sua" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="ODN AUTO на карті"></iframe>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    ODN AUTO · м. Київ, вул. Оноре де Бальзака, 21 · +380 73 303 0383
+  </footer>
+</body>
+</html>
