@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>A Detailing Lviv | Преміум детейлінг — Львів</title>
+  <meta name="description" content="A Detailing Lviv — полірування, нанокераміка, бронеплівка, хімчистка. 10+ років. вул. Брюховицька, Рясне. 073 148 81 01">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    :root{
+      --bg:#0c0c0c;
+      --surface:#141414;
+      --text:#f4f4f4;
+      --muted:#9a9a9a;
+      --dim:#666;
+      --accent:#c41e3a;
+      --accent-soft:rgba(196,30,58,.12);
+      --line:#262626;
+      --max:1120px;
+    }
+    html{scroll-behavior:smooth;font-size:17px}
+    body{
+      font-family:'Inter',system-ui,sans-serif;
+      background:var(--bg);
+      color:var(--text);
+      line-height:1.7;
+      -webkit-font-smoothing:antialiased;
+    }
+    a{color:inherit;text-decoration:none}
+
+    .wrap{max-width:var(--max);margin:0 auto;padding:0 clamp(1.25rem,5vw,2.5rem)}
+
+    /* header */
+    header{
+      position:fixed;top:0;left:0;right:0;z-index:50;
+      background:rgba(12,12,12,.85);
+      backdrop-filter:blur(12px);
+      border-bottom:1px solid var(--line);
+    }
+    .header-inner{
+      max-width:var(--max);
+      margin:0 auto;
+      padding:.9rem clamp(1.25rem,5vw,2.5rem);
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:1rem;
+    }
+    .logo{
+      font-family:'Cormorant Garamond',serif;
+      font-size:1.35rem;
+      font-weight:600;
+      letter-spacing:.2em;
+      text-transform:uppercase;
+    }
+    .logo em{font-style:normal;color:var(--accent)}
+    nav{display:none;gap:2.5rem;font-size:.8rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+    nav a:hover{color:var(--text)}
+    @media(min-width:800px){nav{display:flex}}
+    .header-tel{font-size:.9rem;font-weight:500;color:var(--text)}
+    .header-tel:hover{color:var(--accent)}
+
+    /* hero */
+    .hero{
+      position:relative;
+      min-height:92vh;
+      display:flex;
+      align-items:flex-end;
+      padding-bottom:4rem;
+      margin-top:0;
+    }
+    .hero-bg{
+      position:absolute;inset:0;
+      background:#000;
+    }
+    .hero-bg img{
+      width:100%;height:100%;
+      object-fit:cover;
+      object-position:center 40%;
+      opacity:.55;
+    }
+    .hero-bg::after{
+      content:'';
+      position:absolute;inset:0;
+      background:linear-gradient(to top,#0c0c0c 0%,transparent 50%),linear-gradient(to right,rgba(0,0,0,.4),transparent 60%);
+    }
+    .hero-content{
+      position:relative;z-index:2;
+      width:100%;
+      max-width:var(--max);
+      margin:0 auto;
+      padding:0 clamp(1.25rem,5vw,2.5rem);
+      padding-top:6rem;
+    }
+    .hero-label{
+      font-size:.75rem;
+      letter-spacing:.25em;
+      text-transform:uppercase;
+      color:var(--muted);
+      margin-bottom:1.25rem;
+    }
+    .hero h1{
+      font-family:'Cormorant Garamond',serif;
+      font-size:clamp(2.75rem,7vw,4.5rem);
+      font-weight:500;
+      line-height:1.05;
+      letter-spacing:.02em;
+      max-width:14ch;
+    }
+    .hero h1 i{font-style:italic;color:var(--accent)}
+    .hero-desc{
+      margin-top:1.5rem;
+      font-size:1.05rem;
+      color:var(--muted);
+      max-width:28rem;
+      font-weight:400;
+    }
+    .hero-actions{
+      margin-top:2.25rem;
+      display:flex;
+      flex-wrap:wrap;
+      gap:1rem;
+      align-items:center;
+    }
+    .btn{
+      display:inline-block;
+      padding:.85rem 2rem;
+      font-size:.85rem;
+      font-weight:500;
+      letter-spacing:.08em;
+      text-transform:uppercase;
+      transition:background .2s,color .2s,border-color .2s;
+    }
+    .btn-fill{background:var(--text);color:var(--bg)}
+    .btn-fill:hover{background:#ddd}
+    .btn-line{border:1px solid rgba(255,255,255,.35);color:var(--text)}
+    .btn-line:hover{border-color:var(--text)}
+    .hero-phone{
+      font-size:.95rem;
+      color:var(--muted);
+    }
+    .hero-phone strong{color:var(--text);font-weight:500}
+
+    /* intro strip */
+    .intro{
+      border-top:1px solid var(--line);
+      border-bottom:1px solid var(--line);
+      padding:3rem 0;
+    }
+    .intro-grid{
+      display:grid;
+      gap:2rem;
+    }
+    @media(min-width:700px){.intro-grid{grid-template-columns:1fr 1fr 1fr;gap:3rem}}
+    .intro-item h3{
+      font-family:'Cormorant Garamond',serif;
+      font-size:2rem;
+      font-weight:500;
+      color:var(--text);
+      line-height:1;
+    }
+    .intro-item p{margin-top:.5rem;font-size:.88rem;color:var(--muted)}
+
+    /* sections */
+    section{padding:4.5rem 0}
+    .sec-label{
+      font-size:.72rem;
+      letter-spacing:.22em;
+      text-transform:uppercase;
+      color:var(--dim);
+      margin-bottom:.75rem;
+    }
+    .sec-title{
+      font-family:'Cormorant Garamond',serif;
+      font-size:clamp(2rem,4vw,2.75rem);
+      font-weight:500;
+      line-height:1.15;
+      margin-bottom:2.5rem;
+    }
+
+    /* services */
+    .svc-list{
+      display:grid;
+      gap:0;
+      border-top:1px solid var(--line);
+    }
+    @media(min-width:640px){.svc-list{grid-template-columns:1fr 1fr}}
+    .svc-item{
+      display:flex;
+      justify-content:space-between;
+      align-items:baseline;
+      gap:1rem;
+      padding:1.15rem 0;
+      border-bottom:1px solid var(--line);
+      font-size:.95rem;
+    }
+    @media(min-width:640px){
+      .svc-item:nth-child(odd){padding-right:2rem}
+      .svc-item:nth-child(even){padding-left:2rem;border-left:1px solid var(--line)}
+    }
+    .svc-item span{color:var(--muted);font-size:.82rem;white-space:nowrap}
+
+    /* package */
+    .package{
+      background:var(--surface);
+      padding:3rem;
+      display:grid;
+      gap:2rem;
+      align-items:center;
+    }
+    @media(min-width:720px){.package{grid-template-columns:1.2fr auto;padding:3.5rem 4rem}}
+    .package h3{
+      font-family:'Cormorant Garamond',serif;
+      font-size:2rem;
+      font-weight:500;
+      line-height:1.2;
+    }
+    .package p{margin-top:.75rem;color:var(--muted);font-size:.95rem;max-width:32rem}
+    .package ul{
+      margin-top:1.25rem;
+      list-style:none;
+      font-size:.9rem;
+      color:var(--muted);
+    }
+    .package li{padding:.3rem 0}
+    .package li::before{content:'— ';color:var(--accent)}
+    .package-price{text-align:center}
+    .package-price .amount{
+      font-family:'Cormorant Garamond',serif;
+      font-size:3.5rem;
+      font-weight:500;
+      line-height:1;
+      color:var(--accent);
+    }
+    .package-price .note{font-size:.78rem;color:var(--dim);margin-top:.35rem;letter-spacing:.05em}
+
+    /* prices */
+    .prices{max-width:520px}
+    .price-row{
+      display:flex;
+      justify-content:space-between;
+      gap:1rem;
+      padding:1rem 0;
+      border-bottom:1px solid var(--line);
+      font-size:.95rem;
+    }
+    .price-row span:last-child{color:var(--muted);font-weight:500}
+
+    /* quotes */
+    .quotes{display:grid;gap:3rem}
+    @media(min-width:700px){.quotes{grid-template-columns:1fr 1fr;gap:4rem}}
+    blockquote{
+      border:none;
+      padding:0;
+    }
+    blockquote p{
+      font-family:'Cormorant Garamond',serif;
+      font-size:1.5rem;
+      font-weight:500;
+      font-style:italic;
+      line-height:1.45;
+      color:var(--text);
+    }
+    blockquote footer{
+      margin-top:1rem;
+      font-size:.8rem;
+      color:var(--dim);
+      font-style:normal;
+      letter-spacing:.05em;
+    }
+
+    /* contact */
+    .contact-grid{
+      display:grid;
+      gap:3rem;
+    }
+    @media(min-width:700px){.contact-grid{grid-template-columns:1fr 1.2fr}}
+    .contact-info p{margin-bottom:.65rem;font-size:.95rem;color:var(--muted)}
+    .contact-info strong{color:var(--text);font-weight:500}
+    .contact-info a:hover{color:var(--accent)}
+    .map{
+      width:100%;
+      height:320px;
+      border:0;
+      filter:grayscale(.85) contrast(1.05);
+    }
+
+    footer{
+      padding:2.5rem 0;
+      border-top:1px solid var(--line);
+      display:flex;
+      flex-wrap:wrap;
+      justify-content:space-between;
+      gap:1rem;
+      font-size:.8rem;
+      color:var(--dim);
+    }
+    footer .logo{font-size:1rem}
+
+    .fab{
+      position:fixed;bottom:1.5rem;right:1.5rem;
+      width:3rem;height:3rem;
+      background:var(--text);color:var(--bg);
+      border-radius:50%;
+      display:grid;place-items:center;
+      font-size:.95rem;
+      z-index:40;
+    }
+    @media(min-width:768px){.fab{display:none}}
+    body{padding-bottom:4rem}
+    @media(min-width:768px){body{padding-bottom:0}}
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="header-inner">
+      <a href="#" class="logo">A <em>Detailing</em></a>
+      <nav>
+        <a href="#services">Послуги</a>
+        <a href="#prices">Ціни</a>
+        <a href="#reviews">Відгуки</a>
+        <a href="#contact">Контакти</a>
+      </nav>
+      <a href="tel:+380731488101" class="header-tel">073 148 81 01</a>
+    </div>
+  </header>
+
+  <section class="hero">
+    <div class="hero-bg">
+      <img src="assets/work.jpg" alt="">
+    </div>
+    <div class="hero-content">
+      <p class="hero-label">Львів · 10 років досвіду</p>
+      <h1>Детейлінг,<br>якому <i>довіряють</i></h1>
+      <p class="hero-desc">Полірування, нанокераміка, бронеплівка та хімчистка. Два центри у місті. Професійний підхід до кожної деталі.</p>
+      <div class="hero-actions">
+        <a href="tel:+380731488101" class="btn btn-fill">Записатися</a>
+        <a href="https://www.instagram.com/a.detailing.lviv/" target="_blank" rel="noopener" class="btn btn-line">Instagram</a>
+        <p class="hero-phone"><strong>073 148 81 01</strong></p>
+      </div>
+    </div>
+  </section>
+
+  <div class="intro">
+    <div class="wrap intro-grid">
+      <div class="intro-item">
+        <h3>10+</h3>
+        <p>років у детейлінгу</p>
+      </div>
+      <div class="intro-item">
+        <h3>2</h3>
+        <p>студії у Львові</p>
+      </div>
+      <div class="intro-item">
+        <h3>PPF</h3>
+        <p>бронеплівка та кераміка</p>
+      </div>
+    </div>
+  </div>
+
+  <section id="services">
+    <div class="wrap">
+      <p class="sec-label">Що робимо</p>
+      <h2 class="sec-title">Послуги</h2>
+      <div class="svc-list">
+        <div class="svc-item">Полірування кузова <span>01</span></div>
+        <div class="svc-item">Хімчистка салону <span>02</span></div>
+        <div class="svc-item">Нанокерамічне покриття <span>03</span></div>
+        <div class="svc-item">Бронеплівка PPF <span>04</span></div>
+        <div class="svc-item">Антихром <span>05</span></div>
+        <div class="svc-item">Тонування скла <span>06</span></div>
+        <div class="svc-item">Полірування та бронювання фар <span>07</span></div>
+        <div class="svc-item">Полірування лобового скла <span>08</span></div>
+        <div class="svc-item">Підфарбування сколів <span>09</span></div>
+        <div class="svc-item">Детейлінг моторного відсіку <span>10</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <div class="package">
+        <div>
+          <p class="sec-label" style="margin-bottom:.5rem">Пропозиція</p>
+          <h3>Полірування + нанокераміка</h3>
+          <p>Глибокий дзеркальний блиск, насичений колір кузова та довготривалий гідрофобний захист.</p>
+          <ul>
+            <li>Професійне полірування</li>
+            <li>Нанокерамічне покриття</li>
+            <li>Захист від зовнішніх впливів</li>
+          </ul>
+        </div>
+        <div class="package-price">
+          <div class="amount">199$</div>
+          <p class="note">акційний пакет</p>
+          <a href="tel:+380731488101" class="btn btn-fill" style="margin-top:1.5rem">Забронювати</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="prices">
+    <div class="wrap">
+      <p class="sec-label">Вартість</p>
+      <h2 class="sec-title">Ціни</h2>
+      <div class="prices">
+        <div class="price-row"><span>Полірування + нанокераміка</span><span>від 199$</span></div>
+        <div class="price-row"><span>Хімчистка салону</span><span>ЦІНА</span></div>
+        <div class="price-row"><span>Хімчистка дитячих крісел</span><span>від 800 грн</span></div>
+        <div class="price-row"><span>Бронеплівка PPF</span><span>ЦІНА</span></div>
+        <div class="price-row"><span>Антихром</span><span>ЦІНА</span></div>
+        <div class="price-row"><span>Тонування</span><span>ЦІНА</span></div>
+      </div>
+      <p style="margin-top:1.5rem;font-size:.88rem;color:var(--dim)">Точна вартість — після огляду автомобіля.</p>
+    </div>
+  </section>
+
+  <section id="reviews">
+    <div class="wrap">
+      <p class="sec-label">Клієнти</p>
+      <h2 class="sec-title">Відгуки</h2>
+      <div class="quotes">
+        <blockquote>
+          <p>Якість виконання робіт чудова. Варте уваги.</p>
+          <footer>Клієнт Instagram</footer>
+        </blockquote>
+        <blockquote>
+          <p>Справді відповідальний підхід. Рекомендую.</p>
+          <footer>Клієнт Instagram</footer>
+        </blockquote>
+        <blockquote>
+          <p>Звертався — якість на висоті. Дякую за роботу.</p>
+          <footer>Сергій</footer>
+        </blockquote>
+        <blockquote>
+          <p>Роботою задоволений. Повернуся знову.</p>
+          <footer>Клієнт Instagram</footer>
+        </blockquote>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact">
+    <div class="wrap">
+      <p class="sec-label">Зв'язок</p>
+      <h2 class="sec-title">Контакти</h2>
+      <div class="contact-grid">
+        <div class="contact-info">
+          <p><strong>A Detailing Lviv</strong></p>
+          <p>вул. Брюховицька, район Рясне</p>
+          <p>Львів · 2 студії</p>
+          <p style="margin-top:1.25rem"><a href="tel:+380731488101">073 148 81 01</a></p>
+          <p><a href="https://www.instagram.com/a.detailing.lviv/" target="_blank" rel="noopener">@a.detailing.lviv</a></p>
+          <p style="margin-top:1.25rem">
+            <a href="https://wa.me/380731488101" target="_blank" rel="noopener">WhatsApp</a> ·
+            <a href="viber://chat?number=380731488101">Viber</a> ·
+            <a href="https://t.me/+380731488101" target="_blank" rel="noopener">Telegram</a>
+          </p>
+          <p style="margin-top:1.5rem;font-size:.88rem">Пишіть у Direct або телефонуйте для запису.</p>
+        </div>
+        <iframe
+          class="map"
+          title="Карта"
+          loading="lazy"
+          src="https://maps.google.com/maps?q=Bryukhovychska+St,+Lviv,+Ukraine&t=&z=15&ie=UTF8&iwloc=&output=embed">
+        </iframe>
+      </div>
+    </div>
+  </section>
+
+  <footer class="wrap">
+    <span class="logo">A <em style="color:var(--accent);font-style:normal">Detailing</em> Lviv</span>
+    <span>073 148 81 01</span>
+  </footer>
+
+  <a href="tel:+380731488101" class="fab" aria-label="Дзвінок">☎</a>
+</body>
+</html>

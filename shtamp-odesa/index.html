@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Шиномонтаж «Штамп» 22 | Одеса</title>
+  <meta name="description" content="Шиномонтаж «Штамп» 22 | Одеса. Демо-сайт. 067 270 73 41.">
+  <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;700;800&family=Onest:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    :root{
+      --ink:#1a1a1a;
+      --paper:#f0ebe3;
+      --rust:#c2410c;
+      --rust-soft:#fed7aa;
+      --stripe:#2d2d2d;
+      --muted:#5c5c5c;
+      --demo:#1e3a5f;
+      --demo-bg:#dbeafe;
+    }
+    html{scroll-behavior:smooth}
+    body{
+      font-family:'Onest',sans-serif;
+      background:var(--paper);
+      color:var(--ink);
+      line-height:1.6;
+      overflow-x:hidden;
+      padding-top:2.75rem;
+    }
+    a{color:inherit;text-decoration:none}
+
+    .demo-bar{
+      position:fixed;top:0;left:0;right:0;z-index:200;
+      background:var(--demo);
+      color:#fff;
+      font-size:.78rem;
+      font-weight:600;
+      text-align:center;
+      padding:.55rem 1rem;
+      line-height:1.35;
+    }
+    .demo-bar strong{color:#93c5fd}
+
+    .stripe{
+      background:repeating-linear-gradient(-45deg,var(--stripe),var(--stripe) 12px,#3d3d3d 12px,#3d3d3d 24px);
+      height:8px;
+    }
+    .wrap{max-width:1100px;margin:0 auto;padding:0 1.25rem}
+
+    header{
+      display:flex;align-items:center;justify-content:space-between;
+      padding:1rem 0;border-bottom:3px solid var(--ink);
+    }
+    .logo{
+      font-family:'Unbounded',sans-serif;font-weight:800;
+      font-size:clamp(.85rem,2.5vw,1rem);line-height:1.2;max-width:16rem;
+    }
+    .logo .num{
+      display:inline-block;background:var(--rust);color:#fff;
+      padding:.15rem .45rem;margin-left:.35rem;transform:rotate(-2deg);
+    }
+    .head-tel{
+      font-family:'Unbounded',sans-serif;font-weight:700;font-size:.95rem;
+      background:var(--ink);color:#fff;padding:.55rem 1rem;border-radius:2px;
+    }
+    .head-tel:hover{background:var(--rust)}
+
+    .hero{display:grid;gap:2rem;padding:2.5rem 0 3rem;position:relative}
+    @media(min-width:900px){.hero{grid-template-columns:1fr 280px;align-items:end}}
+    .house-num{
+      font-family:'Unbounded',sans-serif;font-size:clamp(6rem,22vw,11rem);
+      font-weight:800;line-height:.85;color:transparent;
+      -webkit-text-stroke:3px var(--ink);position:absolute;right:-.05em;top:-.15em;
+      opacity:.12;pointer-events:none;user-select:none;
+    }
+    .hero h1{
+      font-family:'Unbounded',sans-serif;font-size:clamp(1.75rem,5vw,2.75rem);
+      font-weight:800;line-height:1.05;position:relative;z-index:1;
+    }
+    .hero h1 em{font-style:normal;color:var(--rust);display:block;font-size:.55em;margin-top:.35em}
+    .hero-lead{margin-top:1.25rem;font-size:1.05rem;color:var(--muted);max-width:32rem;position:relative;z-index:1}
+    .chips{display:flex;flex-wrap:wrap;gap:.5rem;margin-top:1.5rem}
+    .chip{
+      border:2px solid var(--ink);padding:.35rem .75rem;font-size:.75rem;
+      font-weight:700;text-transform:uppercase;letter-spacing:.06em;background:#fff;
+    }
+    .chip.hot{background:var(--rust-soft);border-color:var(--rust)}
+    .chip.demo-chip{background:var(--demo-bg);border-color:var(--demo);color:var(--demo)}
+
+    .sign-card{
+      background:var(--ink);color:#fff;padding:1.5rem;border-radius:4px;
+      box-shadow:8px 8px 0 var(--rust);
+    }
+    .sign-card .label{font-size:.65rem;text-transform:uppercase;letter-spacing:.15em;opacity:.7;margin-bottom:.5rem}
+    .sign-card .rating{font-family:'Unbounded',sans-serif;font-size:2.5rem;font-weight:800;color:var(--rust-soft)}
+    .sign-card .rating small{font-size:.35em;vertical-align:super}
+    .sign-card .addr{margin-top:1rem;font-size:.9rem;line-height:1.45;border-top:1px solid rgba(255,255,255,.15);padding-top:1rem}
+    .sign-card .cta{
+      display:block;margin-top:1.25rem;background:var(--rust);color:#fff;text-align:center;
+      font-weight:800;padding:.85rem;font-family:'Unbounded',sans-serif;font-size:.8rem;
+    }
+
+    section{padding:3rem 0}
+    .sec-title{
+      font-family:'Unbounded',sans-serif;font-size:1.35rem;font-weight:800;
+      margin-bottom:1.5rem;display:flex;align-items:center;gap:.75rem;
+    }
+    .sec-title::before{content:'';width:32px;height:4px;background:var(--rust)}
+    .sec-note{font-size:.9rem;color:var(--muted);margin:-1rem 0 1.5rem}
+
+    .photos{
+      display:grid;gap:1rem;
+      grid-template-columns:repeat(3,1fr);
+    }
+    @media(max-width:700px){.photos{grid-template-columns:1fr}}
+    .photo{
+      aspect-ratio:4/3;background:#fff;border:2px solid var(--ink);
+      overflow:hidden;position:relative;
+    }
+    .photo img{width:100%;height:100%;object-fit:cover;display:block}
+    .photo.ph-placeholder{
+      background:linear-gradient(135deg,#e5e5e5,#d4d4d4);
+      display:flex;align-items:center;justify-content:center;
+      text-align:center;padding:1rem;font-size:.8rem;font-weight:600;color:var(--muted);
+    }
+
+    .grid-3{display:grid;gap:1rem}
+    @media(min-width:700px){.grid-3{grid-template-columns:repeat(3,1fr)}}
+    .tile{
+      background:#fff;border:2px solid var(--ink);padding:1.25rem;
+      transition:transform .2s,box-shadow .2s;
+    }
+    .tile:hover{transform:translate(-4px,-4px);box-shadow:6px 6px 0 var(--ink)}
+    .tile h3{font-size:1rem;font-weight:700;margin-bottom:.35rem}
+    .tile p{font-size:.85rem;color:var(--muted)}
+
+    .price-wrap{overflow-x:auto}
+    table.prices{
+      width:100%;border-collapse:collapse;background:#fff;border:2px solid var(--ink);
+      font-size:.9rem;
+    }
+    .prices th,.prices td{
+      padding:.75rem 1rem;text-align:left;border-bottom:1px solid #e5e5e5;
+    }
+    .prices th{background:var(--ink);color:#fff;font-family:'Unbounded',sans-serif;font-size:.75rem}
+    .prices tr:last-child td{border-bottom:none}
+    .prices .pending{color:var(--muted);font-style:italic}
+    .price-demo-box{
+      margin-top:1rem;padding:1rem 1.25rem;background:var(--demo-bg);
+      border:2px dashed var(--demo);font-size:.88rem;color:var(--demo);
+    }
+
+    .reviews{display:grid;gap:1rem}
+    @media(min-width:768px){.reviews{grid-template-columns:repeat(2,1fr)}}
+    .rev{
+      background:#fff;border-left:5px solid var(--rust);
+      padding:1.25rem 1.25rem 1.25rem 1.5rem;font-size:.92rem;color:var(--muted);font-style:italic;
+    }
+    .rev strong{display:block;margin-top:.75rem;font-style:normal;font-size:.75rem;color:var(--ink);font-weight:700}
+
+    .contact{background:var(--ink);color:#fff;padding:2.5rem 0;margin-top:2rem}
+    .contact-grid{display:grid;gap:2rem}
+    @media(min-width:800px){.contact-grid{grid-template-columns:1fr 1.2fr}}
+    .contact h2{font-family:'Unbounded',sans-serif;font-size:1.75rem;margin-bottom:1rem}
+    .contact p{opacity:.85;font-size:.95rem;margin-bottom:.75rem}
+    .phone-big{
+      font-family:'Unbounded',sans-serif;font-size:clamp(1.5rem,4vw,2rem);
+      font-weight:800;color:var(--rust-soft);display:block;margin:1rem 0;
+    }
+    .hours-table{margin-top:1rem;font-size:.9rem}
+    .hours-table div{
+      display:flex;justify-content:space-between;padding:.4rem 0;
+      border-bottom:1px solid rgba(255,255,255,.1);
+    }
+    .map{border:3px solid var(--rust);min-height:260px;border-radius:2px;overflow:hidden}
+    .map iframe{width:100%;height:100%;min-height:260px;border:0}
+
+    footer{text-align:center;padding:1.5rem;font-size:.8rem;color:var(--muted);border-top:2px solid var(--ink)}
+    footer .demo-foot{margin-top:.5rem;color:var(--demo);font-weight:600}
+
+    .fab{
+      position:fixed;bottom:1.25rem;right:1.25rem;z-index:50;
+      width:3.25rem;height:3.25rem;background:var(--rust);color:#fff;border-radius:50%;
+      display:grid;place-items:center;font-size:1.2rem;
+      box-shadow:0 6px 20px rgba(194,65,12,.45);border:3px solid var(--ink);
+    }
+    @media(min-width:768px){.fab{display:none}}
+    body{padding-bottom:4.5rem}
+    @media(min-width:768px){body{padding-bottom:0}}
+  </style>
+</head>
+<body>
+  <div class="demo-bar" role="note">
+    <strong>Демо-версія сайту</strong> — показує, як виглядатимуть ваші дані.
+    Після згоди: ваші фото, ціни, домен і хостинг. Це не фінальний сайт.
+  </div>
+
+  <div class="stripe"></div>
+
+  <header class="wrap">
+    <a href="#" class="logo">Шиномонтаж<br>«Штамп» <span class="num">22</span></a>
+    <a href="tel:380672707341" class="head-tel">067 270 73 41</a>
+  </header>
+
+  <section class="hero wrap">
+    <div class="hero-big">
+      <span class="house-num" aria-hidden="true">22</span>
+      <h1>Шини й сервіс<em>на Прохоровській</em></h1>
+      <p class="hero-lead">Шиномонтаж в Одесі: сезонна заміна, балансування, ремонт проколів і бічних порізів. Демо під вашу точку в Google Maps.</p>
+      <div class="chips">
+        <span class="chip hot">4.5 ★ Google</span>
+        <span class="chip">50+ відгуків</span>
+        <span class="chip">Щодня 9–18</span>
+        <span class="chip">Одеса, 65000</span>
+        <span class="chip demo-chip">Демо</span>
+      </div>
+    </div>
+    <aside class="sign-card">
+      <p class="label">Запис / консультація</p>
+      <p class="rating">4.5<small>/5</small></p>
+      <p class="addr">вул. Прохоровська, 22<br>м. Одеса</p>
+      <a href="tel:380672707341" class="cta">ЗАТЕЛЕФОНУВАТИ</a>
+    </aside>
+  </section>
+
+  <div class="stripe"></div>
+
+  <section class="wrap">
+    <h2 class="sec-title">Фото майстерні</h2>
+    <p class="sec-note">На демо — з Google Maps або ваші після згоди. У фінальній версії будуть актуальні знімки.</p>
+    <div class="photos"><div class="photo ph-placeholder"><span>Фото з Maps / від клієнта</span></div>
+<div class="photo ph-placeholder"><span>Зона шиномонтажу</span></div>
+<div class="photo ph-placeholder"><span>Вивіска / вхід</span></div></div>
+  </section>
+
+  <section class="wrap">
+    <h2 class="sec-title">Що робимо</h2>
+    <div class="grid-3"><article class="tile"><h3>Сезонна заміна</h3><p>Зняття, монтаж, перевірка дисків.</p></article>
+<article class="tile"><h3>Ремонт бічних порізів</h3><p>Складний ремонт, за відгуками — з гарантією.</p></article>
+<article class="tile"><h3>Балансування</h3><p>Після монтажу, без вібрації.</p></article></div>
+  </section>
+
+  <section class="wrap">
+    <h2 class="sec-title">Орієнтовні ціни</h2>
+    <p class="sec-note">Цифри з демо — підставимо ваші після розмови. Без прихованих умов.</p>
+    <div class="price-wrap"><table class="prices"><thead><tr><th>Послуга</th><th>Ціна</th></tr></thead><tbody><tr><td>Шиномонтаж 4 колеса</td><td class="pending">уточнюйте</td></tr><tr><td>Балансування</td><td class="pending">уточнюйте</td></tr><tr><td>Ремонт проколу</td><td class="pending">від ___ грн</td></tr></tbody></table></div>
+    <p class="price-demo-box">Ціни на демо — приклад. Ваш прайс внесемо після згоди.</p>
+  </section>
+
+  <section class="wrap">
+    <h2 class="sec-title">Відгуки</h2>
+    <div class="reviews"><blockquote class="rev">«Відмінний шиномонтаж — швидко відремонтували бічний поріз, дали гарантію.»<strong>— Google Maps</strong></blockquote>
+<blockquote class="rev">«Професіонали, приємна атмосфера.»<strong>— клієнт</strong></blockquote></div>
+  </section>
+
+  <section class="contact" id="contact">
+    <div class="wrap contact-grid">
+      <div>
+        <h2>Контакти</h2>
+        <p>вул. Прохоровська, 22 — запис і консультація по телефону.</p>
+        <a href="tel:380672707341" class="phone-big">067 270 73 41</a>
+        <div class="hours-table">
+          <div><span>Понеділок – неділя</span><span>09:00 – 18:00</span></div>
+        </div>
+        <p style="margin-top:1.25rem;font-size:.85rem;opacity:.7">
+          <a href="https://www.google.com/maps/place/%D0%A8%D0%B8%D0%BD%D0%BE%D0%BC%D0%BE%D0%BD%D1%82%D0%B0%D0%B6+%22%D0%A8%D1%82%D0%B0%D0%BC%D0%BF%22/@46.4696441,30.7201153,17z" target="_blank" rel="noopener" style="text-decoration:underline">Відкрити в Google Maps →</a>
+        </p>
+      </div>
+      <div class="map">
+        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d282.2!2d30.7201153!3d46.4696441!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x40c631b043665249%3A0xf24def890955b2ff!2z0KjQuNCe0L3QvtC00L4gItCi0YLQvtC80LAi!5e0!3m2!1suk!2sua!4v1717000000000!5m2!1suk!2sua" loading="lazy" title="Шиномонтаж «Штамп» 22 | Одеса"></iframe>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    Шиномонтаж «Штамп» · Одеса
+    <p class="demo-foot">Демо для презентації · Розробка: SENATOR</p>
+  </footer>
+
+  <a href="tel:380672707341" class="fab" aria-label="Зателефонувати">☎</a>
+</body>
+</html>

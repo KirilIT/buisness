@@ -1,0 +1,701 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>СТО на Баварії | Преміум автосервіс · Харків</title>
+  <meta name="description" content="СТО на Баварії — Харків, пр. Любові Малої 45А. Розвал-сходження, ТО, діагностика. Гарантія. 095 110 43 30.">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    :root{
+      --bg:#080808;
+      --bg2:#0f0f0f;
+      --card:#121212;
+      --gold:#c9a962;
+      --gold-light:#e8d5a3;
+      --gold-dim:#8a7340;
+      --text:#f2f0eb;
+      --muted:#b8b5ae;
+      --line:rgba(201,169,98,.18);
+      --line-strong:rgba(201,169,98,.45);
+    }
+    html{
+      scroll-behavior:smooth;
+      font-size:18px;
+    }
+    body{
+      font-family:'DM Sans',sans-serif;
+      background:var(--bg);
+      color:var(--text);
+      font-size:1.0625rem;
+      line-height:1.75;
+      -webkit-font-smoothing:antialiased;
+    }
+    a{color:inherit;text-decoration:none}
+
+    body::before{
+      content:'';
+      position:fixed;
+      inset:0;
+      background:
+        radial-gradient(ellipse 80% 50% at 50% -10%,rgba(201,169,98,.07),transparent),
+        radial-gradient(ellipse 40% 30% at 100% 50%,rgba(201,169,98,.04),transparent);
+      pointer-events:none;
+      z-index:0;
+    }
+
+    .wrap{
+      max-width:1140px;
+      margin:0 auto;
+      padding:0 clamp(1rem,4vw,2rem);
+      position:relative;
+      z-index:1;
+    }
+
+    header{
+      position:sticky;
+      top:0;
+      z-index:50;
+      border-bottom:1px solid var(--line);
+      background:rgba(8,8,8,.88);
+      backdrop-filter:blur(16px);
+    }
+    .header-inner{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:1.5rem;
+      padding:1.1rem 0;
+    }
+    .brand{
+      display:flex;
+      flex-direction:column;
+      gap:.15rem;
+    }
+    .brand-main{
+      font-family:'Cormorant Garamond',serif;
+      font-size:1.85rem;
+      font-weight:700;
+      letter-spacing:.12em;
+      text-transform:uppercase;
+      line-height:1;
+    }
+    .brand-sub{
+      font-size:.8rem;
+      letter-spacing:.2em;
+      text-transform:uppercase;
+      color:var(--gold);
+      font-weight:600;
+    }
+    nav{
+      display:none;
+      gap:2rem;
+      font-size:.9rem;
+      font-weight:600;
+      letter-spacing:.12em;
+      text-transform:uppercase;
+    }
+    nav a{
+      color:var(--muted);
+      transition:color .2s;
+    }
+    nav a:hover{color:var(--gold-light)}
+    @media(min-width:860px){nav{display:flex}}
+
+    .header-contact{
+      display:none;
+      text-align:right;
+      font-size:.9rem;
+      color:var(--muted);
+    }
+    .header-contact a{
+      display:block;
+      font-size:1.15rem;
+      color:var(--gold-light);
+      font-weight:600;
+      letter-spacing:.04em;
+      margin-top:.2rem;
+    }
+    @media(min-width:640px){.header-contact{display:block}}
+
+    .btn{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      padding:.75rem 1.6rem;
+      font-size:.88rem;
+      font-weight:700;
+      letter-spacing:.12em;
+      text-transform:uppercase;
+      transition:all .25s;
+    }
+    .btn-gold{
+      background:transparent;
+      color:var(--gold-light);
+      border:1px solid var(--line-strong);
+    }
+    .btn-gold:hover{
+      background:var(--gold);
+      color:#0a0a0a;
+      border-color:var(--gold);
+    }
+    .btn-fill{
+      background:linear-gradient(135deg,var(--gold) 0%,var(--gold-dim) 100%);
+      color:#0a0a0a;
+      border:1px solid var(--gold);
+    }
+    .btn-fill:hover{
+      filter:brightness(1.08);
+      transform:translateY(-1px);
+    }
+
+    .hero{
+      padding:clamp(3rem,10vw,6rem) 0 clamp(2.5rem,6vw,4rem);
+      border-bottom:1px solid var(--line);
+    }
+    .hero-grid{
+      display:grid;
+      gap:3rem;
+      align-items:end;
+    }
+    @media(min-width:920px){
+      .hero-grid{grid-template-columns:1.2fr .8fr}
+    }
+    .eyebrow{
+      display:inline-flex;
+      align-items:center;
+      gap:.75rem;
+      font-size:.85rem;
+      font-weight:600;
+      letter-spacing:.18em;
+      text-transform:uppercase;
+      color:var(--gold);
+      margin-bottom:1.5rem;
+    }
+    .eyebrow::before{
+      content:'';
+      width:32px;
+      height:1px;
+      background:var(--gold);
+    }
+    .hero h1{
+      font-family:'Cormorant Garamond',serif;
+      font-size:clamp(2.75rem,7vw,4.5rem);
+      font-weight:600;
+      line-height:1.12;
+      letter-spacing:-.01em;
+    }
+    .hero h1 em{
+      font-style:italic;
+      color:var(--gold-light);
+      font-weight:500;
+    }
+    .hero-quote{
+      margin-top:1.25rem;
+      font-family:'Cormorant Garamond',serif;
+      font-size:1.6rem;
+      font-style:italic;
+      color:var(--text);
+    }
+    .hero-text{
+      margin-top:1.5rem;
+      max-width:32rem;
+      color:var(--muted);
+      font-size:1.125rem;
+      line-height:1.8;
+    }
+    .hero-actions{
+      margin-top:2rem;
+      display:flex;
+      flex-wrap:wrap;
+      gap:1rem;
+    }
+
+    .hero-aside{
+      background:var(--card);
+      border:1px solid var(--line);
+      padding:1.75rem;
+    }
+    .hero-aside h2{
+      font-size:.85rem;
+      letter-spacing:.16em;
+      text-transform:uppercase;
+      color:var(--gold);
+      font-weight:700;
+      margin-bottom:1.25rem;
+      padding-bottom:.75rem;
+      border-bottom:1px solid var(--line);
+    }
+    .menu-line{
+      display:flex;
+      justify-content:space-between;
+      align-items:baseline;
+      gap:1rem;
+      padding:.7rem 0;
+      border-bottom:1px solid rgba(255,255,255,.04);
+      font-size:1.05rem;
+    }
+    .menu-line:last-child{border:0}
+    .menu-line span:last-child{
+      font-family:'Cormorant Garamond',serif;
+      font-size:1.35rem;
+      color:var(--gold);
+      letter-spacing:.08em;
+      flex-shrink:0;
+    }
+
+    .stats{
+      display:grid;
+      grid-template-columns:repeat(3,1fr);
+      gap:1px;
+      background:var(--line);
+      border:1px solid var(--line);
+      margin-bottom:0;
+    }
+    .stat{
+      background:var(--bg2);
+      padding:1.5rem 1rem;
+      text-align:center;
+    }
+    .stat strong{
+      display:block;
+      font-family:'Cormorant Garamond',serif;
+      font-size:2rem;
+      color:var(--gold-light);
+      font-weight:600;
+    }
+    .stat span{
+      font-size:.85rem;
+      letter-spacing:.1em;
+      text-transform:uppercase;
+      color:var(--muted);
+      margin-top:.25rem;
+      display:block;
+    }
+
+    section{padding:clamp(3rem,8vw,5rem) 0}
+    .sec-label{
+      font-size:.85rem;
+      letter-spacing:.18em;
+      text-transform:uppercase;
+      color:var(--gold);
+      font-weight:700;
+      margin-bottom:.75rem;
+    }
+    .sec-title{
+      font-family:'Cormorant Garamond',serif;
+      font-size:clamp(2rem,4vw,3rem);
+      font-weight:600;
+      line-height:1.15;
+      margin-bottom:.75rem;
+    }
+    .sec-desc{
+      color:var(--muted);
+      max-width:36rem;
+      font-size:1.1rem;
+      line-height:1.75;
+      margin-bottom:2.5rem;
+    }
+
+    .values{
+      display:grid;
+      gap:1px;
+      background:var(--line);
+      border:1px solid var(--line);
+    }
+    @media(min-width:700px){
+      .values{grid-template-columns:repeat(3,1fr)}
+    }
+    .val{
+      background:var(--card);
+      padding:1.75rem 1.5rem;
+      transition:background .3s;
+    }
+    .val:hover{background:#161616}
+    .val-num{
+      font-family:'Cormorant Garamond',serif;
+      font-size:2rem;
+      color:var(--gold-dim);
+      line-height:1;
+      margin-bottom:.75rem;
+    }
+    .val h3{
+      font-size:.9rem;
+      letter-spacing:.12em;
+      text-transform:uppercase;
+      font-weight:700;
+      color:var(--gold-light);
+      margin-bottom:.5rem;
+    }
+    .val p{font-size:1.05rem;color:var(--muted);line-height:1.7}
+
+    .services{
+      display:grid;
+      gap:1.5rem;
+    }
+    @media(min-width:800px){
+      .services{grid-template-columns:repeat(2,1fr)}
+    }
+    .svc{
+      border:1px solid var(--line);
+      background:var(--card);
+      padding:2rem;
+      display:flex;
+      flex-direction:column;
+      min-height:280px;
+      transition:border-color .3s,box-shadow .3s;
+    }
+    .svc:hover{
+      border-color:var(--line-strong);
+      box-shadow:0 24px 48px rgba(0,0,0,.35);
+    }
+    .svc-tag{
+      font-size:.8rem;
+      letter-spacing:.14em;
+      text-transform:uppercase;
+      color:var(--gold-dim);
+      margin-bottom:1rem;
+    }
+    .svc h3{
+      font-family:'Cormorant Garamond',serif;
+      font-size:1.9rem;
+      font-weight:600;
+      margin-bottom:.75rem;
+      line-height:1.25;
+    }
+    .svc p{
+      font-size:1.05rem;
+      color:var(--muted);
+      flex:1;
+      line-height:1.75;
+    }
+    .svc ul{
+      list-style:none;
+      margin:1rem 0 1.25rem;
+      font-size:1rem;
+      color:var(--muted);
+      line-height:1.65;
+    }
+    .svc ul li{
+      padding:.25rem 0;
+      padding-left:1rem;
+      position:relative;
+    }
+    .svc ul li::before{
+      content:'';
+      position:absolute;
+      left:0;top:.65em;
+      width:4px;height:4px;
+      background:var(--gold);
+      border-radius:50%;
+    }
+    .svc-foot{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      padding-top:1rem;
+      border-top:1px solid var(--line);
+      margin-top:auto;
+    }
+    .svc-foot .price{
+      font-family:'Cormorant Garamond',serif;
+      font-size:1.5rem;
+      color:var(--gold);
+      letter-spacing:.1em;
+    }
+    .svc-foot a{
+      font-size:.85rem;
+      letter-spacing:.1em;
+      text-transform:uppercase;
+      font-weight:700;
+      color:var(--gold-light);
+    }
+    .svc-foot a:hover{text-decoration:underline}
+
+    .cta-band{
+      margin-top:3rem;
+      padding:2.5rem 2rem;
+      text-align:center;
+      border:1px solid var(--line-strong);
+      background:linear-gradient(180deg,rgba(201,169,98,.06),transparent);
+    }
+    .cta-band p{
+      font-family:'Cormorant Garamond',serif;
+      font-size:clamp(1.4rem,3vw,2rem);
+      font-style:italic;
+      color:var(--gold-light);
+      line-height:1.45;
+    }
+
+    .contact{
+      background:var(--bg2);
+      border-top:1px solid var(--line);
+    }
+    .contact-grid{
+      display:grid;
+      gap:3rem;
+    }
+    @media(min-width:860px){
+      .contact-grid{grid-template-columns:1fr 1.1fr}
+    }
+    .contact h2{
+      font-family:'Cormorant Garamond',serif;
+      font-size:2.5rem;
+      font-weight:600;
+      margin-bottom:1rem;
+    }
+    .contact .addr{
+      color:var(--muted);
+      font-size:1.1rem;
+      line-height:1.7;
+      margin-bottom:1.5rem;
+    }
+    .tel{
+      display:block;
+      font-family:'Cormorant Garamond',serif;
+      font-size:clamp(1.5rem,3vw,2.1rem);
+      color:var(--gold-light);
+      margin:.25rem 0;
+      letter-spacing:.04em;
+      transition:color .2s;
+    }
+    .tel:hover{color:var(--gold)}
+    .hours{
+      margin-top:1.25rem;
+      font-size:1rem;
+      color:var(--muted);
+      letter-spacing:.04em;
+    }
+    .links{
+      display:flex;
+      flex-wrap:wrap;
+      gap:.75rem;
+      margin-top:1.75rem;
+    }
+    .map{
+      border:1px solid var(--line);
+      min-height:300px;
+      overflow:hidden;
+    }
+    .map iframe{width:100%;height:100%;min-height:300px;border:0;filter:grayscale(.85) contrast(1.05)}
+
+    footer{
+      padding:1.75rem;
+      text-align:center;
+      font-size:.85rem;
+      letter-spacing:.1em;
+      text-transform:uppercase;
+      color:var(--muted);
+      border-top:1px solid var(--line);
+    }
+
+    .fab{
+      position:fixed;
+      bottom:1.25rem;
+      right:1.25rem;
+      z-index:60;
+      width:3rem;
+      height:3rem;
+      border:1px solid var(--line-strong);
+      background:var(--gold);
+      color:#0a0a0a;
+      border-radius:50%;
+      display:grid;
+      place-items:center;
+      font-size:.9rem;
+    }
+    @media(min-width:768px){.fab{display:none}}
+    body{padding-bottom:4rem}
+    @media(min-width:768px){body{padding-bottom:0}}
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="wrap header-inner">
+      <a href="#" class="brand">
+        <span class="brand-main">СТО на Баварії</span>
+        <span class="brand-sub">Харків · @sto_na_bavarii</span>
+      </a>
+      <nav>
+        <a href="#values">Переваги</a>
+        <a href="#services">Послуги</a>
+        <a href="#contact">Контакти</a>
+      </nav>
+      <div class="header-contact">
+        Запис на сервіс
+        <a href="tel:+380951104330">095 110 43 30</a>
+      </div>
+      <a href="tel:+380951104330" class="btn btn-gold">Запис</a>
+    </div>
+  </header>
+
+  <section class="hero">
+    <div class="wrap hero-grid">
+      <div>
+        <p class="eyebrow">пр. Любові Малої, 45А</p>
+        <h1>Чому варто обирати <em>наше СТО</em></h1>
+        <p class="hero-quote">Ваш автомобіль — в надійних руках</p>
+        <p class="hero-text">
+          Професійний сервіс, сучасне обладнання та прозорі умови. Діагностика, ТО, розвал-сходження — без прихованих платежів.
+        </p>
+        <div class="hero-actions">
+          <a href="tel:+380951104330" class="btn btn-fill">Записатися</a>
+          <a href="https://www.instagram.com/sto_na_bavarii/" target="_blank" rel="noopener" class="btn btn-gold">Instagram</a>
+        </div>
+      </div>
+      <aside class="hero-aside">
+        <h2>Послуги та вартість</h2>
+        <div class="menu-line"><span>Заміна масла</span><span>ЦІНА</span></div>
+        <div class="menu-line"><span>Розвал-сходження</span><span>ЦІНА</span></div>
+        <div class="menu-line"><span>Діагностика</span><span>ЦІНА</span></div>
+        <div class="menu-line"><span>Ремонт ходової</span><span>ЦІНА</span></div>
+        <p style="margin-top:1rem;font-size:1rem;color:var(--muted);line-height:1.6">Уточнення — по телефону або в Direct.</p>
+      </aside>
+    </div>
+  </section>
+
+  <div class="stats wrap">
+    <div class="stat"><strong>6+</strong><span>напрямів сервісу</span></div>
+    <div class="stat"><strong>∞</strong><span>гарантія на роботи</span></div>
+    <div class="stat"><strong>9–20</strong><span>щодня, Харків</span></div>
+  </div>
+
+  <section id="values">
+    <div class="wrap">
+      <p class="sec-label">01 — Переваги</p>
+      <h2 class="sec-title">Стандарт, якому довіряють</h2>
+      <p class="sec-desc">Якість, чесність і оперативність — не слогани, а правила роботи.</p>
+      <div class="values">
+        <article class="val">
+          <div class="val-num">I</div>
+          <h3>Якість</h3>
+          <p>Перевірені матеріали та професійне обладнання.</p>
+        </article>
+        <article class="val">
+          <div class="val-num">II</div>
+          <h3>Досвід</h3>
+          <p>Майстри з багаторічною практикою.</p>
+        </article>
+        <article class="val">
+          <div class="val-num">III</div>
+          <h3>Спектр</h3>
+          <p>Від діагностики до капітального ремонту.</p>
+        </article>
+        <article class="val">
+          <div class="val-num">IV</div>
+          <h3>Чесність</h3>
+          <p>Прозорі ціни, погодження перед роботами.</p>
+        </article>
+        <article class="val">
+          <div class="val-num">V</div>
+          <h3>Швидкість</h3>
+          <p>Цінуємо ваш час — без зайвих простоїв.</p>
+        </article>
+        <article class="val">
+          <div class="val-num">VI</div>
+          <h3>Гарантія</h3>
+          <p>На роботи та встановлені запчастини.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section id="services">
+    <div class="wrap">
+      <p class="sec-label">02 — Послуги</p>
+      <h2 class="sec-title">Сервіс без компромісів</h2>
+      <p class="sec-desc">Ключові напрями — у стилі вашого бренду, з акцентом на результат.</p>
+      <div class="services">
+        <article class="svc">
+          <p class="svc-tag">Технічне обслуговування</p>
+          <h3>Заміна масла</h3>
+          <p>Вчасне ТО — ресурс двигуна та впевненість у кожній поїздці.</p>
+          <ul>
+            <li>Плавна робота мотора</li>
+            <li>Менший ризик дорогого ремонту</li>
+            <li>Оптимальна витрата палива</li>
+          </ul>
+          <div class="svc-foot">
+            <span class="price">ЦІНА</span>
+            <a href="tel:+380951104330">Запис →</a>
+          </div>
+        </article>
+        <article class="svc">
+          <p class="svc-tag">Геометрія</p>
+          <h3>Розвал-сходження</h3>
+          <p>Керованість, рівний знос шин, здорова підвіска.</p>
+          <ul>
+            <li>Після ям і заміни вузлів</li>
+            <li>Якщо авто тягне вбік</li>
+            <li>Нерівний знос гуми</li>
+          </ul>
+          <div class="svc-foot">
+            <span class="price">ЦІНА</span>
+            <a href="tel:+380951104330">Запис →</a>
+          </div>
+        </article>
+        <article class="svc">
+          <p class="svc-tag">Діагностика</p>
+          <h3>Комп’ютерна перевірка</h3>
+          <p>Точний план робіт — без зайвих «накруток».</p>
+          <ul>
+            <li>Зрозумілий звіт</li>
+            <li>Погодження до старту</li>
+          </ul>
+          <div class="svc-foot">
+            <span class="price">ЦІНА</span>
+            <a href="tel:+380951104330">Запис →</a>
+          </div>
+        </article>
+        <article class="svc">
+          <p class="svc-tag">Ремонт</p>
+          <h3>Ходова та двигун</h3>
+          <p>Будь-яка складність — від ТО до серйозних робіт.</p>
+          <ul>
+            <li>Підвіска, гальма</li>
+            <li>МКПП, агрегати</li>
+          </ul>
+          <div class="svc-foot">
+            <span class="price">ЦІНА</span>
+            <a href="tel:+380951104330">Запис →</a>
+          </div>
+        </article>
+      </div>
+      <div class="cta-band">
+        <p>Обирайте наше СТО — і ваш автомобіль служитиме довго</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="contact" id="contact">
+    <div class="wrap contact-grid">
+      <div>
+        <p class="sec-label">03 — Контакти</p>
+        <h2>Запис на сервіс</h2>
+        <p class="addr">пр. Любові Малої, 45А<br>м. Харків</p>
+        <a href="tel:+380951104330" class="tel">095 110 43 30</a>
+        <a href="tel:+380988258898" class="tel">098 825 88 98</a>
+        <p class="hours">Пн–Пт 9:00–19:00 · Сб 9:00–16:00</p>
+        <div class="links">
+          <a href="https://www.instagram.com/sto_na_bavarii/" target="_blank" rel="noopener" class="btn btn-gold">Instagram</a>
+          <a href="tel:+380951104330" class="btn btn-fill">Зателефонувати</a>
+        </div>
+      </div>
+      <div class="map">
+        <iframe
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2650!2d36.28!3d49.98!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2z0KHQsNC90LrRgiDQn9C70L7RgdGC0LDRgtC40YfQvdCw0YHRgtC-0LvQuNGH0L3QsCA0NcFA!5e0!3m2!1suk!2sua!4v1"
+          loading="lazy"
+          title="СТО на Баварії"></iframe>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    СТО на Баварії · Харків · 2026
+  </footer>
+
+  <a href="tel:+380951104330" class="fab" aria-label="Дзвінок">☎</a>
+</body>
+</html>

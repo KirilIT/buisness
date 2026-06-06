@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Чистка бензинових форсунок | Хмільник</title>
+  <meta name="description" content="Ремонт бензинової паливної та ходової системи. Хмільник. Ультразвукова чистка форсунок на стенді AUTOOL CT150. Денис 097 478 12 28.">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700;800;900&display=swap" rel="stylesheet">
+  <style>
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    :root{
+      --black:#000;
+      --red:#e60000;
+      --red-dim:#b80000;
+      --white:#fff;
+      --muted:#b8b8b8;
+      --line:rgba(230,0,0,.35);
+      --max:1080px;
+    }
+    html{scroll-behavior:smooth;font-size:16px}
+    body{
+      font-family:'Montserrat',sans-serif;
+      background:var(--black);
+      color:var(--white);
+      line-height:1.55;
+      overflow-x:hidden;
+    }
+    a{color:inherit;text-decoration:none}
+
+    .hex-bg{
+      position:fixed;
+      inset:0;
+      pointer-events:none;
+      z-index:0;
+      opacity:.07;
+      background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='56' height='100' viewBox='0 0 56 100'%3E%3Cpath fill='%23e60000' d='M28 0l28 16v32L28 64 0 48V16zM0 52l28 16 28-16v32L28 100 0 84z'/%3E%3C/svg%3E");
+      background-size:56px 100px;
+    }
+
+    .wrap{
+      position:relative;
+      z-index:1;
+      max-width:var(--max);
+      margin:0 auto;
+      padding:0 clamp(1rem,3vw,1.75rem);
+    }
+
+    header{
+      border-bottom:1px solid var(--line);
+      background:rgba(0,0,0,.9);
+      position:sticky;
+      top:0;
+      z-index:30;
+    }
+    .header-inner{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:1rem;
+      padding:.85rem 0;
+      font-size:.78rem;
+      font-weight:700;
+      letter-spacing:.08em;
+      text-transform:uppercase;
+    }
+    .tagline{color:var(--muted)}
+    .tagline em{color:var(--red);font-style:normal}
+    .header-phone{
+      color:var(--white);
+      white-space:nowrap;
+    }
+    .header-phone:hover{color:var(--red)}
+
+    .hero{
+      padding:2rem 0 1.5rem;
+    }
+    .hero-grid{
+      display:grid;
+      gap:2rem;
+      align-items:center;
+    }
+    @media(min-width:860px){
+      .hero-grid{grid-template-columns:.95fr 1.05fr}
+    }
+
+    .car-wrap{
+      position:relative;
+      min-height:260px;
+    }
+    .car-glow{
+      position:absolute;
+      inset:10% 0 5% 5%;
+      background:radial-gradient(ellipse at 30% 50%,rgba(230,0,0,.55),transparent 65%);
+      filter:blur(24px);
+    }
+    .car-wrap img{
+      position:relative;
+      width:100%;
+      max-height:340px;
+      object-fit:cover;
+      object-position:center left;
+      mask-image:linear-gradient(90deg,#000 70%,transparent);
+      -webkit-mask-image:linear-gradient(90deg,#000 70%,transparent);
+    }
+
+    .hero-text h1{
+      font-size:clamp(1.65rem,4vw,2.5rem);
+      font-weight:900;
+      line-height:1.1;
+      letter-spacing:.02em;
+      text-transform:uppercase;
+    }
+    .hero-text h1 .red{color:var(--red)}
+    .hero-sub{
+      margin-top:1rem;
+      font-size:clamp(.72rem,1.6vw,.88rem);
+      font-weight:700;
+      letter-spacing:.14em;
+      text-transform:uppercase;
+      color:var(--muted);
+      padding-bottom:.65rem;
+      border-bottom:2px solid var(--red);
+      max-width:28rem;
+    }
+
+    .blocks{
+      display:grid;
+      gap:1.5rem;
+      margin-top:2rem;
+    }
+    @media(min-width:720px){.blocks{grid-template-columns:1fr 1fr}}
+
+    .block{
+      display:grid;
+      grid-template-columns:auto 1fr;
+      gap:1rem;
+      align-items:start;
+    }
+    .icon-box{
+      width:56px;height:56px;
+      border:2px solid var(--red);
+      border-radius:10px;
+      display:grid;
+      place-items:center;
+      flex-shrink:0;
+      box-shadow:0 0 18px rgba(230,0,0,.25);
+    }
+    .icon-box svg{width:28px;height:28px;stroke:var(--red);fill:none;stroke-width:1.8}
+    .block h2{
+      font-size:.82rem;
+      font-weight:800;
+      letter-spacing:.06em;
+      text-transform:uppercase;
+      margin-bottom:.65rem;
+      line-height:1.3;
+    }
+    .list{
+      list-style:none;
+      font-size:.82rem;
+      font-weight:600;
+      color:var(--muted);
+    }
+    .list li{
+      position:relative;
+      padding-left:1rem;
+      margin-bottom:.35rem;
+    }
+    .list li::before{
+      content:'›';
+      position:absolute;
+      left:0;
+      color:var(--red);
+      font-weight:900;
+    }
+
+    .stand{
+      margin:2rem 0;
+      background:var(--red);
+      display:flex;
+      align-items:center;
+      gap:1rem;
+      padding:1rem 1.25rem;
+      border-radius:4px;
+    }
+    .stand svg{width:36px;height:36px;stroke:var(--white);fill:none;stroke-width:1.6;flex-shrink:0}
+    .stand p{
+      font-size:clamp(.72rem,1.8vw,.85rem);
+      font-weight:800;
+      letter-spacing:.08em;
+      text-transform:uppercase;
+    }
+    .stand strong{font-weight:900}
+
+    .bio{
+      margin:1.5rem 0 2rem;
+      padding:1.25rem 0;
+      border-top:1px solid var(--line);
+      border-bottom:1px solid var(--line);
+      font-size:.95rem;
+      font-weight:600;
+      color:var(--muted);
+    }
+    .bio p{margin-bottom:.45rem}
+    .bio .eq{color:var(--white);font-weight:800;letter-spacing:.04em}
+
+    .contact-row{
+      display:grid;
+      gap:1.25rem;
+      align-items:stretch;
+      margin-bottom:2rem;
+    }
+    @media(min-width:640px){
+      .contact-row{grid-template-columns:1fr auto}
+    }
+    .contact-box{
+      border:2px solid var(--red);
+      border-radius:14px;
+      padding:1.25rem 1.5rem;
+      display:flex;
+      align-items:center;
+      gap:1rem;
+      background:rgba(230,0,0,.06);
+      box-shadow:0 0 30px rgba(230,0,0,.12);
+    }
+    .contact-box svg{width:32px;height:32px;stroke:var(--red);fill:none;stroke-width:2;flex-shrink:0}
+    .contact-box .num{
+      display:block;
+      font-size:clamp(1.2rem,3vw,1.65rem);
+      font-weight:800;
+      letter-spacing:.04em;
+    }
+    .contact-box .num:hover{color:var(--red)}
+    .contact-box .name{
+      font-size:.95rem;
+      font-weight:800;
+      color:var(--red);
+      letter-spacing:.12em;
+      text-transform:uppercase;
+    }
+    .qr{
+      display:none;
+      width:88px;height:88px;
+      border-radius:8px;
+      background:var(--white);
+      padding:6px;
+    }
+    @media(min-width:640px){.qr{display:block}}
+
+    .features{
+      display:grid;
+      gap:1rem;
+      grid-template-columns:repeat(2,1fr);
+      padding:1.5rem 0 2.5rem;
+      border-top:1px solid var(--line);
+    }
+    @media(min-width:720px){.features{grid-template-columns:repeat(4,1fr)}}
+    .feat{
+      text-align:center;
+      padding:.5rem;
+    }
+    .feat-icon{
+      width:52px;height:52px;
+      margin:0 auto .65rem;
+      border:2px solid var(--red);
+      border-radius:50%;
+      display:grid;
+      place-items:center;
+      box-shadow:0 0 16px rgba(230,0,0,.2);
+    }
+    .feat-icon svg{width:22px;height:22px;stroke:var(--red);fill:none;stroke-width:2}
+    .feat p{
+      font-size:.68rem;
+      font-weight:800;
+      letter-spacing:.05em;
+      text-transform:uppercase;
+      color:var(--muted);
+      line-height:1.35;
+    }
+
+    .services{
+      padding:0 0 2rem;
+    }
+    .services h2{
+      font-size:.85rem;
+      font-weight:800;
+      letter-spacing:.1em;
+      text-transform:uppercase;
+      color:var(--red);
+      margin-bottom:1rem;
+    }
+    .svc-grid{
+      display:grid;
+      gap:.75rem;
+      grid-template-columns:repeat(auto-fill,minmax(200px,1fr));
+    }
+    .svc{
+      border:1px solid var(--line);
+      border-radius:8px;
+      padding:1rem;
+      font-size:.82rem;
+      font-weight:700;
+      color:var(--muted);
+      background:rgba(255,255,255,.02);
+    }
+
+    footer{
+      text-align:center;
+      padding:1.25rem;
+      font-size:.75rem;
+      font-weight:600;
+      color:#666;
+      letter-spacing:.06em;
+      text-transform:uppercase;
+      border-top:1px solid var(--line);
+    }
+
+    .fab{
+      position:fixed;
+      bottom:1rem;right:1rem;
+      width:3.25rem;height:3.25rem;
+      background:var(--red);
+      color:var(--white);
+      border-radius:50%;
+      display:grid;place-items:center;
+      font-size:1.1rem;
+      box-shadow:0 4px 20px rgba(230,0,0,.45);
+      z-index:40;
+    }
+    @media(min-width:768px){.fab{display:none}}
+    body{padding-bottom:4.5rem}
+    @media(min-width:768px){body{padding-bottom:0}}
+  </style>
+</head>
+<body>
+  <div class="hex-bg" aria-hidden="true"></div>
+
+  <header>
+    <div class="wrap header-inner">
+      <p class="tagline">📍 Хмільник · <em>ціна = якість</em></p>
+      <a href="tel:+380974781228" class="header-phone">097 478 12 28</a>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="wrap hero-grid">
+        <div class="car-wrap">
+          <div class="car-glow" aria-hidden="true"></div>
+          <img src="assets/hero.jpg" alt="Автомобіль">
+        </div>
+        <div class="hero-text">
+          <h1>Чистка <span class="red">бензинових</span> форсунок</h1>
+          <p class="hero-sub">Професійна діагностика та ультразвукова очистка</p>
+
+          <div class="blocks">
+            <article class="block">
+              <div class="icon-box" aria-hidden="true">
+                <svg viewBox="0 0 24 24"><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/><circle cx="12" cy="12" r="4"/></svg>
+              </div>
+              <div>
+                <h2>Як зрозуміти, що проблема у форсунках?</h2>
+                <ul class="list">
+                  <li>Горить Check Engine</li>
+                  <li>Нерівний холостий хід</li>
+                  <li>Збільшена витрата палива</li>
+                  <li>Втрата потужності</li>
+                  <li>Важкий запуск двигуна</li>
+                </ul>
+              </div>
+            </article>
+            <article class="block">
+              <div class="icon-box" aria-hidden="true">
+                <svg viewBox="0 0 24 24"><path d="M8 4h8l2 4v12H6V8l2-4z"/><path d="M10 12h4M12 10v4"/></svg>
+              </div>
+              <div>
+                <h2>Як ми це виправляємо?</h2>
+                <ul class="list">
+                  <li>Комп'ютерна діагностика</li>
+                  <li>Ультразвукова очистка на стенді</li>
+                  <li>Тестування форсунок під тиском</li>
+                  <li>Установка та перевірка роботи</li>
+                </ul>
+              </div>
+            </article>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="wrap">
+      <div class="stand">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l8 4v6c0 5-3.5 9.5-8 10-4.5-.5-8-5-8-10V6l8-4z"/></svg>
+        <p>Працюємо на професійному стенді <strong>AUTOOL CT150</strong></p>
+      </div>
+
+      <div class="bio">
+        <p>💸 ремонт бензинової паливної та ходової системи</p>
+        <p class="eq">ціна = якість</p>
+        <p>📍 Хмільник</p>
+      </div>
+
+      <div class="contact-row">
+        <a href="tel:+380974781228" class="contact-box">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.8 19.8 0 01-8.63-3.07 19.5 19.5 0 01-6-6A19.8 19.8 0 012.12 4.18 2 2 0 014.11 2h3a2 2 0 012 1.72c.12.88.32 1.74.59 2.57a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.51-1.16a2 2 0 012.11-.45c.83.27 1.69.47 2.57.59A2 2 0 0122 16.92z"/></svg>
+          <div>
+            <span class="num">+38 097 478 12 28</span>
+            <span class="name">Денис</span>
+          </div>
+        </a>
+        <img class="qr" src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=tel%3A%2B380974781228" alt="QR для дзвінка" width="88" height="88">
+      </div>
+
+      <div class="services">
+        <h2>Послуги</h2>
+        <div class="svc-grid">
+          <div class="svc">Чистка бензинових форсунок</div>
+          <div class="svc">Діагностика паливної системи</div>
+          <div class="svc">Ремонт ходової частини</div>
+          <div class="svc">Запис на консультацію</div>
+        </div>
+        <p style="margin-top:1rem;font-size:.85rem;color:var(--muted);font-weight:600">Вартість — <strong style="color:var(--red)">ЦІНА</strong> · уточнюйте по телефону</p>
+      </div>
+
+      <div class="features">
+        <div class="feat">
+          <div class="feat-icon"><svg viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></svg></div>
+          <p>Професійне обладнання</p>
+        </div>
+        <div class="feat">
+          <div class="feat-icon"><svg viewBox="0 0 24 24"><path d="M12 2l8 4v6c0 5-3.5 9.5-8 10-4.5-.5-8-5-8-10V6l8-4z"/></svg></div>
+          <p>Точна діагностика та тестування</p>
+        </div>
+        <div class="feat">
+          <div class="feat-icon"><svg viewBox="0 0 24 24"><path d="M3 12h4l3 8 4-16 3 8h4"/></svg></div>
+          <p>Якісний результат та надійність</p>
+        </div>
+        <div class="feat">
+          <div class="feat-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></div>
+          <p>Швидко та ефективно</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p>Хмільник · ремонт паливної та ходової · 097 478 12 28</p>
+  </footer>
+
+  <a href="tel:+380974781228" class="fab" aria-label="Зателефонувати">☎</a>
+</body>
+</html>
