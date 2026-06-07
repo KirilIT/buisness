@@ -1,0 +1,616 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FORM MEDIA · Агенція онлайн-запуску</title>
+  <meta name="description" content="FORM MEDIA — агенція онлайн-запуску для локального бізнесу: стратегія, образ, тексти, візуал, публікація. Беремо весь запуск на себе — від першого дзвінка до публікації.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,500;0,6..72,600;0,6..72,700;1,6..72,600&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    :root{
+      --bg:#050508;--surface:#0e0e14;--surface2:#14141e;
+      --text:#f2f0ec;--muted:#a8a4b0;--dim:#6a6674;
+      --accent:#e2f55a;--accent2:#9b8ee8;
+      --line:rgba(255,255,255,.09);--max:1140px;
+      --ease:cubic-bezier(.22,1,.36,1);
+      --serif:'Newsreader',Georgia,serif;
+      --sans:'Plus Jakarta Sans',system-ui,sans-serif;
+    }
+    html{scroll-behavior:smooth;font-size:19px}
+    body{font-family:var(--sans);background:var(--bg);color:var(--text);line-height:1.7;font-weight:500;overflow-x:hidden;-webkit-font-smoothing:antialiased}
+    a{color:inherit;text-decoration:none}
+    strong,b{font-weight:700;color:var(--text)}
+    .lead{font-size:1.12rem;line-height:1.8;color:var(--muted);font-weight:500;max-width:42rem}
+    .lead strong{color:var(--text)}
+
+    .mesh{position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden}
+    .mesh span{position:absolute;border-radius:50%;filter:blur(100px);animation:drift 20s var(--ease) infinite alternate}
+    .mesh .a{width:60vw;height:60vw;background:#9b8ee8;top:-18%;left:-12%;opacity:.22}
+    .mesh .b{width:50vw;height:50vw;background:#e2f55a;bottom:-22%;right:-14%;opacity:.1;animation-delay:-5s}
+    .mesh .c{width:35vw;height:35vw;background:#ff7b5a;top:42%;right:18%;opacity:.07;animation-delay:-9s}
+    @keyframes drift{to{transform:translate(5%,7%) scale(1.1)}}
+
+    .wrap{position:relative;z-index:1;max-width:var(--max);margin:0 auto;padding:0 clamp(1.25rem,4vw,2.5rem)}
+
+    .reveal{opacity:0;transform:translateY(40px);transition:opacity .85s var(--ease),transform .85s var(--ease)}
+    .reveal.visible{opacity:1;transform:none}
+    .reveal-left{opacity:0;transform:translateX(-36px);transition:opacity .85s var(--ease),transform .85s var(--ease)}
+    .reveal-left.visible{opacity:1;transform:none}
+    .reveal-scale{opacity:0;transform:scale(.94);transition:opacity .8s var(--ease),transform .8s var(--ease)}
+    .reveal-scale.visible{opacity:1;transform:none}
+    .d1{transition-delay:.1s}.d2{transition-delay:.2s}.d3{transition-delay:.3s}.d4{transition-delay:.4s}
+
+    header{position:fixed;top:0;left:0;right:0;z-index:100;padding:1.15rem 0;transition:all .4s}
+    header.scrolled{background:rgba(5,5,8,.9);backdrop-filter:blur(20px);border-bottom:1px solid var(--line);padding:.8rem 0}
+    .header-inner{max-width:var(--max);margin:0 auto;padding:0 clamp(1.25rem,4vw,2.5rem);display:flex;align-items:center;justify-content:space-between;gap:1rem}
+    .logo{font-weight:800;font-size:.92rem;letter-spacing:.2em;text-transform:uppercase}
+    .logo b{color:var(--text)}.logo em{font-style:normal;font-weight:600;color:var(--accent)}
+    nav{display:none;gap:2rem;font-size:.72rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+    nav a:hover{color:var(--text)}
+    @media(min-width:860px){nav{display:flex}}
+    .nav-cta{font-size:.72rem;font-weight:800;letter-spacing:.12em;text-transform:uppercase;padding:.7rem 1.4rem;border:1px solid var(--line);transition:all .3s}
+    .nav-cta:hover{border-color:var(--accent);background:rgba(226,245,90,.08);color:var(--accent)}
+
+    .hero{min-height:100vh;display:flex;align-items:center;padding:7.5rem 0 5rem}
+    .hero-grid{display:grid;gap:3.5rem;align-items:center;width:100%}
+    @media(min-width:900px){.hero-grid{grid-template-columns:1.2fr .8fr}}
+    .hero-tag{font-size:.7rem;font-weight:800;letter-spacing:.24em;text-transform:uppercase;color:var(--accent);margin-bottom:.65rem;display:flex;align-items:center;gap:.65rem}
+    .hero-tag::before{content:'';width:32px;height:2px;background:var(--accent);animation:line-grow 1s var(--ease) both}
+    .hero-subtitle{font-size:.95rem;font-weight:600;color:var(--muted);margin-bottom:1.5rem;max-width:30rem;line-height:1.55}
+    @keyframes line-grow{from{width:0}to{width:32px}}
+    .hero h1{font-family:var(--serif);font-size:clamp(3rem,7.5vw,5.4rem);font-weight:700;line-height:1.02;letter-spacing:-.02em}
+    .hero h1 .line{display:block;overflow:hidden}
+    .hero h1 .word{display:inline-block;animation:rise .85s var(--ease) both}
+    .hero h1 .word:nth-child(1){animation-delay:.1s}.hero h1 .word:nth-child(2){animation-delay:.22s}.hero h1 .word:nth-child(3){animation-delay:.34s}
+    .hero h1 em{font-style:italic;color:var(--accent)}
+    @keyframes rise{from{opacity:0;transform:translateY(100%)}to{opacity:1;transform:none}}
+    .hero-niche{margin-top:1.25rem;font-size:1rem;font-weight:700;color:var(--muted);min-height:1.5em}
+    .hero-niche span{color:var(--accent);display:inline-block;animation:niche-in .5s var(--ease)}
+    @keyframes niche-in{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+    .hero-desc{margin-top:1.5rem;font-size:1.15rem;color:var(--muted);font-weight:500;line-height:1.75;max-width:32rem}
+    .hero-bullets{margin-top:1.5rem;display:flex;flex-direction:column;gap:.55rem}
+    .hero-bullets li{font-size:.92rem;font-weight:600;color:var(--muted);list-style:none;padding-left:1.35rem;position:relative}
+    .hero-bullets li::before{content:'✓';position:absolute;left:0;color:var(--accent);font-weight:800}
+    .hero-actions{margin-top:2.5rem;display:flex;flex-wrap:wrap;gap:1rem}
+    .btn{display:inline-flex;align-items:center;padding:.95rem 1.9rem;font-family:var(--sans);font-size:.74rem;font-weight:800;letter-spacing:.14em;text-transform:uppercase;transition:all .35s var(--ease)}
+    .btn-primary{background:var(--accent);color:#0a0a0c;animation:pulse-btn 3s ease-in-out infinite}
+    .btn-primary:hover{transform:translateY(-3px);box-shadow:0 12px 40px rgba(226,245,90,.3)}
+    @keyframes pulse-btn{0%,100%{box-shadow:0 0 0 0 rgba(226,245,90,.25)}50%{box-shadow:0 0 0 8px rgba(226,245,90,0)}}
+    .btn-ghost{border:2px solid var(--line);color:var(--text)}.btn-ghost:hover{border-color:var(--text)}
+
+    .hero-panel{padding:2.25rem;background:rgba(14,14,20,.75);border:1px solid var(--line);backdrop-filter:blur(14px);animation:float-panel 6s ease-in-out infinite}
+    @keyframes float-panel{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+    .hero-panel>p{font-size:.95rem;font-weight:600;color:var(--muted);margin-bottom:1.75rem;line-height:1.7}
+    .stat-row{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem}
+    .stat-num{font-family:var(--serif);font-size:clamp(2.4rem,4vw,3.2rem);font-weight:700;line-height:1}
+    .stat-num .count{color:var(--accent)}.stat-label{font-size:.68rem;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--dim);margin-top:.45rem}
+
+    .statement{padding:3.5rem 0;text-align:center;border-top:1px solid var(--line);border-bottom:1px solid var(--line);background:rgba(226,245,90,.03)}
+    .statement p{font-family:var(--serif);font-size:clamp(1.5rem,3.5vw,2.4rem);font-weight:600;line-height:1.35;max-width:22ch;margin:0 auto}
+    .statement em{font-style:italic;color:var(--accent)}
+
+    .marquee-wrap{padding:1.25rem 0;overflow:hidden;border-bottom:1px solid var(--line);mask-image:linear-gradient(90deg,transparent,#000 6%,#000 94%,transparent)}
+    .marquee{display:flex;gap:3.5rem;width:max-content;animation:scroll 24s linear infinite}
+    .marquee.rev{animation-direction:reverse;animation-duration:30s;margin-top:.5rem}
+    .marquee span{font-size:.72rem;font-weight:800;letter-spacing:.22em;text-transform:uppercase;color:var(--dim);white-space:nowrap}
+    .marquee span strong{color:var(--muted)}
+    @keyframes scroll{to{transform:translateX(-50%)}}
+
+    section{padding:clamp(4.5rem,11vw,7.5rem) 0}
+    .sec-eyebrow{font-size:.7rem;font-weight:800;letter-spacing:.26em;text-transform:uppercase;color:var(--accent);margin-bottom:1rem}
+    .sec-title{font-family:var(--serif);font-size:clamp(2.1rem,4.8vw,3.4rem);font-weight:700;line-height:1.1;max-width:16ch;margin-bottom:1.5rem}
+    .sec-sub{margin-bottom:2.75rem}
+
+    .pain-grid{display:grid;gap:1.25rem}
+    @media(min-width:700px){.pain-grid{grid-template-columns:repeat(3,1fr)}}
+    .pain{padding:2rem 1.75rem;background:var(--surface);border:1px solid var(--line);transition:all .4s var(--ease)}
+    .pain:hover{border-color:rgba(226,245,90,.25);transform:translateY(-6px)}
+    .pain-icon{font-size:2rem;margin-bottom:1rem;animation:float 4s ease-in-out infinite}
+    .pain:nth-child(2) .pain-icon{animation-delay:-1.3s}.pain:nth-child(3) .pain-icon{animation-delay:-2.6s}
+    @keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
+    .pain h4{font-size:.85rem;font-weight:800;letter-spacing:.06em;text-transform:uppercase;margin-bottom:.65rem}
+    .pain p{font-size:.95rem;color:var(--muted);font-weight:500;line-height:1.65}
+    .pain .pain-result{margin-top:.85rem;font-size:.88rem;font-weight:700;color:var(--accent)}
+
+    .compare{display:grid;gap:1.25rem;margin-top:3rem}
+    @media(min-width:760px){.compare{grid-template-columns:1fr 1fr}}
+    .compare-col{padding:2.25rem;border:1px solid var(--line)}
+    .compare-col.bad{background:rgba(255,80,80,.04)}
+    .compare-col.good{border-color:rgba(226,245,90,.3);background:linear-gradient(160deg,rgba(226,245,90,.08),transparent)}
+    .compare-label{font-size:.72rem;font-weight:800;letter-spacing:.18em;text-transform:uppercase;margin-bottom:1.5rem}
+    .compare-col.bad .compare-label{color:#ff8a8a}.compare-col.good .compare-label{color:var(--accent)}
+    .compare-col li{font-size:.95rem;font-weight:600;color:var(--muted);list-style:none;padding:.5rem 0 .5rem 1.5rem;position:relative;border-bottom:1px solid var(--line)}
+    .compare-col li:last-child{border-bottom:none}
+    .compare-col.bad li::before{content:'×';position:absolute;left:0;color:#ff6b6b;font-weight:800}
+    .compare-col.good li::before{content:'✓';position:absolute;left:0;color:var(--accent);font-weight:800}
+
+    .forwho{display:grid;gap:1rem}
+    @media(min-width:640px){.forwho{grid-template-columns:repeat(2,1fr)}}
+    @media(min-width:960px){.forwho{grid-template-columns:repeat(3,1fr)}}
+    .for-card{padding:1.75rem 1.5rem;border:1px solid var(--line);background:var(--surface2);transition:all .35s var(--ease)}
+    .for-card:hover{transform:scale(1.03);border-color:var(--accent)}
+    .for-card h4{font-size:1.05rem;font-weight:800;margin-bottom:.5rem}
+    .for-card p{font-size:.88rem;color:var(--muted);font-weight:500;line-height:1.6}
+
+    .services{display:grid;gap:1.25rem}
+    .service{padding:2.5rem 2rem;background:var(--surface);border:1px solid var(--line);transition:all .4s var(--ease);position:relative;overflow:hidden}
+    .service::after{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(226,245,90,.06),transparent);opacity:0;transition:opacity .4s}
+    .service:hover{transform:translateY(-5px);border-color:rgba(255,255,255,.14)}.service:hover::after{opacity:1}
+    .service>*{position:relative;z-index:1}
+    .service.featured{background:linear-gradient(135deg,rgba(155,142,232,.12),rgba(226,245,90,.05));border-color:rgba(226,245,90,.2)}
+    @media(min-width:700px){.service.featured{display:grid;grid-template-columns:1.1fr .9fr;gap:2.5rem;align-items:start}}
+    .service-num{font-size:.7rem;font-weight:800;letter-spacing:.18em;color:var(--accent);margin-bottom:1rem}
+    .service h3{font-family:var(--serif);font-size:1.9rem;font-weight:700;margin-bottom:.85rem}
+    .service>.body>p,.service>div>p{font-size:1rem;color:var(--muted);font-weight:500;line-height:1.7}
+    .service ul{margin-top:1.25rem;list-style:none;display:flex;flex-direction:column;gap:.55rem}
+    .service li{font-size:.92rem;font-weight:600;color:var(--muted);padding-left:1.2rem;position:relative}
+    .service li::before{content:'→';position:absolute;left:0;color:var(--accent);font-weight:800}
+
+    .deliver-grid{display:grid;gap:1.25rem}
+    @media(min-width:640px){.deliver-grid{grid-template-columns:repeat(2,1fr)}}
+    @media(min-width:960px){.deliver-grid{grid-template-columns:repeat(4,1fr)}}
+    .deliver{padding:2rem 1.5rem;background:var(--surface);border:1px solid var(--line);transition:all .35s}
+    .deliver:hover{border-color:var(--accent);transform:translateY(-4px)}
+    .deliver-n{font-family:var(--serif);font-size:2.5rem;font-weight:700;color:var(--line);line-height:1;margin-bottom:.85rem;transition:color .35s}
+    .deliver:hover .deliver-n{color:var(--accent)}
+    .deliver h4{font-size:.82rem;font-weight:800;letter-spacing:.08em;text-transform:uppercase;margin-bottom:.5rem}
+    .deliver p{font-size:.9rem;color:var(--muted);font-weight:500;line-height:1.6}
+
+    .faq{display:flex;flex-direction:column;gap:.75rem;max-width:48rem}
+    .faq-item{border:1px solid var(--line);background:var(--surface);overflow:hidden;transition:border-color .3s}
+    .faq-item[open]{border-color:rgba(226,245,90,.3)}
+    .faq-item summary{padding:1.35rem 1.5rem;font-size:1rem;font-weight:700;cursor:pointer;list-style:none;display:flex;justify-content:space-between;align-items:center;gap:1rem}
+    .faq-item summary::-webkit-details-marker{display:none}
+    .faq-item summary::after{content:'+';font-size:1.25rem;font-weight:800;color:var(--accent);transition:transform .3s}
+    .faq-item[open] summary::after{transform:rotate(45deg)}
+    .faq-item p{padding:0 1.5rem 1.35rem;font-size:.95rem;color:var(--muted);font-weight:500;line-height:1.7}
+
+    .portfolio-grid{display:grid;gap:1rem;grid-template-columns:repeat(auto-fill,minmax(250px,1fr))}
+    .work{display:block;padding:1.65rem;background:var(--surface2);border:1px solid var(--line);position:relative;overflow:hidden;transition:all .4s var(--ease)}
+    .work:hover{transform:translateY(-8px) scale(1.02);border-color:rgba(226,245,90,.3)}
+    .work-bg{position:absolute;inset:0;background:linear-gradient(135deg,var(--accent2),transparent 65%);opacity:.12;transition:opacity .4s}
+    .work:hover .work-bg{opacity:.3}
+    .work-cat{font-size:.65rem;font-weight:800;letter-spacing:.16em;text-transform:uppercase;color:var(--accent);margin-bottom:.7rem;position:relative}
+    .work h4{font-family:var(--serif);font-size:1.45rem;font-weight:700;position:relative}
+    .work-city{font-size:.82rem;color:var(--dim);font-weight:700;position:relative;margin-top:.25rem}
+    .work-arrow{position:absolute;bottom:1.25rem;right:1.25rem;font-size:1.2rem;font-weight:800;transition:transform .35s}
+    .work:hover .work-arrow{transform:translate(5px,-5px);color:var(--accent)}
+
+    .pricing{padding:3rem;border:1px solid var(--line);background:linear-gradient(160deg,rgba(155,142,232,.1),transparent);display:grid;gap:2rem}
+    @media(min-width:700px){.pricing{grid-template-columns:1fr auto;align-items:center}}
+    .pricing h3{font-family:var(--serif);font-size:clamp(2rem,3.5vw,2.6rem);font-weight:700}
+    .pricing p{margin-top:.75rem;font-size:1rem;color:var(--muted);font-weight:500;max-width:30rem;line-height:1.7}
+    .price-from{font-family:var(--serif);font-size:clamp(2.8rem,5vw,4rem);font-weight:700;line-height:1}
+    .price-note{font-size:.82rem;font-weight:700;color:var(--dim);margin-top:.5rem}
+
+    .includes-grid{display:grid;gap:1rem}
+    @media(min-width:640px){.includes-grid{grid-template-columns:repeat(2,1fr)}}
+    @media(min-width:960px){.includes-grid{grid-template-columns:repeat(3,1fr)}}
+    .include-item{padding:1.25rem 1.5rem;background:var(--surface);border:1px solid var(--line);font-size:.95rem;font-weight:600;color:var(--muted);display:flex;align-items:center;gap:.75rem;transition:all .35s var(--ease)}
+    .include-item:hover{border-color:rgba(226,245,90,.25);transform:translateY(-3px)}
+    .include-item::before{content:'✓';color:var(--accent);font-weight:800;flex-shrink:0}
+
+    .testimonial-wrap{max-width:44rem;margin:0 auto}
+    .testimonial{padding:3rem 2.5rem;background:var(--surface);border:1px solid var(--line);border-left:3px solid var(--accent);position:relative;overflow:hidden}
+    .testimonial::before{content:'\201C';position:absolute;top:.5rem;left:1.5rem;font-family:var(--serif);font-size:5rem;line-height:1;color:var(--line);pointer-events:none}
+    .testimonial blockquote{font-family:var(--serif);font-size:clamp(1.35rem,3vw,1.8rem);font-weight:600;line-height:1.45;color:var(--text);font-style:italic;position:relative}
+    .testimonial cite{display:block;margin-top:1.5rem;font-size:.85rem;font-weight:800;letter-spacing:.06em;color:var(--dim);font-style:normal}
+
+    .booking-intro{font-size:1.05rem;font-weight:500;color:var(--muted);max-width:34rem;margin-bottom:1.75rem;line-height:1.75}
+    .booking-frame-wrap{border:1px solid var(--line);border-radius:6px;overflow:hidden;min-height:520px}
+    .booking-frame-wrap iframe{display:block;width:100%;height:min(720px,80vh);min-height:520px;border:0;background:#fff}
+
+    .cta-block{text-align:center;padding:clamp(3.5rem,9vw,5.5rem) 2rem;border:1px solid var(--line);position:relative;overflow:hidden}
+    .cta-block::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 70% 80% at 50% 100%,rgba(226,245,90,.1),transparent)}
+    .cta-block>*{position:relative}
+    .cta-block h2{font-family:var(--serif);font-size:clamp(2.2rem,5vw,3.2rem);font-weight:700}
+    .cta-block>p{margin-top:1rem;font-size:1.05rem;color:var(--muted);font-weight:600}
+    .cta-links{margin-top:2.25rem;display:flex;flex-wrap:wrap;gap:1rem;justify-content:center}
+    .cta-link{display:inline-flex;padding:.95rem 1.75rem;font-size:.74rem;font-weight:800;letter-spacing:.12em;text-transform:uppercase;border:2px solid var(--line);transition:all .3s}
+    .cta-link:hover{border-color:var(--accent);color:var(--accent)}
+    .cta-link.primary{background:var(--accent);color:#0a0a0c;border-color:var(--accent)}
+
+    footer{padding:2.5rem 0 3rem;border-top:1px solid var(--line);display:flex;flex-wrap:wrap;justify-content:space-between;gap:1rem;font-size:.78rem;font-weight:700;color:var(--dim)}
+
+    @media(min-width:900px){
+      .cursor-glow{position:fixed;width:450px;height:450px;border-radius:50%;background:radial-gradient(circle,rgba(226,245,90,.07),transparent 70%);pointer-events:none;z-index:0;transform:translate(-50%,-50%);opacity:0;transition:opacity .3s}
+      body:hover .cursor-glow{opacity:1}
+    }
+  </style>
+</head>
+<body>
+  <div class="mesh" aria-hidden="true"><span class="a"></span><span class="b"></span><span class="c"></span></div>
+  <div class="cursor-glow" id="glow" aria-hidden="true"></div>
+
+  <header id="header">
+    <div class="header-inner">
+      <a href="#" class="logo"><b>FORM</b><em> MEDIA</em></a>
+      <nav>
+        <a href="#why">Навіщо</a>
+        <a href="#production">Продюсування</a>
+        <a href="#services">Послуги</a>
+        <a href="#work">Роботи</a>
+        <a href="#booking">Зустріч</a>
+      </nav>
+      <a href="#booking" class="nav-cta" data-fm-event="nav-booking">Записатися</a>
+    </div>
+  </header>
+
+  <section class="hero">
+    <div class="wrap hero-grid">
+      <div>
+        <p class="hero-tag">Агенція · FORM MEDIA</p>
+        <p class="hero-subtitle reveal">Сайти та онлайн-присутність для локального бізнесу</p>
+        <h1>
+          <span class="line"><span class="word">Клієнти</span> <span class="word">йдуть</span></span>
+          <span class="line"><span class="word">до <em>тих,</em></span> <span class="word">хто</span></span>
+          <span class="line"><span class="word"><em>виглядає</em> як лідер</span></span>
+        </h1>
+        <p class="hero-niche">Запускаємо: <span id="niche-rotate">СТО</span></p>
+        <p class="hero-desc reveal">Ви майстер своєї справи — але маркетинг, структура і «як це подати онлайн» не ваші задачі. <strong>FORM MEDIA</strong> бере на себе весь запуск: аудит, позиціонування, тексти, візуал, відгуки, CTA, домен і публікацію. Сайт — лише видимий результат. Продукт — ваша онлайн-присутність, якій довіряють.</p>
+        <ul class="hero-bullets reveal d1">
+          <li>Ми беремо на себе все планування — від першого дзвінка до публікації</li>
+          <li>Повний продакшн: стратегія, образ, структура, копірайт, запуск</li>
+          <li>Показуємо результат до оплати — ви кажете, чи це ваш бізнес онлайн</li>
+        </ul>
+        <div class="hero-actions reveal d2">
+          <a href="#booking" class="btn btn-primary" id="booking-open" data-fm-event="hero-booking">Безкоштовна зустріч</a>
+          <a href="#work" class="btn btn-ghost" data-fm-event="hero-portfolio">Дивитись роботи</a>
+        </div>
+      </div>
+      <aside class="hero-panel reveal-scale d2">
+        <p><strong>87% клієнтів</strong> шукають вас онлайн до першого дзвінка. Якщо там немає системи — ні образу, ні сенсу, ні довіри — вони просто йдуть далі. Агентство закриває цю прогалину повністю.</p>
+        <div class="stat-row">
+          <div><div class="stat-num"><span class="count" data-target="7">0</span></div><div class="stat-label">Ніш у портфоліо</div></div>
+          <div><div class="stat-num"><span class="count" data-target="2">0</span> дн</div><div class="stat-label">До готового запуску</div></div>
+        </div>
+      </aside>
+    </div>
+  </section>
+
+  <div class="statement wrap">
+    <p class="reveal">Ми не збираємо «сайт за сайт». <em>Ми запускаємо бізнес онлайн</em> — образ, структура, довіра. Щоб клієнт дзвонив, а не сумнівався.</p>
+  </div>
+
+  <div class="marquee-wrap" aria-hidden="true">
+    <div class="marquee">
+      <span><strong>FORM MEDIA</strong> · Агенція ·</span><span><strong>СТО</strong> · Детейлінг ·</span><span><strong>Шиномонтаж</strong> · Вікна ·</span><span><strong>Кондиціонери</strong> · Ворота ·</span><span><strong>Балкони</strong> · Меблі ·</span><span><strong>Стоматологія</strong> · Барбер ·</span><span><strong>Fashion</strong> · Запуск ·</span>
+      <span><strong>FORM MEDIA</strong> · Агенція ·</span><span><strong>СТО</strong> · Детейлінг ·</span><span><strong>Шиномонтаж</strong> · Вікна ·</span><span><strong>Кондиціонери</strong> · Ворота ·</span><span><strong>Балкони</strong> · Меблі ·</span><span><strong>Стоматологія</strong> · Барбер ·</span><span><strong>Fashion</strong> · Запуск ·</span>
+    </div>
+    <div class="marquee rev">
+      <span>ОБРАЗ · <strong>СТРАТЕГІЯ</strong> · ЗАПУСК ·</span><span>ПРИСУТНІСТЬ · <strong>ПРОДАКШН</strong> ·</span><span>ТЕКСТИ · <strong>ВІДГУКИ</strong> · CTA ·</span><span>МАЛИЙ БІЗНЕС · <strong>УКРАЇНА</strong> ·</span>
+      <span>ОБРАЗ · <strong>СТРАТЕГІЯ</strong> · ЗАПУСК ·</span><span>ПРИСУТНІСТЬ · <strong>ПРОДАКШН</strong> ·</span><span>ТЕКСТИ · <strong>ВІДГУКИ</strong> · CTA ·</span><span>МАЛИЙ БІЗНЕС · <strong>УКРАЇНА</strong> ·</span>
+    </div>
+  </div>
+
+  <section id="why">
+    <div class="wrap">
+      <p class="sec-eyebrow reveal">Чому це важливо</p>
+      <h2 class="sec-title reveal">Майстерність не продає. Продає перше враження.</h2>
+      <p class="lead sec-sub reveal">Людина шукає СТО, барбершоп або монтаж вікон поруч. Відкриває Maps — у вас 4.8 зірок і десятки відгуків. Клікає на сайт — <strong>404 або сторінка з 2014 року</strong>. Відкриває конкурента — чіткий образ, послуги, телефон. Куди вона подзвонить? Ви вже програли — не через якість роботи, а через те, що онлайн ви виглядаєте слабше. Саме тут починається продюсування: ми перекладаємо вашу реальну силу на мову, яку розуміє клієнт за 10 секунд.</p>
+      <div class="pain-grid">
+        <article class="pain reveal">
+          <p class="pain-icon">📵</p>
+          <h4>Немає системи</h4>
+          <p>Google показує вас у Maps — але посилання веде в нікуди. Клієнт не бачить образу бізнесу, лише порожнечу. І робить висновок: «якщо з онлайном не впорались — з моєю задачею теж?»</p>
+          <p class="pain-result">→ Довіра губиться до першого слова</p>
+        </article>
+        <article class="pain reveal d1">
+          <p class="pain-icon">📱</p>
+          <h4>Розірваний образ</h4>
+          <p>Instagram — одне, візитка — інше, Maps — третє. Немає єдиної присутності, яка пояснює: хто ви, чому ви, як до вас потрапити. Клієнт не збирає пазл — він просто йде далі.</p>
+          <p class="pain-result">→ Виглядаєте дешево, навіть якщо робите на рівні</p>
+        </article>
+        <article class="pain reveal d2">
+          <p class="pain-icon">⏳</p>
+          <h4>Немає часу і не ваш профіль</h4>
+          <p>Ви власник, не маркетолог. «Зроблю сайт потім» тягнеться місяцями. А ринок не чекає — конкуренти вже запустили образ і забирають заявки, поки ви зайняті своєю справою.</p>
+          <p class="pain-result">→ Вся онлайн-частина лягає на вас — або не робиться взагалі</p>
+        </article>
+      </div>
+      <div class="compare reveal d1">
+        <div class="compare-col bad">
+          <p class="compare-label">Без агенції</p>
+          <ul>
+            <li>«Зроблю сам» — і півроку нічого не змінюється</li>
+            <li>Шаблон з конструктора — як у всіх, без позиціонування</li>
+            <li>Maps, Insta і візитка — три різні стилі, нуль системи</li>
+            <li>Відгуки є, але клієнт їх не бачить у потрібний момент</li>
+            <li>Незрозуміло, чому обирати вас — і за яку ціну</li>
+          </ul>
+        </div>
+        <div class="compare-col good">
+          <p class="compare-label">З FORM MEDIA</p>
+          <ul>
+            <li>Єдиний образ: «тут серйозна компанія, можна дзвонити»</li>
+            <li>Стратегія під нішу — не шаблон «на всіх»</li>
+            <li>Тексти, які пояснюють цінність за 10 секунд</li>
+            <li>Відгуки, послуги, CTA — зібрані в одну систему</li>
+            <li>Посилання, яким ви пишете клієнтам без сорому</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <p class="sec-eyebrow reveal">Для кого</p>
+      <h2 class="sec-title reveal">Локальний бізнес, який готовий виглядати як лідер</h2>
+      <p class="lead sec-sub reveal">Якщо клієнти знаходять вас через <strong>Google, Instagram або рекомендації</strong> — вам потрібна агенція, яка збере онлайн-присутність під ключ. У портфоліо — 7 різних ніш, від СТО до fashion-бренду. Не підписка на SMM, а конкретний запуск: образ, система, результат.</p>
+      <div class="forwho">
+        <article class="for-card reveal"><h4>СТО · Автосервіс</h4><p>Послуги, ціни, відгуки з Maps, телефон на першому екрані.</p></article>
+        <article class="for-card reveal d1"><h4>Детейлінг</h4><p>Преміум вигляд, до/після, прайс — щоб ціна не лякала, а виправдовувалась.</p></article>
+        <article class="for-card reveal d2"><h4>Шиномонтаж</h4><p>Швидко, зрозуміло, з адресою і графіком — клієнт їде до вас, а не до сусіда.</p></article>
+        <article class="for-card reveal d3"><h4>Монтаж вікон</h4><p>Портфоліо робіт, калькулятор, довіра — клієнт бачить якість до дзвінка.</p></article>
+        <article class="for-card reveal"><h4>Кондиціонери</h4><p>Монтаж, сервіс, бренди — зрозуміло, що ви робите і чому вам довіряти.</p></article>
+        <article class="for-card reveal d1"><h4>Ворота · огорожі</h4><p>Типи, матеріали, приклади — щоб клієнт не пішов до конкурента з нормальним сайтом.</p></article>
+        <article class="for-card reveal d2"><h4>Балкони</h4><p>Обшивка, скління, фото робіт — локальний бізнес, який виглядає професійно.</p></article>
+        <article class="for-card reveal d3"><h4>Меблі на замовлення</h4><p>Каталог, етапи роботи, контакт — клієнт бачить рівень до зустрічі.</p></article>
+        <article class="for-card reveal"><h4>Стоматології</h4><p>Послуги, лікарі, запис — спокій і довіра з першого екрану.</p></article>
+        <article class="for-card reveal d1"><h4>Барбершопи</h4><p>Стиль, прайс, атмосфера — як у портфоліо, тільки під ваш бренд.</p></article>
+        <article class="for-card reveal d2"><h4>Fashion · бренди одягу</h4><p>Сучасний lookbook, колекції, Instagram-естетика — не «шаблон», а актуальний бренд.</p></article>
+        <article class="for-card reveal d3"><h4>Салон · сантехнік</h4><p>Будь-який локальний сервіс, де дзвінок = гроші — збираємо образ під нішу.</p></article>
+      </div>
+    </div>
+  </section>
+
+  <section id="services">
+    <div class="wrap">
+      <p class="sec-eyebrow reveal">Що ви отримуєте</p>
+      <h2 class="sec-title reveal">Не сайт. Повний онлайн-запуск.</h2>
+      <p class="lead sec-sub reveal">FORM MEDIA працює як агенція: <strong>стратегія → продакшн → публікація</strong>. Сайт — лише видимий результат. Продукт — ваш бізнес, який онлайн виглядає як лідер ринку і змушує клієнта дзвонити.</p>
+      <div class="services">
+        <article class="service featured reveal">
+          <div class="body">
+            <p class="service-num">01 · Стратегія</p>
+            <h3>Аудит і позиціонування</h3>
+            <p>Дивимось на ваш бізнес очима клієнта: ніша, місто, конкуренти, сильні сторони. Визначаємо, що показати і як подати — щоб виграти довіру ще до дзвінка. Ви не витрачаєте вечори на «що написати» — ми беремо це на себе.</p>
+          </div>
+          <ul>
+            <li>Аудит: Maps, Instagram, конкуренти у вашому місті</li>
+            <li>Позиціонування: чому обирають вас, а не сусіда</li>
+            <li>Структура присутності: послуги → переваги → відгуки → дія</li>
+            <li>Копірайт простою мовою — без води і канцеляриту</li>
+            <li>План запуску від першого дзвінка до публікації</li>
+          </ul>
+        </article>
+        <article class="service reveal d1">
+          <p class="service-num">02 · Продакшн</p>
+          <h3>Образ і візуальна система</h3>
+          <p>Збираємо єдину онлайн-присутність: дизайн, тексти, блок відгуків, CTA, карта, прайс. Відкрив на телефоні — за 5 секунд зрозуміло, хто ви і чому сюди можна звертатись.</p>
+          <ul>
+            <li>Дизайн під нішу — не шаблон «як у всіх»</li>
+            <li>Адаптив: більшість клієнтів відкриють з телефону</li>
+            <li>Соціальний доказ: відгуки з Google / Instagram</li>
+            <li>CTA під ваш бізнес: дзвінок, WhatsApp, Direct</li>
+          </ul>
+        </article>
+        <article class="service reveal d2">
+          <p class="service-num">03 · Запуск</p>
+          <h3>Публікація і присутність онлайн</h3>
+          <p>Без запуску навіть найкращий образ — просто файл на комп'ютері. Підключаємо домен, хостинг, публікуємо. Ви отримуєте посилання, яким можна ділитись у Direct, Insta і Google — і воно працює.</p>
+          <ul>
+            <li>Домен і хостинг — налаштовуємо, не перекладаємо на вас</li>
+            <li>Форми заявок і базова SEO-оптимізація</li>
+            <li>Правки після вашого перегляду — до фінального «так»</li>
+            <li>Готовий запуск за 1–2 дні, не «коли звільнитесь»</li>
+          </ul>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section id="production">
+    <div class="wrap">
+      <p class="sec-eyebrow reveal">Суть</p>
+      <h2 class="sec-title reveal">Що таке продюсування</h2>
+      <p class="lead sec-sub reveal">Більшість думає: «мені потрібен сайт». Насправді потрібен <strong>образ бізнесу онлайн</strong> — система, яка пояснює клієнту, чому саме ви. Сайт — лише видимий результат цієї роботи. Ось що входить у продюсування FORM MEDIA:</p>
+      <div class="deliver-grid">
+        <article class="deliver reveal"><div class="deliver-n">→</div><h4>Стратегія</h4><p>Аудит вашої ніші, конкурентів і поточної присутності. Визначаємо позиціонування: що показати, як подати, чому обирати вас. Без цього будь-яка «сторінка» — просто декор.</p></article>
+        <article class="deliver reveal d1"><div class="deliver-n">→</div><h4>Контент і структура</h4><p>Пишемо тексти, збираємо логіку сторінки, формуємо офер. Клієнт має зрозуміти за 10 секунд: хто ви, що робите, чому вам можна довіряти — і як зв'язатись.</p></article>
+        <article class="deliver reveal d2"><div class="deliver-n">→</div><h4>Візуальний продакшн</h4><p>Дизайн, адаптив, блок відгуків, CTA, карта, прайс — все в одному стилі. Не «красива картинка», а цілісний образ, який викликає довіру.</p></article>
+        <article class="deliver reveal d3"><div class="deliver-n">→</div><h4>Запуск</h4><p>Домен, хостинг, публікація, базова SEO. Ви отримуєте готову присутність онлайн — посилання, яким можна ділитись одразу. Ми беремо на себе все планування — від першого дзвінка до публікації.</p></article>
+      </div>
+    </div>
+  </section>
+
+  <section id="process">
+    <div class="wrap">
+      <p class="sec-eyebrow reveal">Процес</p>
+      <h2 class="sec-title reveal">Ви займаєтесь бізнесом. Ми — запуском.</h2>
+      <p class="lead sec-sub reveal">Ми беремо на себе все планування — від першого дзвінка до публікації. <strong>Без нескінченних брифів</strong> — коротко, по суті, з результатом, який можна побачити до оплати.</p>
+      <div class="deliver-grid">
+        <article class="deliver reveal"><div class="deliver-n">01</div><h4>Стратегічний дзвінок</h4><p>15 хвилин: ніша, місто, що продаєте, як вас знаходять зараз. Або запис у календарі нижче — без зобов'язань.</p></article>
+        <article class="deliver reveal d1"><div class="deliver-n">02</div><h4>Планування і продакшн</h4><p>Аудит Maps, Insta, конкурентів. Будуємо структуру, пишемо тексти, збираємо візуал. Ви не витрачаєте час — ми робимо всю підготовку.</p></article>
+        <article class="deliver reveal d2"><div class="deliver-n">03</div><h4>Показ і правки</h4><p>Посилання на телефон. «Подобається» — йдемо до запуску. «Поправ ось це» — поправляємо. Ви вирішуєте до оплати.</p></article>
+        <article class="deliver reveal d3"><div class="deliver-n">04</div><h4>Публікація</h4><p>Домен, хостинг, запуск. Ваша присутність онлайн працює — кидаєте посилання клієнтам, в Insta, в Google.</p></article>
+      </div>
+    </div>
+  </section>
+
+  <section id="work">
+    <div class="wrap">
+      <p class="sec-eyebrow reveal">Портфоліо</p>
+      <h2 class="sec-title reveal">Не слова — реальні проєкти</h2>
+      <p class="lead sec-sub reveal">Сім проєктів у семи нішах — від детейлінгу до барбершопу. Кожен — повний онлайн-запуск, не просто «сторінка». <strong>Відкрийте на телефоні</strong> — так само побачать ваші клієнти.</p>
+      <div class="portfolio-grid">
+        <a href="dl-detailing-poltava/" class="work reveal" data-fm-event="portfolio:DL Auto Detailing"><div class="work-bg"></div><p class="work-cat">Детейлінг</p><h4>DL Auto Detailing</h4><p class="work-city">Полтава</p><span class="work-arrow">↗</span></a>
+        <a href="100bar-mykniv/" class="work reveal d1" data-fm-event="portfolio:100 BAR SERVICE"><div class="work-bg"></div><p class="work-cat">СТО</p><h4>100 BAR SERVICE</h4><p class="work-city">Миколаїв</p><span class="work-arrow">↗</span></a>
+        <a href="a-detailing-lviv/" class="work reveal" data-fm-event="portfolio:A Detailing Lviv"><div class="work-bg"></div><p class="work-cat">Детейлінг</p><h4>A Detailing Lviv</h4><p class="work-city">Львів</p><span class="work-arrow">↗</span></a>
+        <a href="smile-arte-if/" class="work reveal d1" data-fm-event="portfolio:Smile Arte"><div class="work-bg"></div><p class="work-cat">Стоматологія</p><h4>Smile Arte</h4><p class="work-city">Івано-Франківськ</p><span class="work-arrow">↗</span></a>
+        <a href="razum-barber-kharkiv/" class="work reveal" data-fm-event="portfolio:RAZUM Barber"><div class="work-bg"></div><p class="work-cat">Барбершоп</p><h4>RAZUM Barber</h4><p class="work-city">Харків</p><span class="work-arrow">↗</span></a>
+        <a href="lumina-salon-dnipro/" class="work reveal d1" data-fm-event="portfolio:LUMINA"><div class="work-bg"></div><p class="work-cat">Салон краси</p><h4>LUMINA</h4><p class="work-city">Дніпро</p><span class="work-arrow">↗</span></a>
+        <a href="aqua-master-ternopil/" class="work reveal" data-fm-event="portfolio:Aqua Master"><div class="work-bg"></div><p class="work-cat">Сантехнік</p><h4>Aqua Master</h4><p class="work-city">Тернопіль</p><span class="work-arrow">↗</span></a>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <p class="sec-eyebrow reveal">Відгуки</p>
+      <h2 class="sec-title reveal">Що кажуть власники</h2>
+      <div class="testimonial-wrap reveal d1">
+        <figure class="testimonial">
+          <blockquote>Звернулись до агенції — за два дні мали повний запуск: тексти, образ, все на місці. Правки внесли швидко. Тепер посилання кидаємо клієнтам без сорому. Рекомендую.</blockquote>
+          <cite>— Власник детейлінгу, Полтава</cite>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <p class="sec-eyebrow reveal">Питання</p>
+      <h2 class="sec-title reveal">Часті запитання</h2>
+      <div class="faq">
+        <details class="faq-item reveal" open><summary>Де гарантія? Чи безпечно платити незнайомцям?</summary><p><strong>Показуємо результат до оплати.</strong> Спочатку ви бачите готовий запуск на телефоні — тексти, образ, структуру. Подобається — оплачуєте і публікуємо. <strong>Не підходить — не платите.</strong> Без передоплати «на довіру» і без тиску.</p></details>
+        <details class="faq-item reveal d1"><summary>Скільки коштує?</summary><p>Повний онлайн-запуск — від 150$. Розширений продакшн з галереєю, повним прайсом і додатковими блоками — обговорюємо після зустрічі. Ціну кажемо до старту, без сюрпризів.</p></details>
+        <details class="faq-item reveal d2"><summary>Я не розбираюсь в маркетингу — це проблема?</summary><p>Навпаки — це норма. Ви займаєтесь своєю справою, ми беремо на себе всю онлайн-частину: стратегію, тексти, образ, запуск. Від вас — коротка розмова і «так/ні» після перегляду.</p></details>
+        <details class="faq-item reveal d3"><summary>Чим ви відрізняєтесь від фрілансера з Kwork?</summary><p>Ми не здаємо шаблон. Робимо повний продакшн під нішу: стратегія, позиціонування, тексти, образ, запуск. У портфоліо — 7 живих прикладів у різних нішах, можете відкрити зараз.</p></details>
+      </div>
+    </div>
+  </section>
+
+  <section id="includes">
+    <div class="wrap">
+      <p class="sec-eyebrow reveal">Що входить</p>
+      <h2 class="sec-title reveal">Що входить у вартість</h2>
+      <p class="lead sec-sub reveal">Базовий пакет продюсування — все необхідне для запуску. Без прихованих «а це окремо».</p>
+      <div class="includes-grid">
+        <div class="include-item reveal">Дизайн</div>
+        <div class="include-item reveal d1">Адаптація під телефон</div>
+        <div class="include-item reveal d2">Підключення домену</div>
+        <div class="include-item reveal d3">Підключення хостингу</div>
+        <div class="include-item reveal">Форми заявок</div>
+        <div class="include-item reveal d1">Базова SEO-оптимізація</div>
+        <div class="include-item reveal d2">Правки після запуску</div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <div class="pricing reveal">
+        <div>
+          <h3>Онлайн-запуск під ключ</h3>
+          <p>Стратегія + продакшн + публікація. Не «сторінка заради сторінки» — а система, яка формує образ лідера у вашій ніші і приносить дзвінки. Розширений пакет — з галереєю, повним прайсом, додатковими блоками.</p>
+        </div>
+        <div>
+          <div class="price-from">від 150$</div>
+          <p class="price-note">розширений пакет · домен · хостинг — обговорюємо</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="booking">
+    <div class="wrap">
+      <p class="sec-eyebrow reveal">Зустріч</p>
+      <h2 class="sec-title reveal">15 хвилин — розберемо ваш запуск</h2>
+      <p class="booking-intro reveal">Поговоримо про ваш бізнес, покажемо приклади з портфоліо, скажемо термін і ціну. <strong>Навіть якщо не працюватимемо разом — виїдете з розумінням, як має виглядати ваша присутність онлайн.</strong></p>
+      <div class="hero-actions reveal d1" style="margin-bottom:2rem">
+        <a href="#booking" class="btn btn-primary" id="booking-open-btn" data-fm-event="booking-calendar">Відкрити календар</a>
+      </div>
+      <div class="booking-frame-wrap reveal d2" id="booking-embed">
+        <iframe id="booking-frame" title="Запис на зустріч" loading="lazy"></iframe>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact">
+    <div class="wrap">
+      <div class="cta-block reveal">
+        <h2>Давайте запустимо ваш бізнес онлайн</h2>
+        <p>Запишіться на зустріч або напишіть у месенджер. Покажемо, як може виглядати ваш образ у мережі — від стратегії до публікації.</p>
+        <div class="cta-links">
+          <a href="#booking" class="cta-link primary" data-fm-event="cta-booking">Запис на зустріч</a>
+          <a href="https://t.me/" class="cta-link" id="tg-link" data-fm-event="cta-telegram">Telegram</a>
+          <a href="tel:+380000000000" class="cta-link" id="phone-link" data-fm-event="cta-phone">Телефон</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="wrap">
+    <span>FORM MEDIA · Агенція онлайн-запуску</span>
+    <span>© 2026</span>
+  </footer>
+
+  <script>
+    const BOOKING_URL = 'https://calendar.app.google/GgWxzFjfa6pPSR3y9';
+    const BOOKING_EMBED_URL = 'https://calendar.google.com/calendar/appointments/schedules/AcZssZ0HpXzsMLZMW6PdzStolHAIMq7VhvyKobuxsikWVROlkHnTK9wyNEszK0Dfpy6xeiWB-ZXlmzkI';
+
+    function bookingEmbedUrl(url) {
+      const u = new URL(url);
+      if (!u.searchParams.has('gv')) u.searchParams.set('gv', 'true');
+      return u.toString();
+    }
+    (function initBooking() {
+      const frame = document.getElementById('booking-frame');
+      ['booking-open','booking-open-btn'].forEach(id => {
+        const btn = document.getElementById(id);
+        if (btn) { btn.href = BOOKING_URL; btn.target = '_blank'; btn.rel = 'noopener'; }
+      });
+      if (frame) frame.src = bookingEmbedUrl(BOOKING_EMBED_URL);
+    })();
+
+    const niches = ['СТО','детейлінг','шиномонтаж','монтаж вікон','кондиціонери','ворота','балкони','меблі','стоматологію','барбершоп','fashion-бренд','салон'];
+    let ni = 0;
+    const nicheEl = document.getElementById('niche-rotate');
+    setInterval(() => {
+      ni = (ni + 1) % niches.length;
+      nicheEl.textContent = niches[ni];
+      nicheEl.style.animation = 'none';
+      nicheEl.offsetHeight;
+      nicheEl.style.animation = '';
+    }, 2200);
+
+    const header = document.getElementById('header');
+    window.addEventListener('scroll', () => header.classList.toggle('scrolled', scrollY > 40), {passive:true});
+
+    document.querySelectorAll('.reveal,.reveal-left,.reveal-scale').forEach(el => {
+      new IntersectionObserver(([e]) => {
+        if (e.isIntersecting) { el.classList.add('visible'); }
+      }, {threshold:.1, rootMargin:'0px 0px -30px 0px'}).observe(el);
+    });
+
+    document.querySelectorAll('.count').forEach(el => {
+      new IntersectionObserver(([e]) => {
+        if (!e.isIntersecting) return;
+        const t = +el.dataset.target, s = performance.now();
+        const run = n => {
+          const p = Math.min((n - s) / 1200, 1);
+          el.textContent = Math.round(t * (1 - Math.pow(1 - p, 3)));
+          if (p < 1) requestAnimationFrame(run);
+        };
+        requestAnimationFrame(run);
+      }, {threshold:.5}).observe(el);
+    });
+
+    const glow = document.getElementById('glow');
+    if (glow && matchMedia('(min-width:900px)').matches) {
+      document.addEventListener('mousemove', e => {
+        glow.style.left = e.clientX + 'px';
+        glow.style.top = e.clientY + 'px';
+      }, {passive:true});
+    }
+
+    document.querySelectorAll('a[href^="#"]').forEach(a => {
+      a.addEventListener('click', e => {
+        const id = a.getAttribute('href');
+        if (id === '#') return;
+        const t = document.querySelector(id);
+        if (!t) return;
+        e.preventDefault();
+        t.scrollIntoView({behavior:'smooth'});
+      });
+    });
+  </script>
+  <script src="assets/fm-config.js"></script>
+  <script src="assets/fm-analytics.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex">
+  <title>FORM MEDIA · Адмінка</title>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="dashboard.css">
+</head>
+<body>
+
+  <div class="login" id="login">
+    <div class="login-box">
+      <h1>FORM MEDIA</h1>
+      <p class="sub">Аналітика лідів і конверсій</p>
+      <p class="err" id="err">Невірний PIN</p>
+      <input type="password" id="pin" placeholder="PIN-код" autocomplete="current-password">
+      <button type="button" id="login-btn">Увійти</button>
+      <p class="hint" style="margin-top:1.25rem">PIN: <strong>form2026</strong> (локально). На Netlify — змінна <code>ADMIN_PIN</code>.</p>
+    </div>
+  </div>
+
+  <div class="app" id="app">
+    <aside class="sidebar">
+      <div class="brand">
+        <h1>FORM MEDIA</h1>
+        <p>Бізнес-аналітика</p>
+      </div>
+      <button type="button" class="nav-btn active" data-view="overview"><span class="ico">◆</span> Огляд</button>
+      <button type="button" class="nav-btn" data-view="funnel"><span class="ico">▸</span> Воронка</button>
+      <button type="button" class="nav-btn" data-view="sources"><span class="ico">◎</span> Джерела</button>
+      <button type="button" class="nav-btn" data-view="actions"><span class="ico">✦</span> Дії та CTA</button>
+      <button type="button" class="nav-btn" data-view="sessions"><span class="ico">☰</span> Сесії</button>
+      <button type="button" class="nav-btn" data-view="live"><span class="ico">●</span> Онлайн-стрічка</button>
+      <button type="button" class="nav-btn" data-view="deploy"><span class="ico">☁</span> Netlify</button>
+      <div class="sidebar-foot">
+        <button type="button" id="logout">Вийти</button>
+      </div>
+    </aside>
+
+    <main class="main">
+      <div class="topbar">
+        <div>
+          <h2 id="page-title">Огляд</h2>
+          <p class="status" id="status">Завантаження…</p>
+        </div>
+        <div class="topbar-actions">
+          <select id="period">
+            <option value="7">7 днів</option>
+            <option value="30" selected>30 днів</option>
+            <option value="90">90 днів</option>
+            <option value="all">Весь час</option>
+          </select>
+          <button type="button" class="btn-primary" id="refresh">Оновити</button>
+          <button type="button" class="btn-ghost" id="export">Експорт</button>
+          <button type="button" class="btn-ghost btn-danger" id="clear">Очистити</button>
+        </div>
+      </div>
+
+      <section class="view active" id="view-overview">
+        <div class="kpi-grid" id="kpi-grid"></div>
+        <div class="grid-2">
+          <div class="panel">
+            <h3>Візити по днях</h3>
+            <div class="bars" id="chart-days"></div>
+          </div>
+          <div class="panel">
+            <h3>Активність по годинах</h3>
+            <div class="hour-grid" id="chart-hours"></div>
+            <div class="hour-labels"><span>0</span><span></span><span></span><span>3</span><span></span><span></span><span>6</span><span></span><span></span><span>9</span><span></span><span></span><span>12</span><span></span><span></span><span>15</span><span></span><span></span><span>18</span><span></span><span></span><span>21</span><span></span><span></span><span>24</span></div>
+          </div>
+        </div>
+      </section>
+
+      <section class="view" id="view-funnel">
+        <div class="panel">
+          <h3>Воронка конверсії</h3>
+          <p style="font-size:.82rem;color:var(--muted);margin-bottom:1rem">Скільки людей доходять від візиту до запису або контакту</p>
+          <div class="funnel" id="funnel"></div>
+        </div>
+      </section>
+
+      <section class="view" id="view-sources">
+        <div class="grid-2">
+          <div class="panel">
+            <h3>Звідки приходять</h3>
+            <table><thead><tr><th>Джерело</th><th>Візити</th><th>%</th></tr></thead><tbody id="table-referrers"></tbody></table>
+          </div>
+          <div class="panel">
+            <h3>Пристрій</h3>
+            <div class="donut-wrap">
+              <div class="donut" id="device-donut"><div class="donut-center" id="device-center">—</div></div>
+              <div class="legend" id="device-legend"></div>
+            </div>
+          </div>
+        </div>
+        <div class="panel">
+          <h3>UTM-кампанії</h3>
+          <table><thead><tr><th>source / medium / campaign</th><th>Візити</th></tr></thead><tbody id="table-utm"></tbody></table>
+        </div>
+      </section>
+
+      <section class="view" id="view-actions">
+        <div class="grid-2">
+          <div class="panel">
+            <h3>Топ дій (що натискають)</h3>
+            <table><thead><tr><th>Тип</th><th>Дія</th><th>Разів</th></tr></thead><tbody id="table-actions"></tbody></table>
+          </div>
+          <div class="panel">
+            <h3>По категоріях</h3>
+            <table><thead><tr><th>Категорія</th><th>Кліків</th><th>%</th></tr></thead><tbody id="table-categories"></tbody></table>
+          </div>
+        </div>
+        <div class="panel">
+          <h3>Які роботи відкривають</h3>
+          <table><thead><tr><th>Проєкт</th><th>Кліків</th></tr></thead><tbody id="table-portfolio"></tbody></table>
+        </div>
+      </section>
+
+      <section class="view" id="view-sessions">
+        <div class="panel">
+          <h3>Шлях відвідувача</h3>
+          <p style="font-size:.82rem;color:var(--muted);margin-bottom:1rem">Останні сесії: що робили перед записом або виходом</p>
+          <div id="sessions"></div>
+        </div>
+      </section>
+
+      <section class="view" id="view-live">
+        <div class="panel">
+          <h3>Останні події в реальному часі</h3>
+          <table><thead><tr><th>Час</th><th>Тип</th><th>Дія</th><th>Пристрій</th></tr></thead><tbody id="table-live"></tbody></table>
+        </div>
+      </section>
+
+      <section class="view" id="view-deploy">
+        <div class="panel">
+          <h3>Як захостити на Netlify</h3>
+          <div class="hint" style="margin-bottom:1rem">
+            <strong>Крок 1.</strong> Зареєструйтесь на <a href="https://www.netlify.com" target="_blank" rel="noopener">netlify.com</a><br>
+            <strong>Крок 2.</strong> «Add new site» → підключіть GitHub <code>KirilIT/buisness</code><br>
+            <strong>Крок 3.</strong> У налаштуваннях сайту вкажіть <strong>Base directory: <code>studio</code></strong> (тільки FORM MEDIA, без списку клієнтів)<br>
+            · Publish directory: <code>.</code><br>
+            · Functions: <code>netlify/functions</code><br>
+            · Build command: <code>npm install</code> (для Netlify Blobs)<br>
+            <strong>Крок 4.</strong> Environment variables → додайте <code>ADMIN_PIN</code> = ваш секретний PIN<br>
+            <strong>Крок 5.</strong> Deploy. Сайт: <code>https://ваш-сайт.netlify.app</code>, адмінка: <code>/admin/</code>
+          </div>
+          <div class="hint">
+            <strong>Локально з Netlify Functions:</strong><br>
+            <code>npm install</code><br>
+            <code>npx netlify dev</code><br>
+            Сайт і API працюють як на продакшені.<br><br>
+            <strong>Без Netlify (швидкий тест):</strong><br>
+            <code>node admin/server.mjs</code> → <a href="/index.html">сайт</a> і <a href="/admin/">адмінка</a> на localhost:3947
+          </div>
+        </div>
+        <div class="panel">
+          <h3>Налаштування PIN</h3>
+          <input type="password" id="new-pin" placeholder="Новий PIN (мін. 4 символи)" style="width:100%;max-width:320px;margin-bottom:.75rem">
+          <button type="button" class="btn-primary" id="save-pin" style="padding:.65rem 1.2rem">Зберегти PIN локально</button>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script src="app.js"></script>
+  <script>
+    document.querySelectorAll('.nav-btn[data-view]').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const titles = { overview:'Огляд', funnel:'Воронка', sources:'Джерела', actions:'Дії та CTA', sessions:'Сесії', live:'Онлайн-стрічка', deploy:'Netlify' };
+        document.getElementById('page-title').textContent = titles[btn.dataset.view] || '';
+      });
+    });
+  </script>
+</body>
+</html>

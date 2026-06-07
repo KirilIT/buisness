@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Smile Arte — Стоматологія преміум · Івано-Франківськ</title>
+  <meta name="description" content="Smile Arte — сучасна стоматологія в Івано-Франківську. Імплантація, естетика, дитяча стоматологія. вул. Галицька, 42. 067 123 45 67">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600&display=swap" rel="stylesheet">
+  <style>
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    :root{
+      --bg:#faf9f6;--surface:#fff;--text:#1c2420;--muted:#6b7570;--dim:#9aa39e;
+      --accent:#2a7a6e;--accent-soft:#e8f4f1;--line:#e8e6e1;--max:1080px;
+      --serif:'Cormorant Garamond',Georgia,serif;--sans:'DM Sans',system-ui,sans-serif;
+    }
+    html{scroll-behavior:smooth;font-size:17px}
+    body{font-family:var(--sans);background:var(--bg);color:var(--text);line-height:1.7;-webkit-font-smoothing:antialiased}
+    a{color:inherit;text-decoration:none}
+    .wrap{max-width:var(--max);margin:0 auto;padding:0 clamp(1.25rem,4vw,2.5rem)}
+
+    header{position:fixed;top:0;left:0;right:0;z-index:50;background:rgba(250,249,246,.92);backdrop-filter:blur(16px);border-bottom:1px solid var(--line)}
+    .header-inner{max-width:var(--max);margin:0 auto;padding:.85rem clamp(1.25rem,4vw,2.5rem);display:flex;align-items:center;justify-content:space-between;gap:1rem}
+    .logo{font-family:var(--serif);font-size:1.5rem;font-weight:600;letter-spacing:.04em}
+    .logo span{color:var(--accent)}
+    nav{display:none;gap:2rem;font-size:.78rem;font-weight:500;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+    nav a:hover{color:var(--text)}
+    @media(min-width:780px){nav{display:flex}}
+    .head-cta{font-size:.78rem;font-weight:600;padding:.65rem 1.25rem;background:var(--accent);color:#fff;letter-spacing:.06em;text-transform:uppercase;transition:opacity .25s}
+    .head-cta:hover{opacity:.88}
+
+    .hero{min-height:100vh;display:flex;align-items:center;padding:6rem 0 4rem;position:relative;overflow:hidden}
+    .hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 80% 60% at 70% 20%,rgba(42,122,110,.08),transparent),radial-gradient(ellipse 50% 40% at 10% 80%,rgba(42,122,110,.05),transparent);pointer-events:none}
+    .hero-grid{display:grid;gap:3rem;align-items:center;width:100%;position:relative;z-index:1}
+    @media(min-width:900px){.hero-grid{grid-template-columns:1.05fr .95fr}}
+    .hero-tag{font-size:.72rem;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--accent);margin-bottom:1.25rem}
+    .hero h1{font-family:var(--serif);font-size:clamp(2.8rem,6.5vw,4.2rem);font-weight:600;line-height:1.08;letter-spacing:-.01em}
+    .hero h1 em{font-style:italic;color:var(--accent)}
+    .hero-desc{margin-top:1.5rem;font-size:1.05rem;color:var(--muted);max-width:28rem;font-weight:400}
+    .hero-actions{margin-top:2rem;display:flex;flex-wrap:wrap;gap:1rem;align-items:center}
+    .btn{display:inline-block;padding:.85rem 1.75rem;font-size:.78rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;transition:all .25s}
+    .btn-fill{background:var(--text);color:#fff}.btn-fill:hover{background:var(--accent)}
+    .btn-line{border:1px solid var(--line);color:var(--text)}.btn-line:hover{border-color:var(--accent);color:var(--accent)}
+    .hero-phone{font-size:.92rem;color:var(--muted)}.hero-phone strong{color:var(--text);font-weight:600}
+    .hero-visual{aspect-ratio:4/5;max-height:560px;border-radius:2px;overflow:hidden;position:relative;background:linear-gradient(145deg,#d4e8e4 0%,#a8cfc6 40%,#7ab5a8 100%)}
+    .hero-visual::after{content:'';position:absolute;inset:0;background:linear-gradient(to top,rgba(28,36,32,.15),transparent 40%)}
+    .hero-visual-inner{position:absolute;inset:0;display:flex;flex-direction:column;justify-content:flex-end;padding:2rem;color:#fff}
+    .hero-visual-inner p{font-family:var(--serif);font-size:1.75rem;font-weight:500;line-height:1.2}
+    .hero-visual-inner span{font-size:.75rem;letter-spacing:.15em;text-transform:uppercase;opacity:.85;margin-top:.5rem;display:block}
+
+    .trust{padding:2.5rem 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line);background:var(--surface)}
+    .trust-grid{display:grid;gap:2rem;text-align:center}
+    @media(min-width:640px){.trust-grid{grid-template-columns:repeat(3,1fr)}}
+    .trust-num{font-family:var(--serif);font-size:2.5rem;font-weight:600;color:var(--accent);line-height:1}
+    .trust-label{font-size:.78rem;color:var(--muted);margin-top:.35rem;letter-spacing:.06em}
+
+    section{padding:clamp(4rem,10vw,6.5rem) 0}
+    .sec-eyebrow{font-size:.72rem;font-weight:600;letter-spacing:.22em;text-transform:uppercase;color:var(--accent);margin-bottom:.85rem}
+    .sec-title{font-family:var(--serif);font-size:clamp(2rem,4vw,2.75rem);font-weight:600;line-height:1.15;margin-bottom:1rem;max-width:18ch}
+    .sec-sub{color:var(--muted);max-width:32rem;margin-bottom:2.5rem;font-weight:400}
+
+    .services{display:grid;gap:1px;background:var(--line);border:1px solid var(--line)}
+    @media(min-width:700px){.services{grid-template-columns:repeat(2,1fr)}}
+    .service{background:var(--surface);padding:2rem 1.75rem;transition:background .25s}
+    .service:hover{background:var(--accent-soft)}
+    .service h3{font-family:var(--serif);font-size:1.35rem;font-weight:600;margin-bottom:.5rem}
+    .service p{font-size:.92rem;color:var(--muted);margin-bottom:1rem;line-height:1.6}
+    .service-price{font-size:.85rem;font-weight:600;color:var(--accent);letter-spacing:.04em}
+
+    .reviews{display:grid;gap:1.25rem}
+    @media(min-width:700px){.reviews{grid-template-columns:repeat(3,1fr)}}
+    .review{padding:1.75rem;background:var(--surface);border:1px solid var(--line)}
+    .review-stars{color:var(--accent);font-size:.85rem;letter-spacing:.1em;margin-bottom:.85rem}
+    .review p{font-size:.92rem;color:var(--muted);line-height:1.65;font-style:italic}
+    .review-author{margin-top:1rem;font-size:.82rem;font-weight:600;color:var(--text)}
+
+    .contact-grid{display:grid;gap:2.5rem}
+    @media(min-width:800px){.contact-grid{grid-template-columns:1fr 1fr}}
+    .contact-info{display:flex;flex-direction:column;gap:1.5rem}
+    .contact-item h4{font-size:.72rem;font-weight:600;letter-spacing:.15em;text-transform:uppercase;color:var(--dim);margin-bottom:.35rem}
+    .contact-item p{font-size:1rem;font-weight:500}
+    .contact-item a:hover{color:var(--accent)}
+    .map-placeholder{aspect-ratio:16/10;background:linear-gradient(135deg,#e8f4f1,#d4e8e4);border:1px solid var(--line);display:flex;align-items:center;justify-content:center;color:var(--muted);font-size:.88rem;text-align:center;padding:2rem}
+
+    footer{padding:2rem 0 2.5rem;border-top:1px solid var(--line);font-size:.82rem;color:var(--dim);display:flex;flex-wrap:wrap;justify-content:space-between;gap:1rem}
+  </style>
+</head>
+<body>
+  <header>
+    <div class="header-inner">
+      <a href="#" class="logo">Smile <span>Arte</span></a>
+      <nav>
+        <a href="#services">Послуги</a>
+        <a href="#reviews">Відгуки</a>
+        <a href="#contact">Контакти</a>
+      </nav>
+      <a href="tel:+380671234567" class="head-cta">Записатися</a>
+    </div>
+  </header>
+
+  <section class="hero">
+    <div class="wrap hero-grid">
+      <div>
+        <p class="hero-tag">Стоматологія · Івано-Франківськ</p>
+        <h1>Посмішка, за якою <em>не соромно</em></h1>
+        <p class="hero-desc">Сучасна клініка з європейським обладнанням. Без болю, без поспіху — з увагою до деталей і вашого комфорту.</p>
+        <div class="hero-actions">
+          <a href="tel:+380671234567" class="btn btn-fill">Запис на консультацію</a>
+          <a href="#services" class="btn btn-line">Послуги та ціни</a>
+        </div>
+        <p class="hero-phone" style="margin-top:1.25rem"><strong>067 123 45 67</strong> · Пн–Сб 9:00–19:00</p>
+      </div>
+      <div class="hero-visual" aria-hidden="true">
+        <div class="hero-visual-inner">
+          <p>12 років довіри<br>містян</p>
+          <span>вул. Галицька, 42</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="trust">
+    <div class="wrap trust-grid">
+      <div><div class="trust-num">4.9</div><div class="trust-label">Рейтинг Google</div></div>
+      <div><div class="trust-num">12+</div><div class="trust-label">Років практики</div></div>
+      <div><div class="trust-num">3</div><div class="trust-label">Кабінети з мікроскопом</div></div>
+    </div>
+  </div>
+
+  <section id="services">
+    <div class="wrap">
+      <p class="sec-eyebrow">Послуги</p>
+      <h2 class="sec-title">Повний спектр стоматології</h2>
+      <p class="sec-sub">Від профілактики до імплантації — усе в одному місці, з прозорим прайсом після первинного огляду.</p>
+      <div class="services">
+        <article class="service"><h3>Консультація та діагностика</h3><p>Огляд, 3D-знімок, план лікування без зобов'язань.</p><p class="service-price">ЦІНА</p></article>
+        <article class="service"><h3>Професійна гігієна</h3><p>Air Flow, ультразвук, полірування, фторування.</p><p class="service-price">ЦІНА</p></article>
+        <article class="service"><h3>Естетична реставрація</h3><p>Вініри, відбілювання, художня реставрація.</p><p class="service-price">ЦІНА</p></article>
+        <article class="service"><h3>Імплантація</h3><p>Straumann, Nobel — повний цикл під ключ.</p><p class="service-price">ЦІНА</p></article>
+        <article class="service"><h3>Ортодонтія</h3><p>Брекети, елайнери, корекція прикусу.</p><p class="service-price">ЦІНА</p></article>
+        <article class="service"><h3>Дитяча стоматологія</h3><p>Адаптація, лікування, профілактика для дітей.</p><p class="service-price">ЦІНА</p></article>
+      </div>
+    </div>
+  </section>
+
+  <section id="reviews">
+    <div class="wrap">
+      <p class="sec-eyebrow">Відгуки</p>
+      <h2 class="sec-title">Що кажуть пацієнти</h2>
+      <div class="reviews">
+        <article class="review"><div class="review-stars">★★★★★</div><p>«Нарешті стоматолог, до якого не страшно йти. Все пояснили, зробили акуратно — результат перевершив очікування.»</p><p class="review-author">Олена К.</p></article>
+        <article class="review"><div class="review-stars">★★★★★</div><p>«Ставив імплант — жодного дискомфорту. Клініка виглядає як у Європі, персонал уважний і професійний.»</p><p class="review-author">Андрій М.</p></article>
+        <article class="review"><div class="review-stars">★★★★★</div><p>«Водила доньку — лікар знайшов підхід, дитина навіть не плакала. Рекомендую всім батькам.»</p><p class="review-author">Марія Т.</p></article>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact">
+    <div class="wrap">
+      <p class="sec-eyebrow">Контакти</p>
+      <h2 class="sec-title">Запишіться на прийом</h2>
+      <div class="contact-grid">
+        <div class="contact-info">
+          <div class="contact-item"><h4>Телефон</h4><p><a href="tel:+380671234567">067 123 45 67</a></p></div>
+          <div class="contact-item"><h4>Адреса</h4><p>вул. Галицька, 42<br>Івано-Франківськ, 76000</p></div>
+          <div class="contact-item"><h4>Графік</h4><p>Пн–Пт 9:00–19:00<br>Сб 10:00–16:00</p></div>
+          <div class="contact-item"><h4>Instagram</h4><p><a href="#">@smilearte.if</a></p></div>
+        </div>
+        <div class="map-placeholder">Google Maps · вул. Галицька, 42<br>Івано-Франківськ</div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="wrap">
+    <span>Smile Arte · Стоматологія</span>
+    <span>© 2026</span>
+  </footer>
+</body>
+</html>
