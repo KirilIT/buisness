@@ -21,7 +21,12 @@ const EVENT_LABELS = {
 };
 
 function getPin() {
-  return localStorage.getItem(PIN_KEY) || DEFAULT_PIN;
+  return sessionStorage.getItem(PIN_KEY) || localStorage.getItem(PIN_KEY) || DEFAULT_PIN;
+}
+
+function setPin(pin) {
+  sessionStorage.setItem(PIN_KEY, pin);
+  localStorage.setItem(PIN_KEY, pin);
 }
 
 function esc(s) {
@@ -211,9 +216,19 @@ function setView(name) {
   document.querySelectorAll('.view').forEach((v) => v.classList.toggle('active', v.id === 'view-' + name));
 }
 
-async function api(path, opts = {}) {
-  const headers = { ...opts.headers, 'X-Admin-Pin': getPin() };
+async function api(path, opts = {}, pin) {
+  const headers = { ...opts.headers, 'X-Admin-Pin': pin || getPin() };
   return fetch(path, { ...opts, headers });
+}
+
+async function verifyPin(pin) {
+  try {
+    const r = await api('/api/stats', {}, pin);
+    if (r.status === 401) return false;
+    if (r.ok) return true;
+  } catch (e) {}
+  // Локальний сервер без env — приймаємо будь-який PIN, якщо API недоступний
+  return pin === getPin() || pin === DEFAULT_PIN;
 }
 
 async function load() {
@@ -390,10 +405,19 @@ function renderLive(agg) {
 }
 
 function init() {
-  $('login-btn').onclick = () => {
-    const ok = $('pin').value === getPin();
+  $('login-btn').onclick = async () => {
+    const pin = $('pin').value.trim();
+    if (!pin) return;
+    $('login-btn').disabled = true;
+    $('login-btn').textContent = 'Перевірка…';
+    const ok = await verifyPin(pin);
+    $('login-btn').disabled = false;
+    $('login-btn').textContent = 'Увійти';
     $('err').style.display = ok ? 'none' : 'block';
-    if (ok) showApp();
+    if (ok) {
+      setPin(pin);
+      showApp();
+    }
   };
   $('pin').addEventListener('keydown', (e) => { if (e.key === 'Enter') $('login-btn').click(); });
 
@@ -408,8 +432,8 @@ function init() {
   $('save-pin').onclick = () => {
     const p = $('new-pin').value;
     if (p.length >= 4) {
-      localStorage.setItem(PIN_KEY, p);
-      alert('PIN збережено локально. На Netlify встановіть ADMIN_PIN у змінних середовища.');
+      setPin(p);
+      alert('PIN збережено. На Netlify змінна ADMIN_PIN має збігатися з цим значенням.');
     }
   };
 
