@@ -4,7 +4,21 @@
   var SITE = CFG.siteId || 'form-media';
   var LS_KEY = 'fm_analytics_buffer_v1';
   var SID_KEY = 'fm_sid_v1';
+  var LEAD_KEY = 'fm_lead';
   var sent = {};
+
+  function captureLead() {
+    try {
+      var fromUrl = new URLSearchParams(location.search).get('lead');
+      if (fromUrl) sessionStorage.setItem(LEAD_KEY, fromUrl.trim().toLowerCase());
+    } catch (e) {}
+  }
+
+  function leadSlug() {
+    try { return sessionStorage.getItem(LEAD_KEY) || ''; } catch (e) { return ''; }
+  }
+
+  captureLead();
 
   function uid() {
     return Date.now().toString(36) + Math.random().toString(36).slice(2, 8);
@@ -49,6 +63,7 @@
       type: type,
       site: SITE,
       session: sid(),
+      lead: leadSlug(),
       ts: new Date().toISOString(),
       path: location.pathname + location.hash,
       ref: document.referrer || '',
@@ -122,13 +137,37 @@
   window.addEventListener('scroll', onScroll, { passive: true });
 
   var start = Date.now();
+  var HEARTBEAT_MS = 15000;
+
   function sendTime() {
     var sec = Math.round((Date.now() - start) / 1000);
     if (sec >= 3) track('engagement', { kind: 'time_on_page', seconds: sec });
   }
-  window.addEventListener('pagehide', sendTime);
+
+  function sendHeartbeat() {
+    if (document.visibilityState !== 'visible') return;
+    track('engagement', { kind: 'heartbeat' });
+  }
+
+  function sendLeft() {
+    track('engagement', { kind: 'left' });
+  }
+
+  setInterval(sendHeartbeat, HEARTBEAT_MS);
+  setTimeout(sendHeartbeat, 4000);
+
+  window.addEventListener('pagehide', function () {
+    sendTime();
+    sendLeft();
+  });
+
   document.addEventListener('visibilitychange', function () {
-    if (document.visibilityState === 'hidden') sendTime();
+    if (document.visibilityState === 'hidden') {
+      sendTime();
+      sendLeft();
+    } else {
+      sendHeartbeat();
+    }
   });
 
   window.FMTrack = track;

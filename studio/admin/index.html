@@ -31,6 +31,7 @@
       <button type="button" class="nav-btn" data-view="funnel"><span class="ico">▸</span> Воронка</button>
       <button type="button" class="nav-btn" data-view="sources"><span class="ico">◎</span> Джерела</button>
       <button type="button" class="nav-btn" data-view="actions"><span class="ico">✦</span> Дії та CTA</button>
+      <button type="button" class="nav-btn" data-view="leads"><span class="ico">◉</span> Ліди</button>
       <button type="button" class="nav-btn" data-view="sessions"><span class="ico">☰</span> Сесії</button>
       <button type="button" class="nav-btn" data-view="live"><span class="ico">●</span> Онлайн-стрічка</button>
       <button type="button" class="nav-btn" data-view="deploy"><span class="ico">☁</span> Netlify</button>
@@ -118,6 +119,45 @@
         </div>
       </section>
 
+      <section class="view" id="view-leads">
+        <div class="panel">
+          <h3>Генератор персональної посилання</h3>
+          <p style="font-size:.82rem;color:var(--muted);margin-bottom:1rem">Створіть лід → надішліть посилання після дзвінка → <strong style="color:var(--green)">Дивиться</strong> = зараз на сайті, <strong style="color:#ffc864">Закрив</strong> = вийшов (передзвонити)</p>
+          <div class="lead-form">
+            <div>
+              <label for="lead-name">Ім'я / назва бізнесу</label>
+              <input type="text" id="lead-name" placeholder="Олег СТО Миколаїв">
+            </div>
+            <div>
+              <label for="lead-note">Нотатка</label>
+              <input type="text" id="lead-note" placeholder="099… · СТО · холодний дзвінок">
+            </div>
+            <button type="button" class="btn-primary" id="lead-create" style="padding:.75rem 1.2rem;height:fit-content">Створити</button>
+          </div>
+          <div class="lead-result" id="lead-result">
+            <div style="font-size:.72rem;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)">Посилання для відправки</div>
+            <div class="lead-result-url" id="lead-result-url"></div>
+            <button type="button" class="btn-primary" id="lead-copy" style="padding:.55rem 1rem;font-size:.75rem">Скопіювати</button>
+          </div>
+        </div>
+        <div class="panel">
+          <h3>Реєстр лідів</h3>
+          <table>
+            <thead>
+              <tr>
+                <th>Лід</th>
+                <th>Статус (live)</th>
+                <th>Відкрив</th>
+                <th>Час</th>
+                <th>Що дивився</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody id="table-leads"></tbody>
+          </table>
+        </div>
+      </section>
+
       <section class="view" id="view-sessions">
         <div class="panel">
           <h3>Шлях відвідувача</h3>
@@ -168,7 +208,7 @@
   <script>
     document.querySelectorAll('.nav-btn[data-view]').forEach(btn => {
       btn.addEventListener('click', () => {
-        const titles = { overview:'Огляд', funnel:'Воронка', sources:'Джерела', actions:'Дії та CTA', sessions:'Сесії', live:'Онлайн-стрічка', deploy:'Netlify' };
+        const titles = { overview:'Огляд', funnel:'Воронка', sources:'Джерела', actions:'Дії та CTA', leads:'Ліди', sessions:'Сесії', live:'Онлайн-стрічка', deploy:'Netlify' };
         document.getElementById('page-title').textContent = titles[btn.dataset.view] || '';
       });
     });

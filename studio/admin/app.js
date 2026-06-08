@@ -76,6 +76,8 @@ function humanLabel(e) {
   }
   if (e.type === 'pageview') return 'Зайшов на сайт';
   if (e.type === 'engagement' && e.data?.kind === 'time_on_page') return 'Час на сайті: ' + e.data.seconds + 'с';
+  if (e.type === 'engagement' && e.data?.kind === 'heartbeat') return 'На сайті зараз';
+  if (e.type === 'engagement' && e.data?.kind === 'left') return 'Закрив вкладку';
   if (e.type === 'engagement' && e.data?.depth) return 'Прокрутка ' + e.data.depth + '%';
   return e.type;
 }
@@ -203,8 +205,12 @@ function computeStats(events, periodDays) {
 }
 
 let lastRaw = null;
+let lastLeads = [];
+let lastEvents = [];
 let currentView = 'overview';
 let period = '30';
+let leadsPoll = null;
+const LEAD_ONLINE_MS = 40000;
 
 function $(id) {
   return document.getElementById(id);
@@ -214,6 +220,14 @@ function setView(name) {
   currentView = name;
   document.querySelectorAll('.nav-btn').forEach((b) => b.classList.toggle('active', b.dataset.view === name));
   document.querySelectorAll('.view').forEach((v) => v.classList.toggle('active', v.id === 'view-' + name));
+  if (leadsPoll) {
+    clearInterval(leadsPoll);
+    leadsPoll = null;
+  }
+  if (name === 'leads') {
+    renderLeads(lastLeads, lastEvents);
+    leadsPoll = setInterval(load, 12000);
+  }
 }
 
 async function api(path, opts = {}, pin) {
@@ -266,8 +280,16 @@ async function load() {
     }
   }
 
+  lastEvents = events;
+
+  try {
+    const rl = await api('/api/leads');
+    if (rl.ok) lastLeads = (await rl.json()).leads || [];
+  } catch (e) {}
+
   const agg = computeStats(events, period);
   renderAll(agg);
+  renderLeads(lastLeads, lastEvents);
 }
 
 function renderAll(agg) {
@@ -394,6 +416,134 @@ function renderSessions(agg) {
     : '<p class="empty">Сесій поки немає</p>';
 }
 
+function leadLink(slug) {
+  return location.origin + '/?lead=' + encodeURIComponent(slug);
+}
+
+function tsMs(ts) {
+  return ts ? new Date(ts).getTime() : 0;
+}
+
+function leadPresence(evs) {
+  const hasPageview = evs.some((e) => e.type === 'pageview');
+  if (!hasPageview) return 'never';
+
+  const now = Date.now();
+  const byTs = (a, b) => (a.ts || '').localeCompare(b.ts || '');
+  const lastLeft = evs.filter((e) => e.type === 'engagement' && e.data?.kind === 'left').sort(byTs).pop();
+  const lastHb = evs.filter((e) => e.type === 'engagement' && e.data?.kind === 'heartbeat').sort(byTs).pop();
+  const lastPv = evs.filter((e) => e.type === 'pageview').sort(byTs).pop();
+
+  if (lastHb && now - tsMs(lastHb.ts) < LEAD_ONLINE_MS) {
+    if (lastLeft && tsMs(lastLeft.ts) > tsMs(lastHb.ts)) return 'left';
+    return 'watching';
+  }
+  if (lastPv && now - tsMs(lastPv.ts) < 25000 && (!lastLeft || tsMs(lastLeft.ts) < tsMs(lastPv.ts))) {
+    return 'watching';
+  }
+  return 'left';
+}
+
+function analyzeLead(lead, events) {
+  const evs = events.filter((e) => (e.lead || '') === lead.slug);
+  const hasPageview = evs.some((e) => e.type === 'pageview');
+  const hasBooking = evs.some((e) => e.type === 'click' && ['booking', 'phone', 'telegram'].includes(e.data?.category));
+  const presence = leadPresence(evs);
+
+  let statusKey;
+  let statusLabel;
+  if (!hasPageview) {
+    statusKey = 'cold';
+    statusLabel = 'НЕ ВІДКРИВ';
+  } else if (presence === 'watching') {
+    statusKey = 'watching';
+    statusLabel = 'ДИВИТЬСЯ';
+  } else if (hasBooking) {
+    statusKey = 'booked';
+    statusLabel = 'КОНТАКТ';
+  } else {
+    statusKey = 'left';
+    statusLabel = 'ЗАКРИВ';
+  }
+
+  const firstPv = evs.find((e) => e.type === 'pageview');
+  const lastLeft = evs.filter((e) => e.type === 'engagement' && e.data?.kind === 'left').sort((a, b) => (a.ts || '').localeCompare(b.ts || '')).pop();
+  let maxTime = 0;
+  const portfolio = [];
+  let scroll100 = false;
+
+  evs.forEach((e) => {
+    if (e.type === 'engagement' && e.data?.kind === 'time_on_page') {
+      maxTime = Math.max(maxTime, e.data.seconds || 0);
+    }
+    if (e.type === 'click' && e.data?.category === 'portfolio') {
+      const lbl = e.data.label || '';
+      const n = lbl.startsWith('portfolio:') ? lbl.slice(10) : lbl;
+      if (n && !portfolio.includes(n)) portfolio.push(n);
+    }
+    if (e.type === 'engagement' && e.data?.depth === 100) scroll100 = true;
+  });
+
+  let viewed = '—';
+  if (portfolio.length) viewed = portfolio.join(', ');
+  if (scroll100) viewed += (viewed === '—' ? '' : ' · ') + 'дочитав 100%';
+
+  const lastTs = evs.reduce((m, e) => ((e.ts || '') > m ? e.ts : m), '');
+  const sortGroup = statusKey === 'watching' ? 0 : statusKey === 'left' ? 1 : statusKey === 'booked' ? 2 : 3;
+
+  return {
+    ...lead,
+    statusKey,
+    statusLabel,
+    hasBooking,
+    openedAt: firstPv?.ts || null,
+    closedAt: lastLeft?.ts || null,
+    maxTime,
+    viewed,
+    lastTs,
+    sortGroup,
+    presence
+  };
+}
+
+function leadStatusPill(key) {
+  if (key === 'watching') return 'pill pill-watching';
+  if (key === 'booked') return 'pill pill-booking';
+  if (key === 'left') return 'pill pill-lead-hot';
+  return 'pill pill-lead-cold';
+}
+
+function renderLeads(leads, events) {
+  const tbody = $('table-leads');
+  if (!tbody) return;
+
+  const rows = leads.map((l) => analyzeLead(l, events)).sort((a, b) => {
+    if (a.sortGroup !== b.sortGroup) return a.sortGroup - b.sortGroup;
+    return (b.lastTs || '').localeCompare(a.lastTs || '');
+  });
+
+  tbody.innerHTML = rows.length
+    ? rows.map((r) => `
+      <tr data-slug="${esc(r.slug)}">
+        <td><strong>${esc(r.name)}</strong>${r.note ? `<div class="lead-note">${esc(r.note)}</div>` : ''}</td>
+        <td>
+          <span class="${leadStatusPill(r.statusKey)}">${esc(r.statusLabel)}</span>
+          ${r.statusKey === 'watching' && r.presence === 'watching' ? '<span class="pill pill-watching" style="margin-left:.35rem;font-size:.58rem">● LIVE</span>' : ''}
+          ${r.hasBooking && r.statusKey === 'watching' ? '<div class="lead-note">+ телефон / TG</div>' : ''}
+        </td>
+        <td>${r.openedAt ? fmtTime(r.openedAt) : '—'}${r.closedAt && r.statusKey === 'left' ? `<div class="lead-note">пішов ${fmtTime(r.closedAt).slice(11)}</div>` : ''}${r.presence === 'watching' ? '<div class="lead-note live-now">на сайті зараз</div>' : ''}</td>
+        <td>${r.maxTime ? r.maxTime + 'с' : '—'}</td>
+        <td>${esc(r.viewed)}</td>
+        <td>
+          <div class="lead-actions">
+            <button type="button" class="btn-ghost lead-copy-row" data-slug="${esc(r.slug)}">Посилання</button>
+            <button type="button" class="btn-ghost btn-danger lead-del" data-slug="${esc(r.slug)}">×</button>
+          </div>
+        </td>
+      </tr>`).join('')
+    : '<tr><td colspan="6" class="empty">Ще немає лідів — створіть першу посилання вище</td></tr>';
+}
+
 function renderLive(agg) {
   $('table-live').innerHTML = agg.recent.length
     ? agg.recent.map((e) => {
@@ -452,7 +602,55 @@ function init() {
     load();
   };
 
-  setInterval(load, 45000);
+  $('lead-create').onclick = async () => {
+    const name = $('lead-name').value.trim();
+    const note = $('lead-note').value.trim();
+    if (!name) return;
+    $('lead-create').disabled = true;
+    const r = await api('/api/leads', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ name, note })
+    });
+    $('lead-create').disabled = false;
+    if (!r.ok) { alert('Не вдалося створити лід'); return; }
+    const lead = await r.json();
+    const link = leadLink(lead.slug);
+    $('lead-result').style.display = 'block';
+    $('lead-result-url').textContent = link;
+    $('lead-copy').onclick = () => navigator.clipboard.writeText(link).then(() => alert('Скопійовано'));
+    $('lead-name').value = '';
+    $('lead-note').value = '';
+    load();
+  };
+
+  $('table-leads').addEventListener('click', async (e) => {
+    const copyBtn = e.target.closest('.lead-copy-row');
+    if (copyBtn) {
+      const link = leadLink(copyBtn.dataset.slug);
+      navigator.clipboard.writeText(link).then(() => alert('Скопійовано'));
+      return;
+    }
+    const delBtn = e.target.closest('.lead-del');
+    if (delBtn) {
+      if (!confirm('Видалити лід з реєстру?')) return;
+      await api('/api/leads', {
+        method: 'DELETE',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ slug: delBtn.dataset.slug })
+      });
+      load();
+    }
+  });
+
+  let refreshTimer = setInterval(load, 45000);
+
+  document.querySelectorAll('.nav-btn[data-view]').forEach((btn) => {
+    btn.addEventListener('click', () => {
+      clearInterval(refreshTimer);
+      refreshTimer = setInterval(load, btn.dataset.view === 'leads' ? 10000 : 45000);
+    });
+  });
 }
 
 function showApp() {

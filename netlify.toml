@@ -17,6 +17,11 @@
   to = "/.netlify/functions/stats"
   status = 200
 
+[[redirects]]
+  from = "/api/leads"
+  to = "/.netlify/functions/leads"
+  status = 200
+
 [[headers]]
   for = "/admin/*"
   [headers.values]

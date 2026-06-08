@@ -8,3 +8,4 @@ leads_tracker.*
 *.csv
 *.xlsx
 README.md
+studio/admin/data/*.json
